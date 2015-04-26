@@ -72,6 +72,8 @@ It is like writing multi-threaded synchronous code, but without losing your sani
 
 * Modules
 
+* Error handling
+
 * Testing
 
 * Deployment
