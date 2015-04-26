@@ -14,6 +14,7 @@ http://github.com/NeowayLabs/presentations
 
 - Why another language ?
 - How Go improves on other languages ?
+- Formating code
 - Concurrency model
 - Memory model
 - Abstractions 
@@ -45,6 +46,7 @@ http://github.com/NeowayLabs/presentations
 - If the system grows it can scale (yeah, it is a monolith :P)
 - Minimal set of features to enable great software
 - Concurrency at your fingertips
+- No more formating code wars :-)
 - KISS :-)
 
 
@@ -52,6 +54,15 @@ For more info see [[http://commandcenter.blogspot.ca/2012/06/less-is-exponential
 
 
 * Concurrency model
+
+
+* No more callback hell
+
+Thanks to Channels and Goroutines all that you write is synchronous code.
+
+It is like writing multi-threaded synchronous code, but without losing your sanity and personal life :-)
+(it is hard to have a personal life when everything you do is debug non-deterministic code)
+
 
 * Memory model
 
