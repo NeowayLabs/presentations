@@ -1,7 +1,7 @@
 Go
 Less is a lot lot more
 27 Apr 2015
-Tags: go
+Tags: go, golang
 
 var Natel, Katcipis Tiago
 Neoway Business Solution
@@ -9,17 +9,58 @@ tiago.natel@neoway.com.br / tiago.katcipis@neoway.com.br
 http://github.com/NeowayLabs/presentations
 @golang ON Slack
 
-* History
 
-Some More text
+* Agenda
 
-  Preformatted text
-  is indented (however you like)
+- Why another language ?
+- How Go improves on other languages ?
+- Concurrency model
+- Memory model
+- Abstractions 
+- Modules
+- Testing 
+- Deployment
+- Built in stuff
 
-Further Text, including invocations like:
 
-.play hello.go
+* Why another language 
 
-Again, more text
+* The problem
+
+- Need for some serious system programming
+- Pretty low level stuff (performance also a problem), so C++ was used
+- Huge C++ systems have been developed (at Google)
+- C++0x (today C++11) has been presented at Google
+- Lot of stuff added, nothing removed
+- Far from simple :-(
+- Concurrency was a pain in the ass
+- Maintaining a large code base was also a pain in the ass
 
 
+* The solution
+
+- A language that could do serious system programming
+- That has easy access to low level stuff 
+- Where performance is not a problem
+- If the system grows it can scale (yeah, it is a monolith :P)
+- Minimal set of features to enable great software
+- Concurrency at your fingertips
+- KISS :-)
+
+
+For more info see [[http://commandcenter.blogspot.ca/2012/06/less-is-exponentially-more.html][Less is exponentially more]]
+
+
+* Concurrency model
+
+* Memory model
+
+* Objects
+
+* Abstractions
+
+* Modules
+
+* Testing
+
+* Deployment
