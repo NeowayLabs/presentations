@@ -4,5 +4,4 @@ build:
 	docker build -t neoway-presentations .
 
 present: build
-	docker run --name neoway-presentations -v `pwd`:/presentations
-
+	docker run --rm --net="host" --name neoway-presentations -v `pwd`:/presentations -p 3999:3999 neoway-presentations
