@@ -22,7 +22,9 @@ http://github.com/NeowayLabs/presentations
 - Deployment
 
 
-* Why another language ?: The problem
+* Why another language 
+
+* The problem
 
 - Need for some serious system programming
 - Pretty low level stuff (performance also a problem), so C++ was used
@@ -34,7 +36,7 @@ http://github.com/NeowayLabs/presentations
 - Maintaining a large code base was also a pain in the ass
 
 
-* Why another language ?: The solution
+* The solution
 
 - A language that could do serious system programming
 - That has easy access to low level stuff 
