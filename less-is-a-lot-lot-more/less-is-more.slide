@@ -52,6 +52,20 @@ http://github.com/NeowayLabs/presentations
 
 For more info see [[http://commandcenter.blogspot.ca/2012/06/less-is-exponentially-more.html][Less is exponentially more]]
 
+* Designed by
+
+- Rob Pike (Plan9, Limbo, UTF-8, Sam, Acme)
+- Ken Thompson (B, C, Unix, Plan9, UTF-8, ed)
+- Robert Griesemer
+
+.image images/Plan9-1995-729x600.gif 350 _
+
+* Mascot
+
+- Glenda -> Gopher
+
+.image images/plan9go.jpg
+
 * Syntax
 
 - Start with C
