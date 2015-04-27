@@ -10,4 +10,4 @@ WORKDIR /presentations
 
 EXPOSE 3999
 
-CMD ["present"]
+CMD ["present", "-play=true", "-http=172.17.42.1:3999"]
