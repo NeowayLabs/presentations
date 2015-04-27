@@ -278,6 +278,20 @@ To automatically get all code that your project needs, just run:
 
 * Testing
 
+* Testing
+
+- Any file that follows the pattern <name>_test.go is executed as a test
+- Test files are automatically excluded when you build your application
+- To build and execute then use:
+
+    go test
+
+- Mocking is very easy with the concepts of interfaces
+- [[http://golang.org/pkg/testing/][Golang testing package]]
+- Basic testing and benchmarking
+- Lots of other third party code :-)
+
+
 * Deployment
 
 - Binaries are standalone, no need for a any other thing like a VM / interpreter
