@@ -52,6 +52,32 @@ http://github.com/NeowayLabs/presentations
 
 For more info see [[http://commandcenter.blogspot.ca/2012/06/less-is-exponentially-more.html][Less is exponentially more]]
 
+* Syntax
+
+- Start with C
+- Improves declaration
+- Left-to-Right over [[http://c-faq.com/decl/spiral.anderson.html][Clockwise/Spiral]]
+  // C syntax declaration
+  int *p;
+  int (*fp)(int (*)(int, int), int)
+
+  // Go syntax declaration
+  var p *int    // OMG
+  var fp func(func (int, int) int, int) int
+- Closures declaration and invocation
+  sum := func(a, b int) int { return a+b } (3, 4)
+
+* Syntax
+
+- Reverse array indexing
+  // C array syntax
+  int a[10];
+
+  // Go array syntax
+  var a [10]int
+
+- Array declaration and initialization
+  var hi []int("hi")
 
 * Concurrency model
 
@@ -77,3 +103,7 @@ It is like writing multi-threaded synchronous code, but without losing your sani
 * Testing
 
 * Deployment
+
+* Compiler Compiler
+
+
