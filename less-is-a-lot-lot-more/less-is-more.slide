@@ -172,6 +172,18 @@ It is like writing multi-threaded synchronous code, but without losing your sani
 
 * Objects
 
+* Type
+
+- On Go there is no *class* keyword, you basically define types.
+- A type is a struct, where you define all your data
+- Then you can define methods, associated with your type
+- When a type is instantiated, it is an object
+
+* Defining a type
+
+.play defining_type.go 
+
+
 * Abstractions
 
 - When I see a bird that walks like a duck and swims like a duck and quacks like a duck, I call that bird a duck (James Whitcomb Riley).
@@ -242,8 +254,8 @@ To automatically get all code that your project needs, just run:
 
 .code errorhandlingbetter.go
 
-* Testing
 
+* Testing
 
 * Deployment
 
