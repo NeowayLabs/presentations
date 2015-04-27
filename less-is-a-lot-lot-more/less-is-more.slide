@@ -169,8 +169,69 @@ Thanks to Channels and Goroutines all that you write is synchronous code.
 It is like writing multi-threaded synchronous code, but without losing your sanity and personal life :-)
 (it is hard to have a personal life when everything you do is debug non-deterministic code)
 
+* Concurrency examples
+
+.play helloconcurrency.go
+
+* Concurrency examples
+
+.play concurrency2.go
+
+* Concurrency examples
+
+.play concurrency3.go
+
+* Concurrency examples
+
+- Let's help the scheduler
+
+.play concurrency5.go /func f/,/Second\)\n\}\n/
+
+* Concurrency examples
+
+- Let's invoke the scheduler
+
+.play concurrency4.go /func f/,/Second\)\n\}\n/
+
+* Goroutines
+
+- Cheaper and lightweight
+- We can create thousands of them
+- Goroutines are multiplexed inside threads
+- If the Goroutine is blocked, then it will be swapped out for another goroutine on another thread instead[1]
+- A Go program does not deal with threads (Yeahh !!!)
+- The OS is not aware of the existence of goroutines
+- From the OS perspective, a Go program will behave like an event-driven C program
+
+* Goroutines (memory consumption)
+
+- 2Kb of stack space [2]
+- One (1) thread uses ~ 1MB (500 times more)
+- Thread memory is protected between one another
+
+* Goroutines (Setup and Teardown)
+
+- Thread setup and teardown is expensive
+- It has to request resources from the OS and returns it once its done
+
+- Goroutines setup and teardow are done by runtime in userland
+- The language doesn't support manual management of goroutines
+
+* Goroutines (Switching costs)
+
+- During a thread switch, the scheduler needs to save/restore ALL registers:
+
+  16 General Purpose registers, PC (Program Counter), SP (Stack Pointer)
+  SS (Segment Register), 16 XMM registers, FP coprocessor state
+  16 AVX registers, all MSRs, etc
+
+- During a Goroutine switch only 3 registers need to be saved/restored
+
+  PC (Program Counter), SP (Stack Pointer) and DX
 
 * Memory model
+
+- Go encourages the developer to think in the algorithm and leave the decision of the variable storage to compiler
 
 * Objects
 
@@ -185,5 +246,10 @@ It is like writing multi-threaded synchronous code, but without losing your sani
 * Deployment
 
 * Compiler Compiler
+
+* References
+
+1. [[http://www1.cs.columbia.edu/~aho/cs6998/reports/12-12-11_DeshpandeSponslerWeiss_GO.pdf][Analysis of the Go runtime scheduler]]
+2. [[http://golang.org/doc/go1.4#runtime][Goroutine stack size was decreased from 8kB to 2kB in Go 1.4]]
 
 
