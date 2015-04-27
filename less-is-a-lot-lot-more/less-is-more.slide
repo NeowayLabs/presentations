@@ -15,7 +15,6 @@ http://github.com/NeowayLabs/presentations
 - Why another language ?
 - How Go improves on other languages ?
 - Creators
-- Syntax
 - Concurrency model
 - Memory model
 - Abstractions 
@@ -23,6 +22,7 @@ http://github.com/NeowayLabs/presentations
 - Testing 
 - Deployment
 - Built in stuff
+- Syntax
 
 
 * Why another language 
@@ -67,6 +67,193 @@ For more info see [[http://commandcenter.blogspot.ca/2012/06/less-is-exponential
 
 .image images/plan9go.jpg
 
+
+* Concurrency model
+
+* No more callback hell
+
+Thanks to Channels and Goroutines all that you write is synchronous code.
+
+It is like writing multi-threaded synchronous code, but without losing your sanity and personal life :-)
+(it is hard to have a personal life when everything you do is debug non-deterministic code)
+
+
+* Concurrency in details
+
+- Concurrent code goes on goroutines
+- goroutines *MAY* be executed on different threads
+- goroutines communicate using channels
+- channels are typed pipes of communication
+- channel can also have a direction (like receive only)
+- if you like to suffer there is a [[https://golang.org/pkg/sync/][sync package with mutexes and stuff]]
+
+* Goroutines
+
+* Goroutines concepts
+
+- Cheaper and lightweight
+- We can create thousands of them
+- Goroutines are multiplexed inside threads
+- If the Goroutine is blocked, then it will be swapped out for another goroutine on another thread instead[1]
+- A Go program does not deal with threads (Yeahh !!!)
+- The OS is not aware of the existence of goroutines
+- From the OS perspective, a Go program will behave like an event-driven C program
+
+* Goroutines (memory consumption)
+
+- 2Kb of stack space [2]
+- One (1) thread uses ~ 1MB (500 times more)
+- Thread memory is protected between one another
+
+* Goroutines (Setup and Teardown)
+
+- Thread setup and teardown is expensive
+- It has to request resources from the OS and returns it once its done
+
+- Goroutines setup and teardow are done by runtime in userland
+- The language doesn't support manual management of goroutines
+
+* Goroutines (Switching costs)
+
+- During a thread switch, the scheduler needs to save/restore ALL registers:
+
+  16 General Purpose registers, PC (Program Counter), SP (Stack Pointer)
+  SS (Segment Register), 16 XMM registers, FP coprocessor state
+  16 AVX registers, all MSRs, etc
+
+- During a Goroutine switch only 3 registers need to be saved/restored
+
+  PC (Program Counter), SP (Stack Pointer) and DX
+
+* Concurrency examples
+
+.play helloconcurrency.go
+
+
+* Concurrency examples
+
+.play concurrency2.go
+
+
+* Concurrency examples
+
+.play concurrency3.go
+
+
+* Concurrency examples
+
+- Let's help the scheduler
+
+.play concurrency5.go /func f/,/Second\)\n\}\n/
+
+
+* Concurrency examples
+
+- Let's invoke the scheduler
+
+.play concurrency4.go /func f/,/Second\)\n\}\n/
+
+
+* Memory model
+
+* Memory storage
+
+- Stack or Heap? Forget that!
+- Go encourages the developer to think in the algorithm and leave the decision of the variable storage to compiler
+- Each variable in Go exists as long as there are references to it
+- Variables can be allocated on the stack or garbage-collected heap
+
+* Memory Management
+
+- Automatic Garbage collected
+- Concurrent code far easier to write
+- Optimize the generation of garbage not the garbage collector
+- Careful programmers can reduce the garbage collection overhead dramatically by using the language well[3]
+
+* Objects
+
+* Abstractions
+
+- When I see a bird that walks like a duck and swims like a duck and quacks like a duck, I call that bird a duck (James Whitcomb Riley).
+- Interfaces provide a way to specify the behavior of an object
+- Interfaces have a set of methods
+- Interfaces are implicit (no "implements" declaration)
+- A type can implement multiple interfaces
+- Every object implements the empty interface (interface {})
+
+* Abstractions
+
+- HTTP Handler interface
+
+.code httphandler.go
+
+* Abstractions
+
+- Implementing a counter REST
+
+.code counterserver.go /type Counter/,/.n\)\n\}\n/
+
+* Abstractions
+
+- Create the server and route
+
+.code counterservermain.go
+
+* Abstractions
+
+- But why Counter is a struct ?
+
+.code counterserverint.go
+
+* Modules
+
+* Importing modules
+
+Just import it using the repository. For example, importing RabbitMQ:
+
+    import "github.com/streadway/amqp"
+
+This still won't compile, you don't have the code. To get the code just run:
+
+    go get github.com/streadway/amqp
+
+To automatically get all code that your project needs, just run:
+
+    go get ./...
+
+
+* Error handling
+
+- No Exceptions
+- Explicit error handling done by programmer
+- Returns error as last return value from methods
+- In the compiler perspective, error values is just a simple value
+- A lot of if/else for error handling? Use the Go lack of features solves that for you!
+
+* Error handling
+
+- Ugly code
+
+.code errorhandlingugly.go
+
+* Error handling
+
+- Better code
+
+.code errorhandlingbetter.go
+
+* Testing
+
+
+* Deployment
+
+- Binaries are standalone, no need for a any other thing like a VM / interpreter
+- Just build a docker image from scratch with your binary inside, you are good to go :-)
+- Even without docker, deploy is trivial, just copy the binary and run it
+
+
+* Syntax
+
 * Syntax
 
 - Start with C
@@ -93,6 +280,7 @@ For more info see [[http://commandcenter.blogspot.ca/2012/06/less-is-exponential
 
 - Array declaration and initialization
   var hi []int("hi")
+  var hi []int{0,1}
 
 * Syntax
 
@@ -159,155 +347,6 @@ Code example for remove the evil variable from the code below:
 - Done!
 
 .play censorship.go /Use the comment/,/\}\n/
-
-* Concurrency model
-
-
-* No more callback hell
-
-Thanks to Channels and Goroutines all that you write is synchronous code.
-
-It is like writing multi-threaded synchronous code, but without losing your sanity and personal life :-)
-(it is hard to have a personal life when everything you do is debug non-deterministic code)
-
-* Concurrency examples
-
-.play helloconcurrency.go
-
-* Concurrency examples
-
-.play concurrency2.go
-
-* Concurrency examples
-
-.play concurrency3.go
-
-* Concurrency examples
-
-- Let's help the scheduler
-
-.play concurrency5.go /func f/,/Second\)\n\}\n/
-
-* Concurrency examples
-
-- Let's invoke the scheduler
-
-.play concurrency4.go /func f/,/Second\)\n\}\n/
-
-* Goroutines
-
-* Goroutines concepts
-
-- Cheaper and lightweight
-- We can create thousands of them
-- Goroutines are multiplexed inside threads
-- If the Goroutine is blocked, then it will be swapped out for another goroutine on another thread instead[1]
-- A Go program does not deal with threads (Yeahh !!!)
-- The OS is not aware of the existence of goroutines
-- From the OS perspective, a Go program will behave like an event-driven C program
-
-* Goroutines (memory consumption)
-
-- 2Kb of stack space [2]
-- One (1) thread uses ~ 1MB (500 times more)
-- Thread memory is protected between one another
-
-* Goroutines (Setup and Teardown)
-
-- Thread setup and teardown is expensive
-- It has to request resources from the OS and returns it once its done
-
-- Goroutines setup and teardow are done by runtime in userland
-- The language doesn't support manual management of goroutines
-
-* Goroutines (Switching costs)
-
-- During a thread switch, the scheduler needs to save/restore ALL registers:
-
-  16 General Purpose registers, PC (Program Counter), SP (Stack Pointer)
-  SS (Segment Register), 16 XMM registers, FP coprocessor state
-  16 AVX registers, all MSRs, etc
-
-- During a Goroutine switch only 3 registers need to be saved/restored
-
-  PC (Program Counter), SP (Stack Pointer) and DX
-
-* Memory model
-
-* Memory storage
-
-- Stack or Heap? Forget that!
-- Go encourages the developer to think in the algorithm and leave the decision of the variable storage to compiler
-- Each variable in Go exists as long as there are references to it
-- Variables can be allocated on the stack or garbage-collected heap
-
-* Memory Management
-
-- Automatic Garbage collected
-- Concurrent code far easier to write
-- Optimize the generation of garbage not the garbage collector
-- Careful programmers can reduce the garbage collection overhead dramatically by using the language well[3]
-
-* Objects
-
-* Abstractions
-
-- When I see a bird that walks like a duck and swims like a duck and quacks like a duck, I call that bird a duck (James Whitcomb Riley).
-- Interfaces provide a way to specify the behavior of an object
-- Interfaces have a set of methods
-- Interfaces are implicit (no "implements" declaration)
-- A type can implement multiple interfaces
-- Every object implements the empty interface (interface {})
-
-* Abstractions
-
-- HTTP Handler interface
-
-.code httphandler.go
-
-* Abstractions
-
-- Implementing a counter REST
-
-.code counterserver.go /type Counter/,/.n\)\n\}\n/
-
-* Abstractions
-
-- Create the server and route
-
-.code counterservermain.go
-
-* Abstractions
-
-- But why Counter is a struct ?
-
-.code counterserverint.go
-
-* Modules
-
-* Error handling
-
-- No Exceptions
-- Explicit error handling done by programmer
-- Returns error as last return value from methods
-- In the compiler perspective, error values is just a simple value
-- A lot of if/else for error handling? Use the Go lack of features solves that for you!
-
-* Error handling
-
-- Ugly code
-
-.code errorhandlingugly.go
-
-* Error handling
-
-- Better code
-
-.code errorhandlingbetter.go
-
-* Testing
-
-* Deployment
 
 * Compiler Compiler
 
