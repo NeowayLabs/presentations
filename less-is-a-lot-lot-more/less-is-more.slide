@@ -139,19 +139,19 @@ It is like writing multi-threaded synchronous code, but without losing your sani
 
 .play concurrency3.go
 
-
 * Concurrency examples
 
 - Let's help the scheduler
 
-.play concurrency5.go /func f/,/Second\)\n\}\n/
-
+.play concurrency6.go /func f/,/Second\)\n\}\n/
 
 * Concurrency examples
 
 - Let's invoke the scheduler
 
 .play concurrency4.go /func f/,/Second\)\n\}\n/
+
+* Channels
 
 
 * Memory model
