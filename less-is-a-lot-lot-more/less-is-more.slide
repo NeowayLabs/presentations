@@ -14,7 +14,8 @@ http://github.com/NeowayLabs/presentations
 
 - Why another language ?
 - How Go improves on other languages ?
-- Formating code
+- Creators
+- Syntax
 - Concurrency model
 - Memory model
 - Abstractions 
@@ -195,6 +196,8 @@ It is like writing multi-threaded synchronous code, but without losing your sani
 
 * Goroutines
 
+* Goroutines concepts
+
 - Cheaper and lightweight
 - We can create thousands of them
 - Goroutines are multiplexed inside threads
@@ -231,7 +234,18 @@ It is like writing multi-threaded synchronous code, but without losing your sani
 
 * Memory model
 
+* Memory storage
+
+- Stack or Heap? Forget that!
 - Go encourages the developer to think in the algorithm and leave the decision of the variable storage to compiler
+- Each variable in Go exists as long as there are references to it
+- Variables can be allocated on the stack or garbage-collected heap
+
+* Memory Management
+
+- Automatic Garbage collected
+- Concurrent code far easier to write
+- Careful programmers can reduce the garbage collection overhead dramatically by using the language well[3]
 
 * Objects
 
@@ -251,5 +265,5 @@ It is like writing multi-threaded synchronous code, but without losing your sani
 
 1. [[http://www1.cs.columbia.edu/~aho/cs6998/reports/12-12-11_DeshpandeSponslerWeiss_GO.pdf][Analysis of the Go runtime scheduler]]
 2. [[http://golang.org/doc/go1.4#runtime][Goroutine stack size was decreased from 8kB to 2kB in Go 1.4]]
-
+3. [[http://blog.golang.org/profiling-go-programs][Profiling go programs]]
 
