@@ -187,13 +187,6 @@ It is like writing multi-threaded synchronous code, but without losing your sani
 .play defining_type.go 
 
 
-* Extending types
-
-- Decoupling the method definition from types may seen odd at first
-- But they enable the possibility of extending types without having access to the type definition
-- Like you can do on Javascript, extending prototypes, but safe :-)
-
-
 * Abstractions
 
 - When I see a bird that walks like a duck and swims like a duck and quacks like a duck, I call that bird a duck (James Whitcomb Riley).
