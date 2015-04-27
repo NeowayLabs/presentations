@@ -153,6 +153,23 @@ It is like writing multi-threaded synchronous code, but without losing your sani
 
 * Channels
 
+* Channels
+
+- A channel in Go provides a connection between two goroutines, allowing them to communicate.
+
+.code chan1.go
+
+* Channels
+
+.play concurrency5.go /func f/,/\} \/\//
+
+* Synchronization
+
+- The main function executes <–c and wait for a value to be sent.
+- Similarly, when the f function executes c <– value, it waits for a receiver to be ready.
+- A sender and receiver must both be ready to play their part in the communication. Otherwise we wait until they are.
+- Thus channels both communicate and synchronize.
+
 
 * Memory model
 
