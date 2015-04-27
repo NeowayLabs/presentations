@@ -387,3 +387,8 @@ Code example for remove the evil variable from the code below:
 2. [[http://golang.org/doc/go1.4#runtime][Goroutine stack size was decreased from 8kB to 2kB in Go 1.4]]
 3. [[http://blog.golang.org/profiling-go-programs][Profiling go programs]]
 
+
+* Books
+
+1. [[http://www.golang-book.com/][An Introduction to Programming in Go]]
+2. [[http://www.amazon.com/Go-Programming-Blueprints-Mat-Ryer/dp/1783988029][Go Programming Blueprints]]
