@@ -245,15 +245,41 @@ It is like writing multi-threaded synchronous code, but without losing your sani
 
 - Automatic Garbage collected
 - Concurrent code far easier to write
+- Optimize the generation of garbage not the garbage collector
 - Careful programmers can reduce the garbage collection overhead dramatically by using the language well[3]
 
 * Objects
 
 * Abstractions
 
+- When I see a bird that walks like a duck and swims like a duck and quacks like a duck, I call that bird a duck (James Whitcomb Riley).
+- Interfaces provide a way to specify the behavior of an object
+- Interfaces have a set of methods
+- Interfaces are implicit (no "implements" declaration)
+- A type can implement multiple interfaces
+- Every object implements the empty interface (interface {})
+
 * Modules
 
 * Error handling
+
+- No Exceptions
+- Explicit error handling done by programmer
+- Returns error as last return value from methods
+- In the compiler perspective, error values is just a simple value
+- A lot of if/else for error handling? Use the Go lack of features solves that for you!
+
+* Error handling
+
+- Ugly code
+
+.code errorhandlingugly.go
+
+* Error handling
+
+- Better code
+
+.code errorhandlingbetter.go
 
 * Testing
 
