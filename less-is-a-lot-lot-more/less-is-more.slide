@@ -93,6 +93,72 @@ For more info see [[http://commandcenter.blogspot.ca/2012/06/less-is-exponential
 - Array declaration and initialization
   var hi []int("hi")
 
+* Syntax
+
+- Removed all sources misinterpretations
+  // C
+  if (NULL == *a) doSomethingWithNull();
+  doSomethingWithA(a);
+
+  // Go
+  if NULL == *a {
+          doSomethingWithNull();
+  }
+
+  doSomethingWithA(a);
+
+- Force readability
+- Facilitates lexical analyzer
+- Only 25 keywords
+
+* Freedom of syntax is bad
+
+  char*_ = "'""/*";
+  #include <stdio.h>
+  #define m 21
+  #define o(l, k) for(l=0; l<k; l++)
+  #define n(k) o(T, k)
+
+              int E,L,O,R,G[42][m],h[2][42][m],g[3][8],c
+              [42][42][2],f[42]; char d[42]; void v( int
+              b,int a,int j){ printf("\33[%d;%df\33[4%d"
+              "m  ",a,b,j); } void u(){ int T,e; n(42)o(
+              e,m)if(h[0][T][e]-h[1][T][e]){ v(e+4+e,T+2
+              ,h[0][T][e]+1?h[0][T][e]:0); h[1][T][e]=h[
+              0][T][e]; } fflush(stdout); } void q(int l
+                            ,int k,int p){
+                            int T,e,a; L=0
+                            ; O=1; while(O
+                            ){ n(4&&L){ e=
+                            k+c[l] [T][0];
+                            h[0][L-1+c[l][
+                            T][1]][p?0-e:1
+
+* Syntax
+
+- Benefits of clean syntax.
+
+Code example for remove the evil variable from the code below:
+
+.code censorship.go /HelloWorldService/,/}/
+
+* Syntax
+
+- Easily parse the code using go/parser, go/token and go/ast
+
+.code censorship.go /import/,/\)/
+
+* Syntax
+
+.code censorship.go /Create the AST by parsing src/,/\.\.\./ 
+
+* Syntax
+
+- Re-create the comments with the variables left over.
+- Done!
+
+.play censorship.go /Use the comment/,/\}\n/
+
 * Concurrency model
 
 
