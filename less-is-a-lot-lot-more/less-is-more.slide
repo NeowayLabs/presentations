@@ -183,13 +183,13 @@ It is like writing multi-threaded synchronous code, but without losing your sani
 
 * Modules
 
-* Importing a module
+* Importing modules
 
 Just import it using the repository. For example, importing RabbitMQ:
 
     import "github.com/streadway/amqp"
 
-This still won't compile, you don't have the code. To fix it just run:
+This still won't compile, you don't have the code. To get the code just run:
 
     go get github.com/streadway/amqp
 
@@ -220,7 +220,13 @@ To automatically get all code that your project needs, just run:
 
 * Testing
 
+
 * Deployment
+
+- Binaries are standalone, no need for a any other thing like a VM / interpreter
+- Just build a docker image from scratch with your binary inside, you are good to go :-)
+- Even without docker, deploy is trivial, just copy the binary and run it
+
 
 * Syntax
 
