@@ -187,7 +187,9 @@ It is like writing multi-threaded synchronous code, but without losing your sani
 - Optimize the generation of garbage not the garbage collector
 - Careful programmers can reduce the garbage collection overhead dramatically by using the language well[3]
 
+
 * Objects
+
 
 * Type
 
@@ -195,6 +197,7 @@ It is like writing multi-threaded synchronous code, but without losing your sani
 - A type is a struct, where you define all your data
 - Then you can define methods, associated with your type
 - When a type is instantiated, it is an object
+
 
 * Defining a type
 
@@ -209,6 +212,7 @@ It is like writing multi-threaded synchronous code, but without losing your sani
 - Interfaces are implicit (no "implements" declaration)
 - A type can implement multiple interfaces
 - Every object implements the empty interface (interface {})
+
 
 * Abstractions
 
