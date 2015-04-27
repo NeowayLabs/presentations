@@ -94,14 +94,14 @@ It is like writing multi-threaded synchronous code, but without losing your sani
 - Cheaper and lightweight
 - We can create thousands of them
 - Goroutines are multiplexed inside threads
-- If the Goroutine is blocked, then it will be swapped out for another goroutine on another thread instead[1]
+- [[http://www1.cs.columbia.edu/~aho/cs6998/reports/12-12-11_DeshpandeSponslerWeiss_GO.pdf][If the Goroutine is blocked, then it will be swapped out for another goroutine on another thread instead]]
 - A Go program does not deal with threads (Yeahh !!!)
 - The OS is not aware of the existence of goroutines
 - From the OS perspective, a Go program will behave like an event-driven C program
 
 * Goroutines (memory consumption)
 
-- 2Kb of stack space [2]
+- [[http://golang.org/doc/go1.4#runtime][2Kb of stack space]]
 - One (1) thread uses ~ 1MB (500 times more)
 - Thread memory is protected between one another
 
@@ -380,8 +380,6 @@ Code example for remove the evil variable from the code below:
 - Done!
 
 .play censorship.go /Use the comment/,/\}\n/
-
-* Compiler Compiler
 
 * References
 
