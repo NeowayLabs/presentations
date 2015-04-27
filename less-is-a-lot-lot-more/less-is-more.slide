@@ -70,7 +70,6 @@ For more info see [[http://commandcenter.blogspot.ca/2012/06/less-is-exponential
 
 * Concurrency model
 
-
 * No more callback hell
 
 Thanks to Channels and Goroutines all that you write is synchronous code.
@@ -78,29 +77,15 @@ Thanks to Channels and Goroutines all that you write is synchronous code.
 It is like writing multi-threaded synchronous code, but without losing your sanity and personal life :-)
 (it is hard to have a personal life when everything you do is debug non-deterministic code)
 
-* Concurrency examples
 
-.play helloconcurrency.go
+* Concurrency in details
 
-* Concurrency examples
-
-.play concurrency2.go
-
-* Concurrency examples
-
-.play concurrency3.go
-
-* Concurrency examples
-
-- Let's help the scheduler
-
-.play concurrency5.go /func f/,/Second\)\n\}\n/
-
-* Concurrency examples
-
-- Let's invoke the scheduler
-
-.play concurrency4.go /func f/,/Second\)\n\}\n/
+- Concurrent code goes on goroutines
+- goroutines *MAY* be executed on different threads
+- goroutines communicate using channels
+- channels are typed pipes of communication
+- channel can also have a direction (like receive only)
+- if you like to suffer there is a [[https://golang.org/pkg/sync/][sync package with mutexes and stuff]]
 
 * Goroutines
 
@@ -140,6 +125,35 @@ It is like writing multi-threaded synchronous code, but without losing your sani
 
   PC (Program Counter), SP (Stack Pointer) and DX
 
+* Concurrency examples
+
+.play helloconcurrency.go
+
+
+* Concurrency examples
+
+.play concurrency2.go
+
+
+* Concurrency examples
+
+.play concurrency3.go
+
+
+* Concurrency examples
+
+- Let's help the scheduler
+
+.play concurrency5.go /func f/,/Second\)\n\}\n/
+
+
+* Concurrency examples
+
+- Let's invoke the scheduler
+
+.play concurrency4.go /func f/,/Second\)\n\}\n/
+
+
 * Memory model
 
 * Memory storage
@@ -168,6 +182,21 @@ It is like writing multi-threaded synchronous code, but without losing your sani
 - Every object implements the empty interface (interface {})
 
 * Modules
+
+* Importing a module
+
+Just import it using the repository. For example, importing RabbitMQ:
+
+    import "github.com/streadway/amqp"
+
+This still won't compile, you don't have the code. To fix it just run:
+
+    go get github.com/streadway/amqp
+
+To automatically get all code that your project needs, just run:
+
+    go get ./...
+
 
 * Error handling
 
