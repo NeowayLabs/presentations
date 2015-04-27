@@ -193,6 +193,30 @@ It is like writing multi-threaded synchronous code, but without losing your sani
 - A type can implement multiple interfaces
 - Every object implements the empty interface (interface {})
 
+* Abstractions
+
+- HTTP Handler interface
+
+.code httphandler.go
+
+* Abstractions
+
+- Implementing a counter REST
+
+.code counterserver.go /type Counter/,/.n\)\n\}\n/
+
+* Abstractions
+
+- Create the server and route
+
+.code counterservermain.go
+
+* Abstractions
+
+- But why Counter is a struct ?
+
+.code counterserverint.go
+
 * Modules
 
 * Importing modules
