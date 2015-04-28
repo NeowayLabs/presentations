@@ -400,6 +400,7 @@ Code example for remove the evil variable from the code below:
 1. [[http://www1.cs.columbia.edu/~aho/cs6998/reports/12-12-11_DeshpandeSponslerWeiss_GO.pdf][Analysis of the Go runtime scheduler]]
 2. [[http://golang.org/doc/go1.4#runtime][Goroutine stack size was decreased from 8kB to 2kB in Go 1.4]]
 3. [[http://blog.golang.org/profiling-go-programs][Profiling go programs]]
+4. [[http://www.grokpodcast.com/2013/07/17/episodio-95-golang/][Great podcast about Go being used on production]]
 
 
 * Books
