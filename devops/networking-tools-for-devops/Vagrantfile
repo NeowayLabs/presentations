@@ -1,0 +1,20 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure(2) do |config|
+
+  config.vm.box = "ubuntu/trusty64"
+
+  config.vm.define "host1" do |host1_config|
+    host1_config.vm.network "private_network", ip: "192.168.33.10"
+  end
+
+  config.vm.define "host2" do |host2_config|
+    host2_config.vm.network "private_network", ip: "192.168.33.20"
+  end
+
+  config.vm.provision :shell, inline: 'apt-get -qqy update &&
+    apt-get -qqy install iptraf-ng iftop nethogs tcpdump netcat-openbsd \
+    ngrep iperf mtr traceroute'
+
+end
