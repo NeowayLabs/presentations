@@ -7,7 +7,7 @@ Neoway Talk Presentations
 
 > **Author:** Tiago Katcipis & Tiago Natel
 
-> Source [here](https://github.com/lborguetti/presentations/tree/master/golang/less-is-a-lot-lot-more)
+> Source [here](https://github.com/NeowayLabs/presentations/tree/master/golang/less-is-a-lot-lot-more)
 
 
 # DevOps
@@ -16,12 +16,28 @@ Neoway Talk Presentations
 
 > **Author:** Luciano Faustino
 
-> Source [here](https://github.com/lborguetti/presentations/tree/master/devops/networking-tools-for-devops)
+> Source [here](https://github.com/NeowayLabs/presentations/tree/master/devops/networking-tools-for-devops)
 
-> Click [here](https://github.com/lborguetti/presentations/raw/master/devops/networking-tools-for-devops/pdf/Network%20Tools%20for%20DevOps.pdf) to download the PDF
+> Click [here](https://github.com/NeowayLabs/presentations/raw/master/devops/networking-tools-for-devops/pdf/Network%20Tools%20for%20DevOps.pdf) to download the PDF
 
 ### Docker Compose
 
 > **Author:** Luciano Faustino & Tiago Katcipis
 
 > Source [here](https://github.com/lborguetti/TDC2015)
+
+### Docker Meetup Introducing
+
+> **Author:** Luciano Faustino & Tiago Katcipis, Ricardo Longa
+
+> Source [here](https://github.com/lborguetti/docker-meetup-introducing)
+
+> Click [here](https://github.com/lborguetti/docker-meetup-introducing/raw/master/pdf/Introduction%20to%20Docker.pdf) to download the PDF
+
+### Docker Meetup Kubernetes
+
+> **Author:** Luciano Faustino & Tiago Katcipis
+
+> Source [here](https://github.com/lborguetti/docker-meetup-kubernetes)
+
+> Click [here](https://github.com/lborguetti/docker-meetup-kubernetes/raw/master/pdf/Kubernetes.pdf) to download the PDF
