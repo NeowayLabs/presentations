@@ -41,3 +41,11 @@ Neoway Talk Presentations
 > Source [here](https://github.com/lborguetti/docker-meetup-kubernetes)
 
 > Click [here](https://github.com/lborguetti/docker-meetup-kubernetes/raw/master/pdf/Kubernetes.pdf) to download the PDF
+
+### TheDevConf 2015 Porto Alegre - Kubernetes Manage a cluster of Linux containers
+
+> **Author:** Luciano Faustino
+
+> Source [here](https://github.com/lborguetti/TDC2015-PortoAlegre)
+
+> Click [here](https://github.com/lborguetti/TDC2015-PortoAlegre/raw/master/pdf/Kubernetes-TDC-PortoAlegre-2015-site.pdf) to download the PDF
