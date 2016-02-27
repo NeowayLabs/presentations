@@ -17,6 +17,6 @@ We will show how Kubernetes solved problems like:
 * Scheduling services on multiple nodes
 * Handling outages
 * Deployment and rolling updates of services
-* Deploy and update Kubernetes itself
+* Deploy and update Kubernetes itself at AWS
 * Debugging
 * Monitoring
