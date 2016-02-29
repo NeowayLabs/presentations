@@ -16,6 +16,7 @@ We will show how Kubernetes solved problems like:
 * Port collisions
 * Scheduling services on multiple nodes
 * Handling outages
+* QoS
 * Deployment and rolling updates of services
 * Deploy and update Kubernetes itself at AWS
 * Debugging
