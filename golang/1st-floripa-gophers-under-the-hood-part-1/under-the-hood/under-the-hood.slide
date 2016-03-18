@@ -1,0 +1,153 @@
+Under The Hood, Part 1: Data Representation in Go
+1st Floripa Gophers
+17 Mar 2016
+Tags: floripa,gophers
+
+Paulo Pizarro
+Gopher at Neoway
+paulo.pizarro@neoway.com.br
+@pjpizarro
+
+* Notes
+
+The slides are available on [[https://github.com/ppizarro/1st-floripa-gophers-under-the-hood]]
+
+.image images/event_447209215.jpeg
+
+* Agenda
+
+- Data Representation in Go
+- Basic Types and arrays
+- Structs and pointers
+- String and slices
+- Dynamic allocation with "new" and "make"
+- Maps
+- Implementation of interface values
+
+* Data Representation in Go
+
+* Data Representation in Go
+
+- Good programmers know what the compiler does and how it affects the execution.
+
+- A good starting is to understand the data structures Go uses to represent data.
+
+- So we can get an intuition about which operations are expensive and which are not.
+
+* Basic Types and arrays
+
+* 32-bit Memory Layout of basic types
+
+.image images/basic-types.png
+
+- i implicit 32 bit and j = explicit 32 bit
+- explicit sizes like int8 or int64
+- 64 bit machines only pointers are 64 bit long while int are 32 bit
+
+* Example basic type
+
+.play example-basic-types.go
+
+* Structs and pointers
+
+* Memory Layout of structs
+
+.image images/struct.png
+
+- Go lets decide what is a pointer and what is not
+- Composite literals are often used in Go
+- The fields are laid out continuously in memory
+- No pointer arithmetic
+
+* Memory Layout of composite structs
+
+.image images/composite-structs.png
+
+* Example structs
+
+.play example-structs.go
+
+* String and slices
+
+* Memory Layout of a string
+
+.image images/string.png
+.caption The gray pointers are not visible to the Go program but to the runtime system.
+
+- Strings are Immutable
+- Multiple strings to share the same underlying data
+
+* Slicing an array of integers
+
+.image images/slicing-array.png
+.caption The gray pointers are not visible to the Go program but to the runtime system.
+
+- Slice - 3 words (pointer to data, len, cap)
+- Advantage slicing - create a new slice and does not copy underlying data
+- Slice parameters - as efficient as passing a pointer and length par in C
+- Like Java well known draw back keeping a small slice of a huge array
+
+* Example structs
+
+.play example-slicing.go
+.link http://play.golang.org play
+
+* Dynamic allocation with "new" and "make"
+
+* Dynamic allocation with "new"
+
+.image images/allocation-new.png
+
+- new(T) returns *T
+- creates data structures with zeroed memory
+
+* Dynamic allocation with "make"
+
+.image images/allocation-make.png
+
+- make(T, args) return an ordinary T
+- initializes the slice with the underlying data structure
+- make used for channels, slices anda maps
+
+* Maps
+
+* Example Maps
+
+.code maps.go
+
+- maps are built-in data structures
+- decision for built-in maps was made because of the benefit of syntactical
+- maps are a reference type
+- structs, arrays and slices cannot used as key
+
+* Implementation of interface values
+
+* Example Interface
+
+.code interface.go
+
+Languages that support dynamic binding typically fall into one of two categories:
+
+- statically prepare method-call tables, which occurs in C++ and Java
+- do a method lookup for each call like the Smalltalk family of languages does
+
+Go is somewhere in between. It has method tables like C++ but these are computed at runtime
+
+* Interface representation
+
+.image images/interface.png
+.caption The gray pointers are not visible to the Go program but to the runtime system.
+
+To call s.String() the compiler generates s.tab->fun[0](s.data)
+
+The implicit implementation of interfaces in Go is one of the strongest features for refactories
+
+* References
+
+- [[https://www.google.com.br/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&ved=0ahUKEwjwsOjZ2L7LAhVGUJAKHbJaD2UQFggcMAA&url=http%3A%2F%2Fdoc.cat-v.org%2Fprogramming%2Fgo%2Fpapers%2FPaper__aigner_baumgartner.pdf&usg=AFQjCNErtX_dvtvAcKsVuF0UL01mcVMxzQ&bvm=bv.116636494,d.Y2I&cad=rja][Google Go! A look behind the scenes]]
+- [[http://blog.golang.org/strings][Strings, bytes, runes and characters in Go]]
+- [[http://blog.golang.org/slices][Arrays, slices (and strings): The mechanics of 'append']]
+- [[http://blog.golang.org/go-slices-usage-and-internals][Go Slices: usage and internals]]
+- [[http://research.swtch.com/godata][Go Data Structures]]
+- [[http://www.goinggo.net/2013/12/macro-view-of-map-internals-in-go.html][Macro View of Map Internals In Go]]
+
