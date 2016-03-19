@@ -1,0 +1,101 @@
+Deploy Portus Registry
+Tags: network, tools, devops, docker
+
+Vitor Arins
+vitorarins@gmail.com
+https://github.com/vitorarins
+@vitorarins
+
+
+* Agenda
+- What is a Registry?
+- Why use a local Registry?
+- Options
+- Our deploy
+- Problems faced
+- TODOs
+
+* What is a Registry?
+
+*Registry* : An open-source application dedicated to store and distribute Docker images.
+
+Some key concepts:
+
+- Doesn't store state
+
+- Highly scalable
+
+- It works through a REST API
+
+* Why use a local Registry?
+
+- Proprietary code
+
+- Clients with a different demand for security
+
+- Classified files or information stored inside an image
+
+- Decrease time for sending (push) and retrieving (pull) images
+
+* Options (SaaS)
+
+- [[https://hub.docker.com/][Docker Hub]]
+
+- [[https://quay.io/][Quay.io]]
+
+- [[http://www.jfrog.com/artifactory/versions/#Cloud][Artifactory]]
+
+- [[https://cloud.google.com/container-registry/][Google Container Registry]]
+
+
+* Options (On-premises)
+
+- [[https://coreos.com/products/enterprise-registry][CoreOS - Enterprise Registry]]
+
+- [[http://www.jfrog.com/artifactory/versions/#Pro][Artifactory (Pro)]]
+
+- [[https://www.docker.com/docker-trusted-registry][Docker Trusted Registry]]
+
+- [[http://suse.github.io/Portus/][Portus]]
+
+
+* Our deploy
+
+- CoreOS
+
+- Load Balancer (ELB, HAproxy)
+
+- Image storage (AWS S3)
+
+- Cache (Redis)
+
+- User Database (MySQL)
+
+Available at: [[https://github.com/NeowayLabs/deploy-portus][github.com/NeowayLabs/deploy-portus]]
+
+* Problems faced
+
+- Load Balancer
+
+- Crono Job (Image sync)
+
+- Registry config
+
+- MySQL Backup and Restore
+
+- Email for forgotten password
+
+- Valid certificate
+
+
+* TODOs
+
+- Automate certificate creation
+
+- Update strategy
+
+- Can't remove images
+
+- Push of same tag
+
+- Automate AWS infrastructure
