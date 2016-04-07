@@ -1,0 +1,53 @@
+Real Life Kubernetes
+Pathfinder Study Case
+17:45 18 Apr 2016
+Tags: DevOps, k8s, microservices
+
+Fabio Favero Henkes
+Lead Developer - Prevention Team, Neoway
+fabio.favero@neoway.com.br
+http://www.neoway.com.br
+@ffhenkes
+
+* Microservices
+
+- Componentization via Services
+- Organized around Business Capabilities
+- Products not Projects
+- Smart endpoints and dumb pipes
+- Decentralized Governance
+- Decentralized Data Management
+- Infrastructure Automation
+- Design for failure
+- Evolutionary Design
+
+.link http://martinfowler.com/articles/microservices.html
+
+* Docker
+
+- Self-contained (no hell of dependencies)
+- Build
+- Ship
+- Run
+- Stateless x Stateful
+- Shared volumes (NFS)
+- Tough management (how to solve that?)
+
+* Kubernetes
+
+- Scheduling
+- Scaling
+- Balance
+- Deployment
+- Pods
+- Services
+- Endpoints
+- Replication Controllers
+
+* Pathfinder
+
+- Concept
+- Architecture
+- Flow
+- Deploy
+- AWS
