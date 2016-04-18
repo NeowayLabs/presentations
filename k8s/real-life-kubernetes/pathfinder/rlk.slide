@@ -30,7 +30,7 @@ http://www.neoway.com.br
 - Ship
 - Run
 - Stateless x Stateful
-- Shared volumes (NFS)
+- Shared volumes
 - Tough management (how to solve that?)
 
 * Kubernetes
@@ -44,13 +44,25 @@ http://www.neoway.com.br
 - Endpoints
 - Replication Controllers
 
+* Overview
 
-.link kubernetes.png Example
+.image kubernetes.png
 
 * Pathfinder
 
 - Concept
 - Architecture
-- Flow
 - Deploy
 - AWS
+
+* Pathfinder Architecture Overview
+
+.image overview.png 490 581
+
+* Pathfinder AWS Infrastructure
+
+.image networking.png 667 811
+
+* Pathfinder Autos Scaling
+
+.image autoscaling.png
