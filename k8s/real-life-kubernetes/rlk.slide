@@ -1,6 +1,6 @@
 Real Life Kubernetes
-Pathfinder Study Case
-17:45 18 Apr 2016
+Neoway Study Case
+18 Apr 2016
 Tags: DevOps, k8s, microservices, cluster orchestration
 
 Fabio Favero Henkes
@@ -16,9 +16,10 @@ https://github.com/katcipis
 @tiagokatcipis
 
 
-* Why ?
+* Why should you care ?
 
-* Microservices is cool :-)
+
+* Fancy some Microservices ?
 
 - Service orientation done right
 - Organized around Business Capabilities
@@ -28,7 +29,7 @@ https://github.com/katcipis
 - Cool way to apply good and old divide and conquer
 
 
-* Microservices tradeoff
+* Microservices tradeoff, no free lunch for you
 
 * For each service you need
 
@@ -37,22 +38,36 @@ https://github.com/katcipis
 - Keep your service running
 - Scale (better if it is autoscale)
 - Load balance it (if it exposes an API, which usually is the case)
-- Expose it to other services that depends on it
+- Expose it to other services that depends on it (service discovery)
 - Health check (check if it is actually working, not just running)
 - With one service you can survive doing manual stuff
 - With microservices it is automation or agonizing death :-)
 .link http://martinfowler.com/bliki/MicroservicePrerequisites.html
 
 
-* Docker
+* Cattle, not pets
+
+- Treat nodes as cattle, not pets
+- No manual configuration
+- No node is "special" and needs individual care
+- If it goes sick, just kill it
+- If it dies, just add a new one
+- They are just a pool or computational resources
+- No need to know where each service is running
+- Infrastructure as code is your friend
+- Imagine trying to work with pets when you have 100 different services
+
+
+* The Deployable artifact: Docker
 
 - Self-contained (no hell of dependencies)
-- Build
-- Ship
-- Run
-- Stateless x Stateful
-- Shared volumes
-- Tough management (how to solve that?)
+- Language agnostic way to package and run applications
+- Closes the gap between environments (dev <-> staging <-> production)
+- Solves pretty nicely the artifact problem
+- But how to run 100 containers through 10 machines ?
+- How to connect different containers with each other ?
+- How to keep then running even on failures ?
+
 
 * Kubernetes
 
