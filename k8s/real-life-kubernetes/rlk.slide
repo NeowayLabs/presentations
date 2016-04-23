@@ -21,12 +21,12 @@ https://github.com/katcipis
 
 * Fancy some Microservices ?
 
-- Service orientation done right
 - Organized around Business Capabilities
 - Smart endpoints and dumb pipes (no complex stateful protocols)
 - Decentralized Governance
 - Decentralized Data Management
 - Cool way to apply good and old divide and conquer
+- Service orientation done right
 
 
 * Microservices tradeoff, no free lunch for you
@@ -79,20 +79,29 @@ https://github.com/katcipis
 - How to keep then running even on failures ?
 
 
-* Kubernetes
+* The Container Orchestrator: Kubernetes
 
 - Scheduling
 - Scaling
-- Balance
-- Deployment
-- Pods
-- Services
-- Endpoints
-- Replication Controllers
+- Load Balance
+- Health Check
+- Service discovery
+
+
+* Kubernetes why ?
+
+- More than just using fleet
+- Less than using Mesos/Mesosphere/Deis
+- We wanted something more, but that doesn't was a PAAS
+- Kubernetes is a CAAS (Container As A Service)
+- Just what we wanted :-)
+- Cool / Scalable way to extend (through REST API)
+
 
 * Overview
 
 .image kubernetes.png
+
 
 * Pathfinder
 
