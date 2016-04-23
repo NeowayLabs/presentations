@@ -10,7 +10,7 @@ http://www.neoway.com.br
 @ffhenkes
 
 Tiago César Katcipis
-Metaphores enthusiast - Bug Factory - Datapirates Team, Neoway
+Metaphores enthusiast / Bug Factory - Datapirates Team, Neoway
 tiago.katcipis@neoway.com.br
 https://github.com/katcipis
 @tiagokatcipis
@@ -96,11 +96,12 @@ https://github.com/katcipis
 - Kubernetes is a CAAS (Container As A Service)
 - Just what we wanted :-)
 - Cool / Scalable way to extend (through REST API)
+- Great community (Google + Red Hat as top contributors, not bad :-)
 
 
 * Overview
 
-.image kubernetes.png
+.image ./img/kubernetes.png
 
 
 * Pathfinder
@@ -112,12 +113,12 @@ https://github.com/katcipis
 
 * Pathfinder Architecture Overview
 
-.image overview.png 490 581
+.image ./img/overview.png 490 581
 
 * Pathfinder AWS Infrastructure
 
-.image networking.png 667 811
+.image ./img/networking.png 667 811
 
 * Pathfinder Autos Scaling
 
-.image autoscaling.png
+.image ./img/autoscaling.png
