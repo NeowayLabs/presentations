@@ -58,6 +58,16 @@ https://github.com/katcipis
 - Imagine trying to work with pets when you have 100 different services
 
 
+* What we want ?
+
+- A way to automate everything
+- As little distance as possible between running on the dev machine and production
+- Easy way to: configure, scale, service discovery, load balance, health check, rolling update, debug
+- Adding new services must be easy (we are going to have a lot of them :-)
+- No need to ssh/log into nodes (this should be an exception, not the norm)
+- No snowflakes servers
+
+
 * The Deployable artifact: Docker
 
 - Self-contained (no hell of dependencies)
