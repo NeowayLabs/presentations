@@ -147,6 +147,20 @@ https://github.com/katcipis
 - Keep them running, if a pod dies it starts a new one
 - On Kubernetes 1.2 there is the new Replication Set, which is recommended
 - We are still working with replication controllers
+- Neither pods or replication controllers provides service discovery
+- Enters Services
+
+
+* Services
+
+- Easy way to do service discovery inside the cluster
+- Creates an Cluster IP (more on that later :-) for your service
+- The Cluster IP NEVER changes, but pods IPs changes, since they can exit
+- Consumers always uses this cluster ip
+- This Cluster IP load balances to a set of pods
+- The set of pods is defined by the Selector concept
+- It will hold a set of Endpoints (each endpoint points to a pod)
+- They can also be used to abstract access to services outside the cluster
 
 
 * Kubernetes Overview
