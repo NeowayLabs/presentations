@@ -202,6 +202,14 @@ https://github.com/katcipis
 #TODO
 
 
+* Datapirates final remarks
+
+- Choose a service discovery that works the same on dev/prod
+- Do not use docker link env vars, they are deprecating on 1.10
+- DNS seems the way to go
+- Being able to build entire cluster is 5 minutes was a good way to experiment with different instance types
+
+
 * Pathfinder
 
 - Concept
