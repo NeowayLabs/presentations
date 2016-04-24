@@ -47,6 +47,16 @@ https://github.com/katcipis
 .link http://martinfowler.com/bliki/MicroservicePrerequisites.html
 
 
+* Microservices begins with
+
+.image ./img/look-the-languages.jpg _ 700
+
+
+* And ends with...
+
+.image ./img/deploying-all-languages.jpg _ 700
+
+
 * Cattle, not pets
 
 - Treat nodes as cattle, not pets
@@ -56,7 +66,7 @@ https://github.com/katcipis
 - If it dies, just add a new one
 - They are just a pool or computational resources
 - No need to know where each service is running
-- Infrastructure as code is your friend
+- Infrastructure as code is your friend here
 - Imagine trying to work with pets when you have 100 different services
 
 
@@ -68,6 +78,7 @@ https://github.com/katcipis
 - Adding new services must be easy (we are going to have a lot of them :-)
 - No need to ssh/log into nodes (this should be an exception, not the norm)
 - No snowflakes servers
+- Easy way to enable multi-tenancy (some teams have this challenge at Neoway)
 
 
 * The Deployable artifact: Docker
@@ -94,16 +105,60 @@ https://github.com/katcipis
 
 - More than just using fleet
 - Less than using Mesos/Mesosphere/Deis
-- We wanted something more, but that doesn't was a PAAS
+- We wanted something more, but that doesn't was a PAAS (remember, multi-tenancy)
 - Kubernetes is a CAAS (Container As A Service)
 - Just what we wanted :-)
-- Cool / Scalable way to extend (through REST API)
+- Cool / Scalable way to extend through REST API
 - Great community (Google + Red Hat as top contributors, not bad :-)
+- Great documentation
 
 
-* Overview
+* Datapirates Kubernetes Learning Experience
+
+
+* Context: 2015
+
+- April, started work on new service oriented architecture for bots
+- Looking for a way to run our new architecture
+- We started working with Kubernetes for this around August, 2015
+- Setting up a cluster took less than a day
+- Understand the main concepts is pretty fast
+- Understanding the networking took almost a week and a lot of drawings on the wall :-)
+
+
+* Kubernetes concepts very fast introduction
+
+
+* Pods
+
+- Where your containers will be running
+- You can think on it as a "node"
+- Each one has its own IP address
+- Can have multiple containers
+- Containers on the same pod share the same filesystem/network/IPC(Inter process communication)
+- Again, like they are on the same host/node
+- If you create a pod and it exits, it stays dead forever
+- Enters replication controllers
+
+
+* Replication controllers
+
+- Replicates your pods
+- Keep them running, if a pod dies it starts a new one
+- On Kubernetes 1.2 there is the new Replication Set, which is recommended
+- We are still working with replication controllers
+
+
+* Kubernetes Overview
 
 .image ./img/kubernetes.png
+
+
+* What we needed to deploy
+
+.image ./img/datapirates-arch.png 580 _
+
+
 
 
 * Pathfinder
