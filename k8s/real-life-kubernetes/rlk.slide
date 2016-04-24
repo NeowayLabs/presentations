@@ -163,7 +163,13 @@ https://github.com/katcipis
 - They can also be used to abstract access to services outside the cluster
 
 
-* Kubernetes Overview
+* Service discovery
+
+- Environment variables
+- DNS
+
+
+* Overview
 
 .image ./img/kubernetes.png
 
@@ -173,6 +179,27 @@ https://github.com/katcipis
 .image ./img/datapirates-arch.png 580 _
 
 
+* Our full stack
+
+- CoreOS
+- Flannel (SDN-Software Defined Network, or overlay network)
+- Kubernetes
+- That is it :-)
+
+
+* Deployment diagram
+
+#TODO
+
+
+* How a bot reaches a service ?
+
+#TODO
+
+
+* How we command the cluster ?
+
+#TODO
 
 
 * Pathfinder
