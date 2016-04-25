@@ -169,11 +169,6 @@ https://github.com/katcipis
 - DNS
 
 
-* Overview
-
-.image ./img/kubernetes.png
-
-
 * What we needed to deploy
 
 .image ./img/datapirates-arch.png 580 _
@@ -184,22 +179,20 @@ https://github.com/katcipis
 - CoreOS
 - Flannel (SDN-Software Defined Network, or overlay network)
 - Kubernetes
-- That is it :-)
-
-
-* Deployment diagram
-
-#TODO
+- [[https://github.com/NeowayLabs/cloud-machine][Cloud Machine]]
 
 
 * How a bot reaches a service ?
 
-#TODO
+.image ./img/kubernetes-networking.png
 
 
-* How we command the cluster ?
+* Deployment Overview
 
-#TODO
+
+* Where each service/database is
+
+.image ./img/deployment.png _ 1000
 
 
 * Datapirates final remarks
@@ -208,6 +201,12 @@ https://github.com/katcipis
 - Do not use docker link env vars, they are deprecating on 1.10
 - DNS seems the way to go
 - Being able to build entire cluster is 5 minutes was a good way to experiment with different instance types
+- Honestly, it simply worked :-)
+
+
+* Overview
+
+.image ./img/kubernetes.png
 
 
 * Pathfinder
