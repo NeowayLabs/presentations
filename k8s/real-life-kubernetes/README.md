@@ -31,7 +31,13 @@ We will show how Kubernetes solved problems like:
 * Debugging
 * Monitoring
 
-### Fabio Favero Henkes profile:
+
+## Running the presentation
+
+Install docker and run: `make`
+
+
+## Fabio Favero Henkes profile:
 
 Software craftsman, full stack developer. Focus on solving problems with simplicity.
 Embrace new technologies and complex tasks. Twelve+ years of professional experience.
