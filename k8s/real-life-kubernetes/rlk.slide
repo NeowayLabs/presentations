@@ -116,6 +116,18 @@ https://github.com/katcipis
 * Datapirates Kubernetes Learning Experience
 
 
+* Datapirates ???
+
+- Team responsible for capturing data on the internet
+- We mainly develop scrapers
+- And all the infrastructure required by it
+- Breaking captchas
+- Fresh proxies to avoid blacklisting
+- Storing raw data (rastreability / reprocessing)
+- Monitor services + more than 200 bots
+- DevOps culture, the team does all operational work
+
+
 * Context: 2015
 
 - April, started work on new service oriented architecture for bots
