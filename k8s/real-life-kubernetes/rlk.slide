@@ -144,11 +144,10 @@ https://github.com/katcipis
 * Pods
 
 - Where your containers will be running
-- You can think on it as a "node"
 - Each one has its own IP address
 - Can have multiple containers
 - Containers on the same pod share the same filesystem/network/IPC(Inter process communication)
-- Again, like they are on the same host/node
+- You can think on it as a "node"
 - If you create a pod and it exits, it stays dead forever
 - Enters replication controllers
 
@@ -189,6 +188,7 @@ https://github.com/katcipis
 * Our full stack
 
 - CoreOS
+- Etcd
 - Flannel (SDN-Software Defined Network, or overlay network)
 - Kubernetes
 - [[https://github.com/NeowayLabs/cloud-machine][Cloud Machine]]
