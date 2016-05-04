@@ -159,6 +159,7 @@ https://github.com/katcipis
 - On Kubernetes 1.2 there is the new Replication Set, which is recommended
 - We are still working with replication controllers
 - Neither pods or replication controllers provides service discovery
+- Until now, you have not exported anything
 - Enters Services
 
 
