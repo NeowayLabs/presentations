@@ -59,15 +59,15 @@ https://github.com/katcipis
 
 * Cattle, not pets
 
+- Imagine trying to work with pets when you have 100 different services
+- No need to know where each service is running
 - Treat nodes as cattle, not pets
 - No manual configuration
 - No node is "special" and needs individual care
 - If it goes sick, just kill it
 - If it dies, just add a new one
 - They are just a pool or computational resources
-- No need to know where each service is running
 - Infrastructure as code is your friend here
-- Imagine trying to work with pets when you have 100 different services
 
 
 * What we want ?
