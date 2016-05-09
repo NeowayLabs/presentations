@@ -259,3 +259,8 @@ https://github.com/katcipis
 * Pathfinder Autos Scaling
 
 .image ./img/autoscaling.png
+
+
+* Interesting reading
+
+- [[https://github.com/kubernetes/kubernetes/blob/release-1.0/docs/admin/networking.md][Kubernetes Networking]]
