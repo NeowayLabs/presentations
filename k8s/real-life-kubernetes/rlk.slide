@@ -68,6 +68,7 @@ https://github.com/katcipis
 - If it dies, just add a new one
 - They are just a pool or computational resources
 - Infrastructure as code is your friend here
+- Nice match for using ephemeral machines, like AWS spot instances
 
 
 * What we want ?
