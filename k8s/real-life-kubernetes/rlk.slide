@@ -1,6 +1,6 @@
 Real Life Kubernetes
 Neoway Study Case
-18 Apr 2016
+12 May 2016
 Tags: DevOps, k8s, microservices, cluster orchestration
 
 Fabio Favero Henkes
@@ -28,6 +28,7 @@ https://github.com/katcipis
 - Cool way to apply good and old divide and conquer
 - Different problems can be approached with different technologies
 - Great way to explore new languages/ideas with safety
+- Physical boundaries VS logical boundaries
 - Service orientation done right
 
 
@@ -128,12 +129,21 @@ https://github.com/katcipis
 - DevOps culture, the team does all operational work
 
 
-* Context: 2015
+* Context: April 2015 - Current architecture
 
-- April, started work on new service oriented architecture for bots
+- Java framework performs crawler
+- All bots share the same java JVM (installed on host)
+- We have very interesting problems when we try to update Java :-)
+- There is no isolation or orthogonality
+
+
+* Context: April 2015 - New architecture
+
+- Started work on new service oriented architecture for bots
 - Looking for a way to run our new architecture
+- Strong desire to have better isolation and orthogonality for the bots
 - We started working with Kubernetes for this around August, 2015
-- Setting up a cluster took less than a day
+- Setting up a cluster took less than a day (with help of a kick ass BlackOps/DevOps/PaleoOps)
 - Understand the main concepts is pretty fast
 - Understanding the networking took almost a week and a lot of drawings on the wall :-)
 
