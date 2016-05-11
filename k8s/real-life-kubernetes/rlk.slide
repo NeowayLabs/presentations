@@ -71,9 +71,10 @@ https://github.com/katcipis
 - Infrastructure as code is your friend here
 
 
-* What we want ?
+* What we wanted ?
 
 - A way to automate everything
+- Fast 0 to 100 development environment
 - As little distance as possible between running on the dev machine and production
 - Easy way to: configure, scale, service discovery, load balance, health check, rolling update, debug
 - Adding new services must be easy (we are going to have a lot of them :-)
@@ -86,6 +87,7 @@ https://github.com/katcipis
 
 - Self-contained (no hell of dependencies)
 - Language agnostic way to package and run applications
+- Isolated and automated way to build development environments
 - Closes the gap between environments (dev <-> staging <-> production)
 - Solves pretty nicely the artifact problem
 - But how to run 100 containers through 10 machines ?
