@@ -18,7 +18,7 @@ https://github.com/katcipis
 
 * First, a little about Neoway
 
-- Fabio talks awesome stuff about Neoway Business :-)
+.image ./img/neoway.jpg _ 700
 
 
 * Why should you care ?
@@ -183,49 +183,6 @@ https://github.com/katcipis
 - Understanding the networking took almost a week and a lot of drawings on the wall :-)
 
 
-* Kubernetes concepts very fast introduction
-
-
-* Pods
-
-- Where your containers will be running
-- Each one has its own IP address
-- Can have multiple containers
-- Containers on the same pod share the same filesystem/network/IPC(Inter process communication)
-- You can think on it as a "node"
-- If you create a pod and it exits, it stays dead forever
-- Enters replication controllers
-
-
-* Replication controllers
-
-- Replicates your pods
-- Keep them running, if a pod dies it starts a new one
-- On Kubernetes 1.2 there is the new Replication Set, which is recommended
-- We are still working with replication controllers
-- Neither pods or replication controllers provides service discovery
-- Until now, you have not exported anything
-- Enters Services
-
-
-* Services
-
-- Easy way to do service discovery inside the cluster
-- Creates an Cluster IP (more on that later :-) for your service
-- The Cluster IP NEVER changes, but pods IPs changes, since they can exit
-- Consumers always uses this cluster ip
-- This Cluster IP load balances to a set of pods
-- The set of pods is defined by the Selector concept
-- It will hold a set of Endpoints (each endpoint points to a pod)
-- They can also be used to abstract access to services outside the cluster
-
-
-* Service discovery
-
-- Environment variables
-- DNS
-
-
 * Our full stack
 
 - CoreOS
@@ -243,33 +200,6 @@ https://github.com/katcipis
 - It seems to be a good way to start playing with Kubernetes + CoreOS
 
 
-* How to talk with the cluster ?
-
-- kubectl
-- Kubernetes REST API, if you are feeling fancy
-
-
-* How deploy is done ?
-
-kubectl -s http://<masterip>:<port> create -f resource.yaml
-
-
-* How rolling update is done ?
-
-TODO
-
-
-* How scaling is done ?
-
-kubectl -s http://<masterip>:<port> scale --replicas=<replicas> replicationcontrollers <name>
-
-
-* How debugging is done ?
-
-- logs: kubectl -s http://<masterip>:<port> logs <pod_id> -f
-- shell on container: kubectl -s http://<masterip>:<port> -ti <pod_id> bash
-
-
 * Deployment Overview
 
 
@@ -281,14 +211,14 @@ kubectl -s http://<masterip>:<port> scale --replicas=<replicas> replicationcontr
 * Networking Example
 
 
-* How a bot reaches a service ?
-
-.image ./img/kubernetes-networking.png
-
-
-* Magic !!!
+* How a bot reaches a service ? Magic !!!
 
 .image ./img/magic.gif _ 600
+
+
+* No magic :)
+
+.image ./img/kubernetes-networking.png
 
 
 * Size of the cluster
@@ -322,6 +252,7 @@ kubectl -s http://<masterip>:<port> scale --replicas=<replicas> replicationcontr
 - Or AWS connectivity issues
 - Just that...sorry, shit just works :-)
 
+* Prevention Case (Pathfinder)
 
 * Overview
 
@@ -337,17 +268,28 @@ kubectl -s http://<masterip>:<port> scale --replicas=<replicas> replicationcontr
 
 * Pathfinder Architecture Overview
 
-.image ./img/overview.png 490 581
+.image ./img/overview.png 490 _
 
 * Pathfinder AWS Infrastructure
 
-.image ./img/networking.png 667 811
+.image ./img/networking.png 667 _
 
-* Pathfinder Autos Scaling
+* Size of the cluster
+
+- 17 services
+- Total pods: 2 ~ 3 instances per service
+
+* Outside the cluster
+
+- Distributed filesystem (NFS)
+- 2 Nosql databases (MongoDB, Neo4J)
+- Message broker (RabbitMQ)
+
+* Pathfinder Auto Scaling
 
 .image ./img/autoscaling.png
 
+* Demo ?!
 
-* Interesting reading
 
-- [[https://github.com/kubernetes/kubernetes/blob/release-1.0/docs/admin/networking.md][Kubernetes Networking]]
+* Questions ?
