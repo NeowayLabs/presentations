@@ -291,6 +291,14 @@ kubectl -s http://<masterip>:<port> scale --replicas=<replicas> replicationcontr
 .image ./img/magic.gif _ 600
 
 
+* Size of the cluster
+
+- 8 services
+- 20 bots
+- Total pods: 60 ~ 100
+- More than 15 million PDFs downloaded and parsed
+
+
 * The good
 
 - Choose a service discovery that works the same on dev/prod
