@@ -16,65 +16,57 @@ https://github.com/katcipis
 @tiagokatcipis
 
 
+* First, a little about Neoway
+
+- Fabio talks awesome stuff about Neoway Business :-)
+
+
 * Why should you care ?
 
 
-* Fancy some Microservices ?
-
-- Organized around Business Capabilities
-- Smart endpoints and dumb pipes (no complex stateful protocols)
-- Decentralized Governance
-- Decentralized Data Management
-- Cool way to apply good and old divide and conquer
-- Different problems can be approached with different technologies
-- Great way to explore new languages/ideas with safety
-- Physical boundaries VS logical boundaries
-- Service orientation done right
-
-
-* Microservices tradeoff, no free lunch for you
-
-* For each service you need
-
-- Build an deployable artifact
-- Deploy your artifact
-- Keep your service running
-- Scale (better if it is autoscale)
-- Load balance it (if it exposes an API, which usually is the case)
-- Expose it to other services that depends on it (service discovery)
-- Health check (check if it is actually working, not just running)
-- With one service you can survive doing manual stuff
-- With microservices it is automation or agonizing death :-)
-.link http://martinfowler.com/bliki/MicroservicePrerequisites.html
-
-
-* Microservices begins with
+* Microservices !!!
 
 .image ./img/look-the-languages.jpg _ 700
 
 
-* And ends with...
+* Microservices: The tradeoff
 
 .image ./img/deploying-all-languages.jpg _ 700
 
 
-* Cattle, not pets
+* Microservices: For each one
 
-- Imagine trying to work with pets when you have 100 different services
-- No need to know where each service is running
-- Treat nodes as cattle, not pets
-- No manual configuration
-- No node is "special" and needs individual care
-- If it goes sick, just kill it
-- If it dies, just add a new one
-- They are just a pool or computational resources
-- Infrastructure as code is your friend here
+- Deploy
+- Service discovery
+- Load balance
+- Health check
+- Scale
+- Get the logs
+
+
+* Development <-> Production distance
+
+.image ./img/code-prod.jpg _ 500
+
+
+* Cloud ephemeral infrastructure
+
+.image ./img/instances-down.jpg _ 550
+
+
+* Multi-tenancy
+
+.image ./img/multi-tenancy.jpg _ 650
+
+
+* The solution ?
+
+.image ./img/automate.jpg _ 700
 
 
 * What we wanted ?
 
 - A way to automate everything
-- Fast 0 to 100 development environment
 - As little distance as possible between running on the dev machine and production
 - Easy way to: configure, scale, service discovery, load balance, health check, rolling update, debug
 - Adding new services must be easy (we are going to have a lot of them :-)
