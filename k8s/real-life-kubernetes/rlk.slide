@@ -64,15 +64,15 @@ https://github.com/katcipis
 .image ./img/automate.jpg _ 700
 
 
-* What we wanted ?
+* If you want
 
 - A way to automate everything
 - As little distance as possible between running on the dev machine and production
 - Easy way to: configure, scale, service discovery, load balance, health check, rolling update, debug
-- Adding new services must be easy (we are going to have a lot of them :-)
+- Adding new services to be easy (you are going to have a lot of them :-)
 - No need to ssh/log into nodes (this should be an exception, not the norm)
 - No snowflakes servers
-- Easy way to enable multi-tenancy (some teams have this challenge at Neoway)
+- Easy way to enable multi-tenancy
 
 
 * Datapirates Case
