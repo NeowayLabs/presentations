@@ -75,32 +75,100 @@ https://github.com/katcipis
 - Easy way to enable multi-tenancy (some teams have this challenge at Neoway)
 
 
+* Datapirates Case
+
+
+* Datapirates ???
+
+- Team responsible for capturing data on the internet
+- We mainly develop scrapers (we call them bots)
+
+
+* And...
+
+- All the infrastructure required by it
+- Breaking captchas
+- Fresh proxies to avoid blacklisting
+- Storing raw data (rastreability / reprocessing)
+- Monitor services + more than 260 bots
+- DevOps culture, the team does all operational work
+- Build new awesome architecture, with lasers !!!
+
+
+* Context: April 2015 - Architectural change
+
+
+* Current architecture
+
+- No clear service boundaries, lots of databases/ETLs and plsql
+- Data pumping based
+- Bots coupled on the databases (the schema is the protocol)
+
+
+* Current architecture
+
+- Bots developed based on a Java framework
+- All bots share the same java JVM (installed on host)
+- We have very interesting problems when we try to update Java :-)
+- There is no isolation or orthogonality
+
+
+* Current architecture
+
+- Running bot on a machine is not very easy
+- Testing is even harder, since its highly coupled to databases
+- When people is afraid to format their machine, something is wrong :-(
+
+
+* New architecture
+
+- Started work on new service oriented architecture for bots
+- Strong desire to have better isolation and orthogonality for the bots
+- Fast and easy development environment would be great too
+- And automation all the way
+
+
+* New architecture, with an adapter
+
+.image ./img/datapirates-arch.png 580 _
+
+
 * The Deployable artifact: Docker
 
 - Self-contained (no hell of dependencies)
 - Language agnostic way to package and run applications
 - Isolated and automated way to build development environments
 - Closes the gap between environments (dev <-> staging <-> production)
-- Solves pretty nicely the artifact problem
+
+
+* Docker unsolved problems (thank God)
+
 - But how to run 100 containers through 10 machines ?
 - How to connect different containers with each other ?
 - How to keep then running even on failures ?
+- Load balancing ?
 
 
-* The Container Orchestrator: Kubernetes
+* The Cluster Orchestrator: Kubernetes
 
 - Scheduling
 - Scaling
 - Load Balance
 - Health Check
 - Service discovery
+- Logs
 
 
 * Kubernetes why ?
 
 - More than just using fleet
 - Less than using Mesos/Mesosphere/Deis
+- At the time docker swarm was alpha (and docker only)
 - We wanted something more, but that doesn't was a PAAS (remember, multi-tenancy)
+
+
+* Kubernetes why ?
+
 - Kubernetes is a CAAS (Container As A Service)
 - Just what we wanted :-)
 - Cool / Scalable way to extend through REST API
@@ -108,35 +176,8 @@ https://github.com/katcipis
 - Great documentation
 
 
-* Datapirates Kubernetes Learning Experience
+* The learning experience
 
-
-* Datapirates ???
-
-- Team responsible for capturing data on the internet
-- We mainly develop scrapers
-- And all the infrastructure required by it
-- Breaking captchas
-- Fresh proxies to avoid blacklisting
-- Storing raw data (rastreability / reprocessing)
-- Monitor services + more than 200 bots
-- DevOps culture, the team does all operational work
-
-
-* Context: April 2015 - Current architecture
-
-- Java framework performs crawler
-- All bots share the same java JVM (installed on host)
-- We have very interesting problems when we try to update Java :-)
-- There is no isolation or orthogonality
-
-
-* Context: April 2015 - New architecture
-
-- Started work on new service oriented architecture for bots
-- Looking for a way to run our new architecture
-- Strong desire to have better isolation and orthogonality for the bots
-- We started working with Kubernetes for this around August, 2015
 - Setting up a cluster took less than a day (with help of a kick ass BlackOps/DevOps/PaleoOps)
 - Understand the main concepts is pretty fast
 - Understanding the networking took almost a week and a lot of drawings on the wall :-)
@@ -185,11 +226,6 @@ https://github.com/katcipis
 - DNS
 
 
-* What we needed to deploy
-
-.image ./img/datapirates-arch.png 580 _
-
-
 * Our full stack
 
 - CoreOS
@@ -199,12 +235,39 @@ https://github.com/katcipis
 - [[https://github.com/NeowayLabs/cloud-machine][Cloud Machine]]
 
 
-* How the cluster is builded ?
+* How the cluster is built ?
 
-- In house tool called harbor, using Cloud Machine
+- Using Cloud Machine and cloud-configs
 - Why not [[https://coreos.com/kubernetes/docs/latest/kubernetes-on-aws.html][kube-aws]] ?
 - Because it didnt existed on the time we started :-)
 - It seems to be a good way to start playing with Kubernetes + CoreOS
+
+
+* How to talk with the cluster ?
+
+- kubectl
+- Kubernetes REST API, if you are feeling fancy
+
+
+* How deploy is done ?
+
+kubectl -s http://<masterip>:<port> create -f resource.yaml
+
+
+* How rolling update is done ?
+
+TODO
+
+
+* How scaling is done ?
+
+kubectl -s http://<masterip>:<port> scale --replicas=<replicas> replicationcontrollers <name>
+
+
+* How debugging is done ?
+
+- logs: kubectl -s http://<masterip>:<port> logs <pod_id> -f
+- shell on container: kubectl -s http://<masterip>:<port> -ti <pod_id> bash
 
 
 * Deployment Overview
@@ -223,21 +286,33 @@ https://github.com/katcipis
 .image ./img/kubernetes-networking.png
 
 
-* Basically ...
+* Magic !!!
 
 .image ./img/magic.gif _ 600
 
 
-* Datapirates final remarks
+* The good
 
 - Choose a service discovery that works the same on dev/prod
+- Docker Compose <-> Kubernetes was transparent
 - Do not use docker link env vars, they are deprecating on Docker 1.10
 - DNS seems the way to go
+
+
+* The good
+
 - Being able to build entire cluster is 5 minutes was a good way to experiment with different instance types
 - No need to knows IPs (or have some cheatsheet)
 - Destroying stuff is fun :-)
 - Easy to get logs and get inside containers
+
+
+* The bad
+
 - Hard to debug network problems (more layers than usual)
+- Problems usually caused by disks being full
+- Or AWS connectivity issues
+- Just that...sorry, shit just works :-)
 
 
 * Overview
