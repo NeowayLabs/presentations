@@ -1,6 +1,6 @@
 Real Life Kubernetes
 Neoway Study Case
-18 Apr 2016
+12 May 2016
 Tags: DevOps, k8s, microservices, cluster orchestration
 
 Fabio Favero Henkes
@@ -16,97 +16,159 @@ https://github.com/katcipis
 @tiagokatcipis
 
 
+* First, a little about Neoway
+
+.image ./img/neoway.jpg _ 700
+
+
 * Why should you care ?
 
 
-* Fancy some Microservices ?
-
-- Organized around Business Capabilities
-- Smart endpoints and dumb pipes (no complex stateful protocols)
-- Decentralized Governance
-- Decentralized Data Management
-- Cool way to apply good and old divide and conquer
-- Different problems can be approached with different technologies
-- Great way to explore new languages/ideas with safety
-- Service orientation done right
-
-
-* Microservices tradeoff, no free lunch for you
-
-* For each service you need
-
-- Build an deployable artifact
-- Deploy your artifact
-- Keep your service running
-- Scale (better if it is autoscale)
-- Load balance it (if it exposes an API, which usually is the case)
-- Expose it to other services that depends on it (service discovery)
-- Health check (check if it is actually working, not just running)
-- With one service you can survive doing manual stuff
-- With microservices it is automation or agonizing death :-)
-.link http://martinfowler.com/bliki/MicroservicePrerequisites.html
-
-
-* Microservices begins with
+* Microservices !!!
 
 .image ./img/look-the-languages.jpg _ 700
 
 
-* And ends with...
+* Microservices: The tradeoff
 
 .image ./img/deploying-all-languages.jpg _ 700
 
 
-* Cattle, not pets
+* Microservices: For each one
 
-- Imagine trying to work with pets when you have 100 different services
-- No need to know where each service is running
-- Treat nodes as cattle, not pets
-- No manual configuration
-- No node is "special" and needs individual care
-- If it goes sick, just kill it
-- If it dies, just add a new one
-- They are just a pool or computational resources
-- Infrastructure as code is your friend here
-- Nice match for using ephemeral machines, like AWS spot instances
+- Deploy
+- Service discovery
+- Load balance
+- Health check
+- Scale
+- Get the logs
 
 
-* What we want ?
+* Development <-> Production distance
+
+.image ./img/code-prod.jpg _ 500
+
+
+* Cloud ephemeral infrastructure
+
+.image ./img/instances-down.jpg _ 550
+
+
+* Multi-tenancy
+
+.image ./img/multi-tenancy.jpg _ 650
+
+
+* The solution ?
+
+.image ./img/automate.jpg _ 700
+
+
+* If you want
 
 - A way to automate everything
 - As little distance as possible between running on the dev machine and production
 - Easy way to: configure, scale, service discovery, load balance, health check, rolling update, debug
-- Adding new services must be easy (we are going to have a lot of them :-)
+- Adding new services to be easy (you are going to have a lot of them :-)
 - No need to ssh/log into nodes (this should be an exception, not the norm)
 - No snowflakes servers
-- Easy way to enable multi-tenancy (some teams have this challenge at Neoway)
+- Easy way to enable multi-tenancy
+
+
+* Datapirates Case
+
+
+* Datapirates ???
+
+- Team responsible for capturing data on the internet
+- We mainly develop scrapers (we call them bots)
+
+
+* And...
+
+- All the infrastructure required by it
+- Breaking captchas
+- Fresh proxies to avoid blacklisting
+- Storing raw data (rastreability / reprocessing)
+- Monitor services + more than 260 bots
+- DevOps culture, the team does all operational work
+- Build new awesome architecture, with lasers !!!
+
+
+* Context: April 2015 - Architectural change
+
+
+* Current architecture
+
+- No clear service boundaries, lots of databases/ETLs and plsql
+- Data pumping based
+- Bots coupled on the databases (the schema is the protocol)
+
+
+* Current architecture
+
+- Bots developed based on a Java framework
+- All bots share the same java JVM (installed on host)
+- We have very interesting problems when we try to update Java :-)
+- There is no isolation or orthogonality
+
+
+* Current architecture
+
+- Running bot on a machine is not very easy
+- Testing is even harder, since its highly coupled to databases
+- When people are afraid to format their machine, something is wrong :-(
+
+
+* New architecture
+
+- Started work on new service oriented architecture for bots
+- Strong desire to have better isolation and orthogonality for the bots
+- Fast and easy development environment would be great too
+- And automation all the way
+
+
+* New architecture, with an adapter
+
+.image ./img/datapirates-arch.png 580 _
 
 
 * The Deployable artifact: Docker
 
 - Self-contained (no hell of dependencies)
 - Language agnostic way to package and run applications
+- Isolated and automated way to build development environments
 - Closes the gap between environments (dev <-> staging <-> production)
-- Solves pretty nicely the artifact problem
+
+
+* Docker unsolved problems (thank God)
+
 - But how to run 100 containers through 10 machines ?
 - How to connect different containers with each other ?
 - How to keep then running even on failures ?
+- Load balancing ?
 
 
-* The Container Orchestrator: Kubernetes
+* The Cluster Orchestrator: Kubernetes
 
 - Scheduling
 - Scaling
 - Load Balance
 - Health Check
 - Service discovery
+- Logs
 
 
 * Kubernetes why ?
 
 - More than just using fleet
 - Less than using Mesos/Mesosphere/Deis
-- We wanted something more, but that doesn't was a PAAS (remember, multi-tenancy)
+- At the time docker swarm was alpha (and docker only)
+- We wanted something more, but that wasn't a PAAS (remember, multi-tenancy)
+
+
+* Kubernetes why ?
+
 - Kubernetes is a CAAS (Container As A Service)
 - Just what we wanted :-)
 - Cool / Scalable way to extend through REST API
@@ -114,77 +176,11 @@ https://github.com/katcipis
 - Great documentation
 
 
-* Datapirates Kubernetes Learning Experience
+* The learning experience
 
-
-* Datapirates ???
-
-- Team responsible for capturing data on the internet
-- We mainly develop scrapers
-- And all the infrastructure required by it
-- Breaking captchas
-- Fresh proxies to avoid blacklisting
-- Storing raw data (rastreability / reprocessing)
-- Monitor services + more than 200 bots
-- DevOps culture, the team does all operational work
-
-
-* Context: 2015
-
-- April, started work on new service oriented architecture for bots
-- Looking for a way to run our new architecture
-- We started working with Kubernetes for this around August, 2015
-- Setting up a cluster took less than a day
+- Setting up a cluster took less than a day (with help of a kick ass BlackOps/DevOps/PaleoOps)
 - Understand the main concepts is pretty fast
 - Understanding the networking took almost a week and a lot of drawings on the wall :-)
-
-
-* Kubernetes concepts very fast introduction
-
-
-* Pods
-
-- Where your containers will be running
-- Each one has its own IP address
-- Can have multiple containers
-- Containers on the same pod share the same filesystem/network/IPC(Inter process communication)
-- You can think on it as a "node"
-- If you create a pod and it exits, it stays dead forever
-- Enters replication controllers
-
-
-* Replication controllers
-
-- Replicates your pods
-- Keep them running, if a pod dies it starts a new one
-- On Kubernetes 1.2 there is the new Replication Set, which is recommended
-- We are still working with replication controllers
-- Neither pods or replication controllers provides service discovery
-- Until now, you have not exported anything
-- Enters Services
-
-
-* Services
-
-- Easy way to do service discovery inside the cluster
-- Creates an Cluster IP (more on that later :-) for your service
-- The Cluster IP NEVER changes, but pods IPs changes, since they can exit
-- Consumers always uses this cluster ip
-- This Cluster IP load balances to a set of pods
-- The set of pods is defined by the Selector concept
-- It will hold a set of Endpoints (each endpoint points to a pod)
-- They can also be used to abstract access to services outside the cluster
-
-
-* Service discovery
-
-- Environment variables
-- DNS
-
-
-* What we needed to deploy
-
-.image ./img/datapirates-arch.png 580 _
 
 
 * Our full stack
@@ -196,9 +192,9 @@ https://github.com/katcipis
 - [[https://github.com/NeowayLabs/cloud-machine][Cloud Machine]]
 
 
-* How the cluster is builded ?
+* How the cluster is built ?
 
-- In house tool called harbor, using Cloud Machine
+- Using Cloud Machine and cloud-configs
 - Why not [[https://coreos.com/kubernetes/docs/latest/kubernetes-on-aws.html][kube-aws]] ?
 - Because it didnt existed on the time we started :-)
 - It seems to be a good way to start playing with Kubernetes + CoreOS
@@ -215,27 +211,48 @@ https://github.com/katcipis
 * Networking Example
 
 
-* How a bot reaches a service ?
-
-.image ./img/kubernetes-networking.png
-
-
-* Basically ...
+* How a bot reaches a service ? Magic !!!
 
 .image ./img/magic.gif _ 600
 
 
-* Datapirates final remarks
+* No magic :)
+
+.image ./img/kubernetes-networking.png
+
+
+* Size of the cluster
+
+- 8 services
+- 20 bots
+- Total pods: 60 ~ 100
+- More than 15 million PDFs downloaded and parsed
+
+
+* The good
 
 - Choose a service discovery that works the same on dev/prod
+- Docker Compose <-> Kubernetes was transparent
 - Do not use docker link env vars, they are deprecating on Docker 1.10
 - DNS seems the way to go
+
+
+* The good
+
 - Being able to build entire cluster is 5 minutes was a good way to experiment with different instance types
 - No need to knows IPs (or have some cheatsheet)
 - Destroying stuff is fun :-)
 - Easy to get logs and get inside containers
-- Hard to debug network problems (more layers than usual)
 
+
+* The bad
+
+- Hard to debug network problems (more layers than usual)
+- Problems usually caused by disks being full
+- Or AWS connectivity issues
+- Just that...sorry, shit just works :-)
+
+* Prevention Case (Pathfinder)
 
 * Overview
 
@@ -251,17 +268,28 @@ https://github.com/katcipis
 
 * Pathfinder Architecture Overview
 
-.image ./img/overview.png 490 581
+.image ./img/overview.png 490 _
 
 * Pathfinder AWS Infrastructure
 
-.image ./img/networking.png 667 811
+.image ./img/networking.png 667 _
 
-* Pathfinder Autos Scaling
+* Size of the cluster
+
+- 17 services
+- Total pods: 2 ~ 3 instances per service
+
+* Outside the cluster
+
+- Distributed filesystem (NFS)
+- 2 Nosql databases (MongoDB, Neo4J)
+- Message broker (RabbitMQ)
+
+* Pathfinder Auto Scaling
 
 .image ./img/autoscaling.png
 
+* Demo ?!
 
-* Interesting reading
 
-- [[https://github.com/kubernetes/kubernetes/blob/release-1.0/docs/admin/networking.md][Kubernetes Networking]]
+* Questions ?
