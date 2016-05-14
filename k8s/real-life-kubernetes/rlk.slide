@@ -117,7 +117,7 @@ https://github.com/katcipis
 
 - Running bot on a machine is not very easy
 - Testing is even harder, since its highly coupled to databases
-- When people is afraid to format their machine, something is wrong :-(
+- When people are afraid to format their machine, something is wrong :-(
 
 
 * New architecture
@@ -164,7 +164,7 @@ https://github.com/katcipis
 - More than just using fleet
 - Less than using Mesos/Mesosphere/Deis
 - At the time docker swarm was alpha (and docker only)
-- We wanted something more, but that doesn't was a PAAS (remember, multi-tenancy)
+- We wanted something more, but that wasn't a PAAS (remember, multi-tenancy)
 
 
 * Kubernetes why ?
