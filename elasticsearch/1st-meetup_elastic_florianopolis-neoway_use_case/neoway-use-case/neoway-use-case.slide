@@ -1,0 +1,31 @@
+Elasticsearch - Neoway use case
+Meetup Elastic Florianópolis
+27 Aug 2016
+Tags: neoway, elastic, elasticsearch, nosql
+
+Luciano Faustino & Paulo Pizarro
+BlackOps & Core Team Leader at Neoway
+luciano.faustino@neoway.com.br
+paulo.pizarro@neoway.com.br
+https://github.com/NeowayLabs
+@NeowayLabs
+
+* Elasticsearch @ Neoway
+
+* Our Deploy @ AWS
+
+* Config Tips
+
+* Mapping and Field Data
+
+* Monitoring
+
+* Prometheus and Grafana
+
+Prometheus
+
+.link https://prometheus.io
+
+Grafana
+
+.link https://grafana.net
