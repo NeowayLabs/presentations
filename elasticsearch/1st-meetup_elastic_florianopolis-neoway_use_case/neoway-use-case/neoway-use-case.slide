@@ -14,18 +14,37 @@ https://github.com/NeowayLabs
 
 * Our Deploy @ AWS
 
+* CoreOS & Docker
+
+.image images/coreos.png
+
+*Version:* 1.7.5 and 2.3.5
+
+*Plugins:* cloud-aws, elastichq
+
+*Network:* VPC with Private subnet and Placement Group
+
+*Security:* NACL and Security Group
+
+*Master* *nodes:* 3 x c4.large -- `3.75G` `Mem,` `2` `vCPUs`
+
+*Data* *nodes:* 7 x i2.2xlarge -- `61G` `Mem,` `8` `vCPUs,` `1.600TB` `disk` `(2` `*` `800GB` `ssd)`
+
+
 * Config Tips
 
 * Mapping and Field Data
 
 * Monitoring
 
-* Prometheus and Grafana
-
-Prometheus
+* Prometheus
 
 .link https://prometheus.io
 
-Grafana
+.image images/prometheus.png
+
+* Grafana
 
 .link https://grafana.net
+
+.image images/grafana.png
