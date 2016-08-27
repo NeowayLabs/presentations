@@ -9,6 +9,11 @@ Neoway Talk Presentations
 
 > Source [here](https://github.com/NeowayLabs/presentations/tree/master/golang/less-is-a-lot-lot-more)
 
+### 1st Floripa Gophers: Under the Hood - Part 1
+
+> **Author:** Paulo Pizarro
+
+> Source [here](https://github.com/NeowayLabs/presentations/tree/master/golang/1st-floripa-gophers-under-the-hood-part-1)
 
 # DevOps
 
@@ -49,3 +54,12 @@ Neoway Talk Presentations
 > Source [here](https://github.com/lborguetti/TDC2015-PortoAlegre)
 
 > Click [here](https://github.com/lborguetti/TDC2015-PortoAlegre/raw/master/pdf/Kubernetes-TDC-PortoAlegre-2015-site.pdf) to download the PDF
+
+# Elasticsearch
+
+### 1st Meetup Elasticsearch Meetup - Neoway Use Case
+
+> **Author:** Luciano Faustino & Paulo Pizarro
+
+> Source [here](https://github.com/NeowayLabs/presentations/tree/master/elasticsearch/1st-meetup_elastic_florianopolis-neoway_use_case)
+
