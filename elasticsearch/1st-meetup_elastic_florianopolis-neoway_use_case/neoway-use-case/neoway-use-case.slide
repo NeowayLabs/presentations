@@ -12,6 +12,27 @@ https://github.com/NeowayLabs
 
 * Elasticsearch @ Neoway
 
+* Apps Using Elasticsearch
+
+.image images/simm-home.png
+
+* Search App - Resume
+
+.image images/search-resume.png
+
+* Search App - Profile Neoway
+
+.image images/neoway-profile.png
+
+* Dados indexados no Elasticsearch
+
+- *Empresas*: 33 Milhões
+- *Pessoas*: 193 Milhões
+- *Processos* *Judiciais*: 104 Milhões
+- *Companies* *USA*: 193 Milhões
+- *Obras* *Imobiliário* *e* *Industria*: 31 Mil
+- *Obras* *Infraestrutura*:  12 Mil
+
 * Our Deploy @ AWS
 
 * CoreOS & Docker
