@@ -68,6 +68,27 @@ https://github.com/NeowayLabs
 
 .code config-parte2.json
 
+* Query, Aggreagations and Sort
+
+- Índice Reverso
+
+nome.luciano: 2, 5, 8
+nome.paulo: 1, 5, 6, 10
+
+- Índice Normal
+
+nome: 2, 5, 8, 1, 5, 6, 10
+
+- Search:
+ - usa o índice reverso para a busca
+ - índice reverso criado em disco no momento da indexação
+
+- Aggreagations and Sort
+ - usa o índice normal
+ - Se doc_values: false índice normal será criado on flight em memória
+ - Se doc_values: true índice normal será criado na indexação em disco
+ - Sort: usar type not_analysed
+
 * Mapping and Field Data
 
 * Tips - doc_values: true, dynamic: strict, _all: false
