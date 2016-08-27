@@ -24,7 +24,7 @@ https://github.com/NeowayLabs
 
 .image images/neoway-profile.png
 
-* Dados indexados no Elasticsearch
+* Dados - Indices no Elasticsearch
 
 - *Empresas*: 33 Milhões
 - *Pessoas*: 193 Milhões
@@ -32,6 +32,12 @@ https://github.com/NeowayLabs
 - *Companies* *USA*: 193 Milhões
 - *Obras* *Imobiliário* *e* *Industria*: 31 Mil
 - *Obras* *Infraestrutura*:  12 Mil
+
+* Exemplo Dados de Empresas
+
+- +1000 campos de empresas pesquisáveis 
+
+.code neoway.json
 
 * Our Deploy @ AWS
 
@@ -54,7 +60,19 @@ https://github.com/NeowayLabs
 
 * Config Tips
 
+* Nodes Discovery - AWS Plugin
+
+.code config-parte1.json
+
+* Field Data Cache / SSD / Others
+
+.code config-parte2.json
+
 * Mapping and Field Data
+
+* Tips - doc_values: true, dynamic: strict, _all: false
+
+.code mapping.json
 
 * Monitoring
 
