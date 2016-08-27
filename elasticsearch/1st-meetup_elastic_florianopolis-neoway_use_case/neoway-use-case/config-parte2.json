@@ -1,0 +1,24 @@
+bootstrap:
+  mlockall: true
+action:
+  destructive_requires_name: true
+  disable_delete_all_indices: false
+index:
+  mapper:
+    dynamic: false
+  merge:
+    policy:
+      reclaim_deletes_weight: 3
+  translog:
+    flush_threshold_size: 1gb
+indices:
+  fielddata:
+    cache:
+      size: 55%
+  breaker:
+    fielddata:
+      limit: 60%
+  store:
+    throttle:
+      max_bytes_per_sec: 100mb
+

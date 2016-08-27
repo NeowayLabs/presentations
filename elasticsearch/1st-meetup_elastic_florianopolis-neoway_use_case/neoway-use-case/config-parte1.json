@@ -1,0 +1,24 @@
+cluster:
+  name: stage
+node:
+  name: es-qa-data-ip-XX-XX-XX-XX
+  data: true
+  master: false
+path:
+  data: /data1,/data2
+http:
+  enabled: true
+plugin:
+  mandatory: cloud-aws
+cloud:
+  aws:
+    region: us-west-2
+discovery:
+  type: ec2
+  ec2:
+    tag:
+      clusterES: true
+  zen:
+    minimum_master_nodes: 2
+    ping_timeout: 40s
+

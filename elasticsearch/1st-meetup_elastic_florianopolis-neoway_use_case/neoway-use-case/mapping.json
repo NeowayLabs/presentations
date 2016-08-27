@@ -1,0 +1,1994 @@
+{
+   "mappings": {
+      "main": {
+         "_all": {
+            "enabled": false
+         },
+         "dynamic": "strict",
+         "properties": {
+            "cnpj": {
+               "type": "string",
+               "index": "not_analyzed",
+               "doc_values": true
+            },
+            "razaoSocial": {
+               "type": "string",
+               "fields": {
+                  "raw": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  }
+               }
+            },
+            "endereco": {
+               "properties": {
+                  "bairro": {
+                     "type": "string",
+                     "fields": {
+                        "raw": {
+                           "type": "string",
+                           "index": "not_analyzed",
+                           "doc_values": true
+                        }
+                     }
+                  },
+                  "cep": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "complemento": {
+                     "type": "string",
+                     "fields": {
+                        "raw": {
+                           "type": "string",
+                           "index": "not_analyzed",
+                           "doc_values": true
+                        }
+                     }
+                  },
+                  "enderecoResidencial": {
+                     "type": "boolean",
+                     "doc_values": true
+                  },
+                  "latlng": {
+                     "properties": {
+                        "point": {
+                           "type": "geo_point",
+                           "fielddata": {
+                              "format": "compressed",
+                              "precision": "1m"
+                           },
+                           "lat_lon": true,
+                           "geohash": true,
+                           "geohash_prefix": true,
+                           "geohash_precision": 11,
+                           "ignore_malformed": true,
+                           "doc_values": true
+                        },
+                        "shape": {
+                           "type": "geo_shape",
+                           "tree": "quadtree",
+                           "tree_levels": 26
+                        }
+                     }
+                  },
+                  "logradouro": {
+                     "type": "string",
+                     "fields": {
+                        "raw": {
+                           "type": "string",
+                           "index": "not_analyzed",
+                           "doc_values": true
+                        }
+                     }
+                  },
+                  "maisRecenteNoEndereco": {
+                     "type": "boolean",
+                     "doc_values": true
+                  },
+                  "municipio": {
+                     "type": "string",
+                     "fields": {
+                        "raw": {
+                           "type": "string",
+                           "index": "not_analyzed",
+                           "doc_values": true
+                        }
+                     }
+                  },
+                  "numero": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "precisao": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "uf": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  }
+               }
+            },
+            "cnaePrincipal": {
+               "properties": {
+                  "codigo": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "descricao": {
+                     "type": "string",
+                     "fields": {
+                        "raw": {
+                           "type": "string",
+                           "index": "not_analyzed",
+                           "doc_values": true
+                        }
+                     }
+                  },
+                  "ramoAtividade": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "setor": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  }
+               }
+            },
+            "condominioCnpj": {
+               "type": "string",
+               "index": "not_analyzed",
+               "doc_values": true
+            },
+            "crescimentoPorAno": {
+               "type": "nested",
+               "properties": {
+                  "ano": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "percentual": {
+                     "type": "double",
+                     "doc_values": true
+                  }
+               }
+            },
+            "cvm": {
+               "properties": {
+                  "anoBalanco": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "ativoTotal": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "cadastro": {
+                     "type": "boolean",
+                     "doc_values": true
+                  },
+                  "faturamentoBruto": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "faturamentoLiquido": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "lucroBruto": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "lucroLiquido": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "patrimonioLiquido": {
+                     "type": "long",
+                     "doc_values": true
+                  }
+               }
+            },
+            "dataAbertura": {
+               "type": "date",
+               "format": "dateOptionalTime",
+               "doc_values": true
+            },
+            "debitosPgfnDau": {
+               "type": "nested",
+               "properties": {
+                  "inscricao": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "natureza": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "valorTotal": {
+                     "type": "double",
+                     "doc_values": true
+                  }
+               }
+            },
+            "detran": {
+               "properties": {
+                  "totalVeiculos": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "totalVeiculosGrupo": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "totalVeiculosLeves": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "totalVeiculosLevesGrupo": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "totalVeiculosPesados": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "totalVeiculosPesadosGrupo": {
+                     "type": "long",
+                     "doc_values": true
+                  }
+               }
+            },
+            "distribuicaoAfastamento": {
+               "properties": {
+                  "acidenteTrabalhoTrajeto": {
+                     "type": "double",
+                     "doc_values": true
+                  },
+                  "acidenteTrabalhoTipico": {
+                     "type": "double",
+                     "doc_values": true
+                  },
+                  "doencaNaoRelativaTrabalho": {
+                     "type": "double",
+                     "doc_values": true
+                  },
+                  "doencaRelativaTrabalho": {
+                     "type": "double",
+                     "doc_values": true
+                  },
+                  "licencaMaternidade": {
+                     "type": "double",
+                     "doc_values": true
+                  },
+                  "licencaSemVencimento": {
+                     "type": "double",
+                     "doc_values": true
+                  },
+                  "servicoMilitar": {
+                     "type": "double",
+                     "doc_values": true
+                  }
+               }
+            },
+            "distribuicaoFaixaEtaria": {
+               "properties": {
+                  "ate18Anos": {
+                     "type": "double",
+                     "doc_values": true
+                  },
+                  "de19a23Anos": {
+                     "type": "double",
+                     "doc_values": true
+                  },
+                  "de24a28Anos": {
+                     "type": "double",
+                     "doc_values": true
+                  },
+                  "de29a33Anos": {
+                     "type": "double",
+                     "doc_values": true
+                  },
+                  "de34a38Anos": {
+                     "type": "double",
+                     "doc_values": true
+                  },
+                  "de39a43Anos": {
+                     "type": "double",
+                     "doc_values": true
+                  },
+                  "de44a48Anos": {
+                     "type": "double",
+                     "doc_values": true
+                  },
+                  "de49a53Anos": {
+                     "type": "double",
+                     "doc_values": true
+                  },
+                  "de54a58Anos": {
+                     "type": "double",
+                     "doc_values": true
+                  },
+                  "acima58Anos": {
+                     "type": "double",
+                     "doc_values": true
+                  },
+                  "desconhecida": {
+                     "type": "double",
+                     "doc_values": true
+                  }
+               }
+            },
+            "distribuicaoFaixaSalarial": {
+               "properties": {
+                  "ate1SalMinimo": {
+                     "type": "double",
+                     "doc_values": true
+                  },
+                  "de1a3SalMinimo": {
+                     "type": "double",
+                     "doc_values": true
+                  },
+                  "de3a5SalMinimo": {
+                     "type": "double",
+                     "doc_values": true
+                  },
+                  "de5a10Salminimo": {
+                     "type": "double",
+                     "doc_values": true
+                  },
+                  "de10a15SalMinimo": {
+                     "type": "double",
+                     "doc_values": true
+                  },
+                  "de15a20SalMinimo": {
+                     "type": "double",
+                     "doc_values": true
+                  },
+                  "acima20SalMinimo": {
+                     "type": "double",
+                     "doc_values": true
+                  },
+                  "desconhecida": {
+                     "type": "double",
+                     "doc_values": true
+                  }
+               }
+            },
+            "distribuicaoFuncPlanoSaude": {
+               "type": "nested",
+               "properties": {
+                  "nomeOperadora": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "percentualFuncionarios": {
+                     "type": "double",
+                     "doc_values": true
+                  }
+               }
+            },
+            "distribuicaoGrauInstrucao": {
+               "properties": {
+                  "analfabeto": {
+                     "type": "double",
+                     "doc_values": true
+                  },
+                  "de1a5Incompl": {
+                     "type": "double",
+                     "doc_values": true
+                  },
+                  "completo5": {
+                     "type": "double",
+                     "doc_values": true
+                  },
+                  "de6a9Incompl": {
+                     "type": "double",
+                     "doc_values": true
+                  },
+                  "fundamentalCompleto": {
+                     "type": "double",
+                     "doc_values": true
+                  },
+                  "medioIncompleto": {
+                     "type": "double",
+                     "doc_values": true
+                  },
+                  "medioCompleto": {
+                     "type": "double",
+                     "doc_values": true
+                  },
+                  "superiorIncompleto": {
+                     "type": "double",
+                     "doc_values": true
+                  },
+                  "superiorCompleto": {
+                     "type": "double",
+                     "doc_values": true
+                  },
+                  "mestrado": {
+                     "type": "double",
+                     "doc_values": true
+                  },
+                  "doutorado": {
+                     "type": "double",
+                     "doc_values": true
+                  },
+                  "desconhecido": {
+                     "type": "double",
+                     "doc_values": true
+                  }
+               }
+            },
+            "dominios": {
+               "type": "nested",
+               "properties": {
+                  "dataCriacao": {
+                     "type": "date",
+                     "format": "dateOptionalTime",
+                     "doc_values": true
+                  },
+                  "email": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "nome": {
+                     "type": "string",
+                     "fields": {
+                        "raw": {
+                           "type": "string",
+                           "index": "not_analyzed",
+                           "doc_values": true
+                        }
+                     }
+                  },
+                  "responsavel": {
+                     "type": "string",
+                     "fields": {
+                        "raw": {
+                           "type": "string",
+                           "index": "not_analyzed",
+                           "doc_values": true
+                        }
+                     }
+                  }
+               }
+            },
+            "empresasColigadas": {
+               "type": "nested",
+               "properties": {
+                  "cnae": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "cnpj": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "dataAbertura": {
+                     "type": "date",
+                     "format": "dateOptionalTime",
+                     "doc_values": true
+                  },
+                  "municipio": {
+                     "type": "string",
+                     "fields": {
+                        "raw": {
+                           "type": "string",
+                           "index": "not_analyzed",
+                           "doc_values": true
+                        }
+                     }
+                  },
+                  "razaoSocial": {
+                     "type": "string",
+                     "fields": {
+                        "raw": {
+                           "type": "string",
+                           "index": "not_analyzed",
+                           "doc_values": true
+                        }
+                     }
+                  },
+                  "uf": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  }
+               }
+            },
+            "empresasSimilares": {
+               "type": "nested",
+               "properties": {
+                  "cnae": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "cnpj": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "naturezaJuridica": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "quantidadeFunc": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "razaoSocial": {
+                     "type": "string",
+                     "fields": {
+                        "raw": {
+                           "type": "string",
+                           "index": "not_analyzed",
+                           "doc_values": true
+                        }
+                     }
+                  },
+                  "uf": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  }
+               }
+            },
+            "escolas": {
+               "type": "nested",
+               "properties": {
+                  "categoria": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "codigo": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "funcionamento": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "nome": {
+                     "type": "string",
+                     "fields": {
+                        "raw": {
+                           "type": "string",
+                           "index": "not_analyzed",
+                           "doc_values": true
+                        }
+                     }
+                  },
+                  "totalMatricula": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "vinculo": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  }
+               }
+            },
+            "exportacao": {
+               "type": "nested",
+               "properties": {
+                  "ano": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "valor": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  }
+               }
+            },
+            "faculdades": {
+               "type": "nested",
+               "properties": {
+                  "categoria": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "codigo": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "nome": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "situacao": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  }
+               }
+            },
+            "fantasia": {
+               "type": "string",
+               "fields": {
+                  "raw": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  }
+               }
+            },
+            "faturamentoPresumido": {
+               "properties": {
+                  "grupo": {
+                     "type": "double",
+                     "doc_values": true
+                  },
+                  "individual": {
+                     "type": "double",
+                     "doc_values": true
+                  },
+                  "faixaIndividual": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "faixaGrupo": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  }
+               }
+            },
+            "filiais": {
+               "type": "nested",
+               "properties": {
+                  "cnpj": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "dataAbertura": {
+                     "type": "date",
+                     "format": "dateOptionalTime",
+                     "doc_values": true
+                  },
+                  "municipio": {
+                     "type": "string",
+                     "fields": {
+                        "raw": {
+                           "type": "string",
+                           "index": "not_analyzed",
+                           "doc_values": true
+                        }
+                     }
+                  },
+                  "razaoSocial": {
+                     "type": "string",
+                     "fields": {
+                        "raw": {
+                           "type": "string",
+                           "index": "not_analyzed",
+                           "doc_values": true
+                        }
+                     }
+                  },
+                  "situacao": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "uf": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  }
+               }
+            },
+            "ibge": {
+               "properties": {
+                  "faixaRendaPopulacao": {
+                     "type": "double",
+                     "doc_values": true
+                  }
+               }
+            },
+            "importacao": {
+               "type": "nested",
+               "properties": {
+                  "ano": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "valor": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  }
+               }
+            },
+            "indicadoresFinanceiros": {
+               "type": "nested",
+               "properties": {
+                  "descricao": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "numero": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "valor1": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "valor2": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "valor3": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "valor4": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "valor5": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  }
+               }
+            },
+            "info": {
+               "properties": {
+                  "anacVinculo": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "emailRF": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "faixaDividaPgfnDau": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "numeroDDD": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "numeroTelefoneRF": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "possuiAntt": {
+                     "type": "boolean",
+                     "doc_values": true
+                  },
+                  "possuiCFC": {
+                     "type": "boolean",
+                     "doc_values": true
+                  },
+                  "possuiCeis": {
+                     "type": "boolean",
+                     "doc_values": true
+                  },
+                  "possuiCepim": {
+                     "type": "boolean",
+                     "doc_values": true
+                  },
+                  "possuiCndFgts": {
+                     "type": "boolean",
+                     "doc_values": true
+                  },
+                  "possuiCndInss": {
+                     "type": "boolean",
+                     "doc_values": true
+                  },
+                  "possuiCndPgfn": {
+                     "type": "boolean",
+                     "doc_values": true
+                  },
+                  "possuiCndSefaz": {
+                     "type": "boolean",
+                     "doc_values": true
+                  },
+                  "possuiCndTst": {
+                     "type": "boolean",
+                     "doc_values": true
+                  },
+                  "possuiCnes": {
+                     "type": "boolean",
+                     "doc_values": true
+                  },
+                  "possuiDominio": {
+                     "type": "boolean",
+                     "doc_values": true
+                  },
+                  "possuiEmail": {
+                     "type": "boolean",
+                     "doc_values": true
+                  },
+                  "possuiEmailRF": {
+                     "type": "boolean",
+                     "doc_values": true
+                  },
+                  "possuiExportacao": {
+                     "type": "boolean",
+                     "doc_values": true
+                  },
+                  "possuiFone": {
+                     "type": "boolean",
+                     "doc_values": true
+                  },
+                  "possuiFoneRF": {
+                     "type": "boolean",
+                     "doc_values": true
+                  },
+                  "possuiFuncionarioFalecido": {
+                     "type": "boolean",
+                     "doc_values": true
+                  },
+                  "possuiImovel": {
+                     "type": "boolean",
+                     "doc_values": true
+                  },
+                  "possuiImportacao": {
+                     "type": "boolean",
+                     "doc_values": true
+                  },
+                  "possuiIndicadoresFinanceiros": {
+                     "type": "boolean",
+                     "doc_values": true
+                  },
+                  "possuiSintegraInscricaoAtiva": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "postoCombustivel": {
+                     "type": "boolean",
+                     "doc_values": true
+                  },
+                  "postoTipoCombustivel": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "qsaDivergente": {
+                     "type": "boolean",
+                     "doc_values": true
+                  },
+                  "possuiSocioPep": {
+                     "type": "boolean",
+                     "doc_values": true
+                  },
+                  "possuiPlanoSaude": {
+                     "type": "boolean",
+                     "doc_values": true
+                  },
+                  "chanceContatoTelefone": {
+                     "type": "boolean",
+                     "doc_values": true
+                  },
+                  "possuiAfastamento": {
+                     "type": "boolean",
+                     "doc_values": true
+                  },
+                  "percentualAfastamento": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "email": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "idadeEmpresa": {
+                     "type": "long",
+                     "doc_values": true
+                  }
+               }
+            },
+            "inpiMarcas": {
+               "type": "nested",
+               "properties": {
+                  "classe": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "dataDeposito": {
+                     "type": "date",
+                     "format": "dateOptionalTime",
+                     "doc_values": true
+                  },
+                  "marca": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "numeroProcesso": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "situacao": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  }
+               }
+            },
+            "inpiPatentes": {
+               "type": "nested",
+               "properties": {
+                  "dataDeposito": {
+                     "type": "date",
+                     "format": "dateOptionalTime",
+                     "doc_values": true
+                  },
+                  "depositante": {
+                     "type": "string",
+                     "fields": {
+                        "raw": {
+                           "type": "string",
+                           "index": "not_analyzed",
+                           "doc_values": true
+                        }
+                     }
+                  },
+                  "inventor": {
+                     "type": "string",
+                     "fields": {
+                        "raw": {
+                           "type": "string",
+                           "index": "not_analyzed",
+                           "doc_values": true
+                        }
+                     }
+                  },
+                  "numeroProcesso": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "procurador": {
+                     "type": "string",
+                     "fields": {
+                        "raw": {
+                           "type": "string",
+                           "index": "not_analyzed",
+                           "doc_values": true
+                        }
+                     }
+                  },
+                  "resumo": {
+                     "type": "string",
+                     "fields": {
+                        "raw": {
+                           "type": "string",
+                           "index": "not_analyzed",
+                           "doc_values": true
+                        }
+                     }
+                  },
+                  "tituloPatente": {
+                     "type": "string",
+                     "fields": {
+                        "raw": {
+                           "type": "string",
+                           "index": "not_analyzed",
+                           "doc_values": true
+                        }
+                     }
+                  }
+               }
+            },
+            "inpiProgramas": {
+               "type": "nested",
+               "properties": {
+                  "dataDeposito": {
+                     "type": "date",
+                     "format": "dateOptionalTime",
+                     "doc_values": true
+                  },
+                  "numeroProcesso": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "tituloPrograma": {
+                     "type": "string",
+                     "fields": {
+                        "raw": {
+                           "type": "string",
+                           "index": "not_analyzed",
+                           "doc_values": true
+                        }
+                     }
+                  }
+               }
+            },
+            "licencasAmbientais": {
+               "type": "nested",
+               "properties": {
+                  "id": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "numProcesso": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "tipo": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "situacao": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "dataEmissao": {
+                     "type": "date",
+                     "format": "dateOptionalTime",
+                     "doc_values": true
+                  },
+                  "dataAtualizacao": {
+                     "type": "date",
+                     "format": "dateOptionalTime",
+                     "doc_values": true
+                  },
+                  "numeroTipologia": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "descricaoTipologia": {
+                     "type": "string",
+                     "fields": {
+                        "raw": {
+                           "type": "string",
+                           "index": "not_analyzed",
+                           "doc_values": true
+                        }
+                     }
+                  },
+                  "municipio": {
+                     "type": "string",
+                     "fields": {
+                        "raw": {
+                           "type": "string",
+                           "index": "not_analyzed",
+                           "doc_values": true
+                        }
+                     }
+                  },
+                  "uf": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  }
+               }
+            },
+            "matriz": {
+               "properties": {
+                  "cnpj": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "empresaMatriz": {
+                     "type": "boolean",
+                     "doc_values": true
+                  },
+                  "razaoSocial": {
+                     "type": "string",
+                     "fields": {
+                        "raw": {
+                           "type": "string",
+                           "index": "not_analyzed",
+                           "doc_values": true
+                        }
+                     }
+                  },
+                  "situacao": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "dataAbertura": {
+                     "type": "date",
+                     "format": "dateOptionalTime",
+                     "doc_values": true
+                  },
+                  "municipio": {
+                     "type": "string",
+                     "fields": {
+                        "raw": {
+                           "type": "string",
+                           "index": "not_analyzed",
+                           "doc_values": true
+                        }
+                     }
+                  },
+                  "uf": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "quantidadeFilial": {
+                     "type": "long",
+                     "doc_values": true
+                  }
+               }
+            },
+            "natureza": {
+               "properties": {
+                  "descricao": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "id": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  }
+               }
+            },
+            "nivelAtividade": {
+               "type": "string",
+               "index": "not_analyzed",
+               "doc_values": true
+            },
+            "pat": {
+               "type": "nested",
+               "properties": {
+                  "admCozinha": {
+                     "type": "string",
+                     "fields": {
+                        "raw": {
+                           "type": "string",
+                           "index": "not_analyzed",
+                           "doc_values": true
+                        }
+                     }
+                  },
+                  "alimentacaoConvenio": {
+                     "type": "string",
+                     "fields": {
+                        "raw": {
+                           "type": "string",
+                           "index": "not_analyzed",
+                           "doc_values": true
+                        }
+                     }
+                  },
+                  "beneficiadosAcima5sm": {
+                     "type": "string",
+                     "fields": {
+                        "raw": {
+                           "type": "string",
+                           "index": "not_analyzed",
+                           "doc_values": true
+                        }
+                     }
+                  },
+                  "beneficiadosAte5sm": {
+                     "type": "string",
+                     "fields": {
+                        "raw": {
+                           "type": "string",
+                           "index": "not_analyzed",
+                           "doc_values": true
+                        }
+                     }
+                  },
+                  "cestaAlimento": {
+                     "type": "string",
+                     "fields": {
+                        "raw": {
+                           "type": "string",
+                           "index": "not_analyzed",
+                           "doc_values": true
+                        }
+                     }
+                  },
+                  "cpfResponsavel": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "emailResponsavel": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "inscricao": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "nomeResponsavel": {
+                     "type": "string",
+                     "fields": {
+                        "raw": {
+                           "type": "string",
+                           "index": "not_analyzed",
+                           "doc_values": true
+                        }
+                     }
+                  },
+                  "refeicaoConvenio": {
+                     "type": "string",
+                     "fields": {
+                        "raw": {
+                           "type": "string",
+                           "index": "not_analyzed",
+                           "doc_values": true
+                        }
+                     }
+                  },
+                  "refeicaoTransportada": {
+                     "type": "string",
+                     "fields": {
+                        "raw": {
+                           "type": "string",
+                           "index": "not_analyzed",
+                           "doc_values": true
+                        }
+                     }
+                  },
+                  "servicoProprio": {
+                     "type": "string",
+                     "fields": {
+                        "raw": {
+                           "type": "string",
+                           "index": "not_analyzed",
+                           "doc_values": true
+                        }
+                     }
+                  },
+                  "situacaoCadastral": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  }
+               }
+            },
+            "pontosAbastecimento": {
+               "type": "nested",
+               "properties": {
+                  "cnpj": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "municipio": {
+                     "type": "string",
+                     "fields": {
+                        "raw": {
+                           "type": "string",
+                           "index": "not_analyzed",
+                           "doc_values": true
+                        }
+                     }
+                  },
+                  "numeroConsulta": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "numeroTanques": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "totalTancagem": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "uf": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  }
+               }
+            },
+            "postosCombustivel": {
+               "type": "nested",
+               "properties": {
+                  "cnpj": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "postoBandeira": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "qtTotalBicos": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "tancagemTotal": {
+                     "type": "long",
+                     "doc_values": true
+                  }
+               }
+            },
+            "potencialConsumo": {
+               "properties": {
+                  "valorCapitalSocial": {
+                     "type": "long",
+                     "doc_values": true
+                  }
+               }
+            },
+            "propriedadeIntelectual": {
+               "properties": {
+                  "nomeRegistro": {
+                     "type": "string",
+                     "fields": {
+                        "raw": {
+                           "type": "string",
+                           "index": "not_analyzed",
+                           "doc_values": true
+                        }
+                     }
+                  },
+                  "quantidadeMarca": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "quantidadePatente": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "quantidadePrograma": {
+                     "type": "long",
+                     "doc_values": true
+                  }
+               }
+            },
+            "saudeTributaria": {
+               "properties": {
+                  "cor": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "possuiSEFAZ": {
+                     "type": "boolean",
+                     "doc_values": true
+                  },
+                  "recencia": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "situacaoFGTS": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "situacaoINSS": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "situacaoPGFN": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "situacaoTST": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  }
+               }
+            },
+            "segmento": {
+               "properties": {
+                  "industria": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  }
+               }
+            },
+            "simplesNacional": {
+               "properties": {
+                  "dataOptanteSimei": {
+                     "type": "date",
+                     "format": "dateOptionalTime",
+                     "doc_values": true
+                  },
+                  "dataOptanteSimples": {
+                     "type": "date",
+                     "format": "dateOptionalTime",
+                     "doc_values": true
+                  },
+                  "optanteSimei": {
+                     "type": "boolean",
+                     "doc_values": true
+                  },
+                  "optanteSimples": {
+                     "type": "boolean",
+                     "doc_values": true
+                  },
+                  "simplesIrregular": {
+                     "type": "boolean",
+                     "doc_values": true
+                  }
+               }
+            },
+            "sintegra": {
+               "type": "nested",
+               "properties": {
+                  "cnpj": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "dataSituacaoCadastral": {
+                     "type": "date",
+                     "format": "dateOptionalTime",
+                     "doc_values": true
+                  },
+                  "email": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "inscricaoEstadual": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "regimeApuracao": {
+                     "type": "string",
+                     "fields": {
+                        "raw": {
+                           "type": "string",
+                           "index": "not_analyzed",
+                           "doc_values": true
+                        }
+                     }
+                  },
+                  "situacaoCadastral": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "telefone": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  }
+               }
+            },
+            "situacao": {
+               "properties": {
+                  "data": {
+                     "type": "date",
+                     "format": "dateOptionalTime",
+                     "doc_values": true
+                  },
+                  "descricao": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "especial": {
+                     "properties": {
+                        "data": {
+                           "type": "date",
+                           "format": "dateOptionalTime",
+                           "doc_values": true
+                        },
+                        "descricao": {
+                           "type": "string",
+                           "index": "not_analyzed",
+                           "doc_values": true
+                        }
+                     }
+                  },
+                  "motivo": {
+                     "type": "string",
+                     "fields": {
+                        "raw": {
+                           "type": "string",
+                           "index": "not_analyzed",
+                           "doc_values": true
+                        }
+                     }
+                  }
+               }
+            },
+            "spa": {
+               "properties": {
+                  "possuiSpa": {
+                     "type": "boolean",
+                     "doc_values": true
+                  },
+                  "potencialConsumoOleoGas": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "potencialConsumoOleoGasGrupo": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "totalTancagem": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "totalTancagemGrupo": {
+                     "type": "long",
+                     "doc_values": true
+                  }
+               }
+            },
+            "susep": {
+               "type": "nested",
+               "properties": {
+                  "categoria": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "codigoRegistro": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "email": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  },
+                  "situacao": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  }
+               }
+            },
+            "telefones": {
+               "type": "nested",
+               "properties": {
+                  "nomeTitular": {
+                     "type": "string",
+                     "fields": {
+                        "raw": {
+                           "type": "string",
+                           "index": "not_analyzed",
+                           "doc_values": true
+                        }
+                     }
+                  },
+                  "numero": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  }
+               }
+            },
+            "totalFuncionarios": {
+               "properties": {
+                  "quantidade": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "quantidadeAdvogados": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "quantidadeAnalistasTecnicos": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "quantidadeBase": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "quantidadeCompradores": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "quantidadeDiretores": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "quantidadeEngenheirosArquitetos": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "quantidadeGerentes": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "quantidadeGrupo": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "quantidadeMedicos": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "quantidadeOutros": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "quantidadePdv": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "quantidadeProfessores": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "quantidadeSupervisores": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "quantidadeVendedores": {
+                     "type": "long",
+                     "doc_values": true
+                  }
+               }
+            },
+            "totalObras": {
+               "properties": {
+                  "quantidadeArts": {
+                     "type": "long",
+                     "doc_values": true
+                  }
+               }
+            },
+            "totalVeiculos": {
+               "properties": {
+                  "acimaDezAnos": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "ateUmAno": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "entreCincoDezAnos": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "entreDoisCincoAnos": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "grupoAcimaDezAnos": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "grupoAteUmAno": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "grupoEntreCincoDezAnos": {
+                     "type": "long",
+                     "doc_values": true
+                  },
+                  "grupoEntreDoisCincoAnos": {
+                     "type": "long",
+                     "doc_values": true
+                  }
+               }
+            }
+         }
+      },
+      "socios": {
+         "_parent": {
+            "type": "main"
+         },
+         "_routing": {
+            "required": true
+         },
+         "_all": {
+            "enabled": false
+         },
+         "dynamic": "strict",
+         "properties": {
+            "documento": {
+               "type": "string",
+               "index": "not_analyzed",
+               "doc_values": true
+            },
+            "falecido": {
+               "type": "boolean",
+               "doc_values": true
+            },
+            "nome": {
+               "type": "string",
+               "fields": {
+                  "raw": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  }
+               }
+            },
+            "participacaoSocietaria": {
+               "type": "long",
+               "doc_values": true
+            },
+            "qualificacao": {
+               "type": "string",
+               "index": "not_analyzed",
+               "doc_values": true
+            },
+            "nivelPep": {
+               "type": "string",
+               "index": "not_analyzed",
+               "doc_values": true
+            }
+         }
+      },
+      "sociosJunta": {
+         "_parent": {
+            "type": "main"
+         },
+         "_routing": {
+            "required": true
+         },
+         "_all": {
+            "enabled": false
+         },
+         "dynamic": "strict",
+         "properties": {
+            "documento": {
+               "type": "string",
+               "index": "not_analyzed",
+               "doc_values": true
+            },
+            "falecido": {
+               "type": "boolean",
+               "doc_values": true
+            },
+            "nome": {
+               "type": "string",
+               "fields": {
+                  "raw": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  }
+               }
+            },
+            "participacaoSocietaria": {
+               "type": "long",
+               "doc_values": true
+            },
+            "qualificacao": {
+               "type": "string",
+               "index": "not_analyzed",
+               "doc_values": true
+            },
+            "nivelPep": {
+               "type": "string",
+               "index": "not_analyzed",
+               "doc_values": true
+            }
+         }
+      },
+      "qsaUnificado": {
+         "_parent": {
+            "type": "main"
+         },
+         "_routing": {
+            "required": true
+         },
+         "_all": {
+            "enabled": false
+         },
+         "dynamic": "strict",
+         "properties": {
+            "documento": {
+               "type": "string",
+               "index": "not_analyzed",
+               "doc_values": true
+            },
+            "falecido": {
+               "type": "boolean",
+               "doc_values": true
+            },
+            "nome": {
+               "type": "string",
+               "fields": {
+                  "raw": {
+                     "type": "string",
+                     "index": "not_analyzed",
+                     "doc_values": true
+                  }
+               }
+            },
+            "participacaoSocietaria": {
+               "type": "long",
+               "doc_values": true
+            },
+            "qualificacao": {
+               "type": "string",
+               "index": "not_analyzed",
+               "doc_values": true
+            },
+            "nivelPep": {
+               "type": "string",
+               "index": "not_analyzed",
+               "doc_values": true
+            }
+         }
+      },
+      "veiculos": {
+         "_parent": {
+            "type": "main"
+         },
+         "_routing": {
+            "required": true
+         },
+         "_all": {
+            "enabled": false
+         },
+         "dynamic": "strict",
+         "properties": {
+            "anoFabricacao": {
+               "type": "string",
+               "index": "not_analyzed",
+               "doc_values": true
+            },
+            "classificacao": {
+               "type": "string",
+               "index": "not_analyzed",
+               "doc_values": true
+            },
+            "combustivel": {
+               "type": "string",
+               "index": "not_analyzed",
+               "doc_values": true
+            },
+            "constaAntt": {
+               "type": "boolean",
+               "doc_values": true
+            },
+            "marcaModelo": {
+               "type": "string",
+               "index": "not_analyzed",
+               "doc_values": true
+            },
+            "placa": {
+               "type": "string",
+               "index": "not_analyzed",
+               "doc_values": true
+            },
+            "tipo": {
+               "type": "string",
+               "index": "not_analyzed",
+               "doc_values": true
+            },
+            "uf": {
+               "type": "string",
+               "index": "not_analyzed",
+               "doc_values": true
+            },
+            "veiculoId": {
+               "type": "string",
+               "index": "not_analyzed",
+               "doc_values": true
+            }
+         }
+      },
+      "leads": {
+         "_parent": {
+            "type": "main"
+         },
+         "_routing": {
+            "required": true
+         },
+         "_all": {
+            "enabled": false
+         },
+         "dynamic": "strict",
+         "properties": {
+         }
+      },
+      "opportunities": {
+         "_parent": {
+            "type": "leads"
+         },
+         "_routing": {
+            "required": true
+         },
+         "_all": {
+            "enabled": false
+         },
+         "dynamic": "strict",
+         "properties": {}
+      },
+      "activities": {
+         "_parent": {
+            "type": "opportunities"
+         },
+         "_routing": {
+            "required": true
+         },
+         "_all": {
+            "enabled": false
+         },
+         "dynamic": "strict",
+         "properties": {}
+      },
+      "schedules": {
+         "_parent": {
+            "type": "opportunities"
+         },
+         "_routing": {
+            "required": true
+         },
+         "_all": {
+            "enabled": false
+         },
+         "dynamic": "strict",
+         "properties": {}
+      },
+      "tags": {
+         "_parent": {
+            "type": "main"
+         },
+         "_routing": {
+            "required": true
+         },
+         "_all": {
+            "enabled": false
+         },
+         "dynamic": "strict",
+         "properties": {}
+      }
+   }
+}
