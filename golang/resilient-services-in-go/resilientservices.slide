@@ -1,0 +1,53 @@
+Go
+Building resilient services in Go
+28 Aug 2016
+Tags: go, golang, resilience, services, REST, microservices, someotherbuzzword
+
+Tiago Katcipis
+Neoway Business Solution
+tiago.katcipis@neoway.com.br
+http://github.com/NeowayLabs/presentations
+
+
+* Agenda
+
+- Resilience
+- Basic concepts
+- Recovery Oriented Computing
+- Timeouts
+- Bulkheads
+- Fail Fast
+- Context
+- Simple timeouts with contexts
+- How to test this ?
+- Go routine pools with timeouts
+- Error handling
+- Final thoughts
+
+
+* Recovery Oriented Computing
+
+
+It is not a mater of *if it will fail* but *what will happen when it fails*.
+
+- Will your entire system freeze ?
+- Start to answer with errors to never recover again until restarted manually ?
+
+
+* Things that can go wrong
+
+- Downstream service not answering
+- Connections gets dropped
+- Connection fails to handshake
+- Connection takes 10 minutes to handshake
+- An answer of a request is received with a speed of 1 byte per minute
+- No more disk available
+- No more memory available
+- Sun flare flips bits from the memory :-)
+
+
+* How far ?
+
+* Error handling
+
+Talk about accumulating errors on an error array :-)
