@@ -51,3 +51,8 @@ It is not a mater of *if it will fail* but *what will happen when it fails*.
 * Error handling
 
 Talk about accumulating errors on an error array :-)
+
+
+* HTTP timeouts
+
+Talk about: https://blog.cloudflare.com/the-complete-guide-to-golang-net-http-timeouts/
