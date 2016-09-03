@@ -20,6 +20,7 @@ http://github.com/NeowayLabs/presentations
 - Context
 - Simple timeouts with contexts
 - How to test this ?
+- What to do when your test is expensive ?
 - Go routine pools with timeouts
 - Error handling
 - Final thoughts
