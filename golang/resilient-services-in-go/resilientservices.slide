@@ -14,7 +14,7 @@ http://github.com/NeowayLabs/presentations
 - Resilience
 - Timeouts
 - Bulkheads
-- Fail Fast
+- Case Study
 - Context
 - Simple timeouts with contexts
 - How to test this ?
@@ -44,6 +44,7 @@ It is not a matter of *if it will fail* but *what will happen when it fails*.
 * Things that can go wrong
 
 - Downstream dependency not answering
+- Downstream dependency giving errors
 - Connections gets dropped
 - Connection fails to handshake
 - Connection takes 10 minutes to handshake
@@ -51,18 +52,53 @@ It is not a matter of *if it will fail* but *what will happen when it fails*.
 - No more disk available
 - No more file descriptors available
 - No more memory available
-- Sun flare flips bits from the memory :-)
+- Sun flares flips bits from the memory :-)
 
 
 * How far ?
 
 - It can get as resilient as it can get
 - Pretty much like security :-)
+- Choose something to start with
 
 
-* Error handling
+* Timeouts
 
-Talk about accumulating errors on an error array :-)
+- Integration points must have timeouts
+- Seems simple, but it is easy to don't do it
+- Go makes it very simple :-)
+
+
+* Bulkheads
+
+- Cool metaphor to express orthogonality
+
+.image ./img/bulkheads.jpg _ 450
+
+
+* Case Study
+
+
+* Breaking CAPTCHAs
+
+
+- Gateway to our solutions to break CAPTCHAs.
+- Why a gateway ? The main reason is to avoid the duplication
+- Saving success images on S3 to use on training
+- Generate metrics on how well different solvers are performing
+- Implement quotas of available solving for some bots
+- We have multiple ways to break captchas (4 on the moment)
+- Each captcha breaking service only focus on breaking captchas properly
+
+
+* Integration Points
+
+.image ./img/integration-points.jpg _ 700
+
+
+* Expensive tests
+
+- On captcha breaking, some tests literally mean paying
 
 
 * HTTP timeouts
