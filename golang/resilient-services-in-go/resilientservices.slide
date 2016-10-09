@@ -79,16 +79,16 @@ It is not a matter of *if it will fail* but *what will happen when it fails*.
 * Case Study
 
 
-* Breaking CAPTCHAs
+* Solving CAPTCHAs
 
 
-- Gateway to our solutions to break CAPTCHAs.
+- Gateway to our CAPTCHA solvers
 - Why a gateway ? The main reason is to avoid the duplication
 - Saving success images on S3 to use on training
 - Generate metrics on how well different solvers are performing
-- Implement quotas of available solving for some bots
-- We have multiple ways to break captchas (4 on the moment)
-- Each captcha breaking service only focus on breaking captchas properly
+- Implement quotas for specific crawlers (some solvers are paid)
+- We have 4 ways to break CAPTCHAs at the moment
+- Each CAPTCHA breaking service only focus on solving properly
 
 
 * Integration Points
