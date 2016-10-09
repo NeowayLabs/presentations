@@ -91,6 +91,12 @@ It is not a matter of *if it will fail* but *what will happen when it fails*.
 - Each CAPTCHA breaking service only focus on solving properly
 
 
+* Design
+
+.image ./img/design.png _ 700
+
+
+
 * Integration Points
 
 .image ./img/integration-points.jpg _ 700
@@ -98,7 +104,7 @@ It is not a matter of *if it will fail* but *what will happen when it fails*.
 
 * Expensive tests
 
-- On captcha breaking, some tests literally mean paying
+- On CAPTCHA breaking, some tests literally mean paying
 
 
 * HTTP timeouts
