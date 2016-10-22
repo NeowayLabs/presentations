@@ -1,4 +1,4 @@
-FROM google/golang
+FROM golang:1.7
 MAINTAINER Tiago Katcipis <tiagokatcipis@gmail.com> (@tiagokatcipis)
 
 # Grab Go test coverage tools

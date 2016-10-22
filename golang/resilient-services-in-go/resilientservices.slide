@@ -13,14 +13,11 @@ http://github.com/NeowayLabs/presentations
 
 - Resilience
 - Timeouts
-- Bulkheads
-- Case Study
 - Context
 - Simple timeouts with contexts
-- How to test this ?
-- What to do when your test is expensive ?
-- Go routine pools with timeouts
-- Error handling
+- Making HTTP requests
+- Calling expensive long running job
+- Serving HTTP requests
 - Final thoughts
 
 
@@ -49,6 +46,7 @@ It is not a matter of *if it will fail* but *what will happen when it fails*.
 - Connection fails to handshake
 - Connection takes 10 minutes to handshake
 - An answer of a request is received with a speed of 1 byte per minute
+- The request body is received with a speed of 1 byte per minute
 - No more disk available
 - No more file descriptors available
 - No more memory available
@@ -65,46 +63,48 @@ It is not a matter of *if it will fail* but *what will happen when it fails*.
 * Timeouts
 
 - Integration points must have timeouts
+- Expensive and long running ops must have timeouts
 - Seems simple, but it is easy to don't do it
-- Go makes it very simple :-)
+- Go makes it even simpler :-)
 
 
-* Bulkheads
-
-- Cool metaphor to express orthogonality
-
-.image ./img/bulkheads.jpg _ 450
-
-
-* Case Study
-
-
-* Solving CAPTCHAs
-
-
-- Gateway to our CAPTCHA solvers
-- Why a gateway ? The main reason is to avoid the duplication
-- Saving success images on S3 to use on training
-- Generate metrics on how well different solvers are performing
-- Implement quotas for specific crawlers (some solvers are paid)
-- We have 4 ways to break CAPTCHAs at the moment
-- Each CAPTCHA breaking service only focus on solving properly
-
-
-* Design
-
-.image ./img/design.png _ 700
-
-
-
-* Integration Points
+* Microservices
 
 .image ./img/integration-points.jpg _ 700
 
 
-* Expensive tests
+* Microservices
 
-- On CAPTCHA breaking, some tests literally mean paying
+- Local call != Remote call
+- Having lots of small services = lots of small integration points
+- Networks have really fun ways to fail
+
+
+* context.Context
+
+- Moved to Go core in 1.7
+- Models timeouts and cancellation
+
+
+* Timeout Context
+
+.play examples/timeout.go
+
+
+* Timeout Context
+
+- Will be canceled when timeout expires
+- Or when cancel is called
+
+
+* Waiting to expire
+
+.play examples/expiration.go
+
+
+* Canceling explicitly
+
+.play examples/cancellation.go
 
 
 * HTTP timeouts
