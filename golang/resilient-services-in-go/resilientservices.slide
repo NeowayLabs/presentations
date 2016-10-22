@@ -15,8 +15,9 @@ http://github.com/NeowayLabs/presentations
 - Timeouts
 - Context
 - Simple timeouts with contexts
-- Making HTTP requests
 - Calling expensive long running job
+- Context best practices
+- Making HTTP requests
 - Serving HTTP requests
 - Final thoughts
 
@@ -105,6 +106,15 @@ It is not a matter of *if it will fail* but *what will happen when it fails*.
 * Canceling explicitly
 
 .play examples/cancellation.go
+
+
+* Timeout Overview
+
+- Waiting for timeout is as simple as reading a channel
+- It leverages Go closed channel behaviour
+- Multiple goroutines can be waiting for a single done
+- Contexts are hierarchical
+- Cancelling parent cancels all children
 
 
 * HTTP timeouts
