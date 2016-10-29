@@ -1,0 +1,487 @@
+Nash
+Lessons learned writing a shell
+5 Nov 2016
+Tags: nash, go, shell, namespaces, containers
+
+Tiago Natel de Moura
+Bug writer at Neoway Business Solution
+tiago4orion@gmail.com
+https://github.com/tiago4orion
+@_i4k_
+
+* Nash
+
+- System shell written in Go
+- Inspired by Plan9 rc
+- Modern syntax (non POSIX)
+- Portable (with some caveats)
+
+* Motivation
+
+- Write lots of shell scripts to test a distributed file server;
+- Testing support;
+- Linux namespace support;
+- Easy to embed into go programs;
+- I hate bash/zsh/csh/...
+
+* What I wanted
+
+.code ./rfork_ex.sh /#!\/usr\/bin\/env nash/,/# END OMIT/
+
+* What I wanted
+
+.code ./rfork_ex.sh /#!\/usr\/bin\/env nash/,/# END OMIT/ HL1
+
+* What I wanted
+
+.code ./rfork_ex.sh /#!\/usr\/bin\/env nash/,/# END OMIT/ HL2
+
+* What I wanted
+
+.code ./rfork_ex.sh /#!\/usr\/bin\/env nash/,/# END OMIT/ HL3
+
+* What I wanted
+
+.code ./rfork_ex.sh /#!\/usr\/bin\/env nash/,/# END OMIT/ HL4
+
+* What I wanted
+
+.code ./rfork_ex.sh /fn main/,/# END OMIT/
+
+* Shells
+
+A Unix shell was tipically:
+
+  fork -> execve -> wait (optional)
+
+with a crappy language around it...
+
+* Shells
+
+But If it have job control, then it must handle process groups and
+sessions.
+
+  1 session       -> N process groups
+  1 process group -> N processes
+  1 process       -> N process threads
+
+All have ID's (Unix way...)
+
+- Session ID (SID)
+- Process group ID (PGID)
+- Process ID (PID)
+- Process thread ID (TID)
+
+_But_job_control_is_most_suited_for_interactive_use,_then_I_decided_to_avoid_this_complication_
+
+* Nash
+
+Then, _Nash_ shell is basically:
+
+  fork -> execve -> wait (optional)
+
+with a sane language around it.
+
+* Nash features
+
+Functions are first-class:
+
+- Have explicit arguments;
+- Return values (or other function);
+- Could be stored in variables;
+- Could be passed as arguments to other functions;
+
+Support process isolations out of the box.
+
+- Linux namespaces (USER, PID, MNT, UTS, IPC, NET)
+- Plan9 namespaces (Planned)
+
+* Nash features
+
+Safe:
+
+- No eval (no exec, backticks, etc);
+- No file wildcard (globbing);
+- No string expansions (strings are just strings);
+- Yeah, you get the idea. A shell with nothing that makes it a shell...
+
+* Nash features
+
+Works by default:
+
+- Abort on first error (set -e)
+- Abort on first use of unset variables (set -u)
+- Return status of every command of a pipeline (like _rc_)
+
+* Nash features
+
+- Supports embedding in Go programs;
+- Supports tooling (nashfmt and like);
+
+* Implementation
+
+Is Go suited for this task?
+
+We need:
+
+- Process spawning facilities;
+- Some way to create namespaces;
+- Lexer/Parser;
+- Signal handling;
+- Terminal
+- Something more?
+
+* Implementation (Process spawning)
+
+Some facts about Go programs:
+
+- *Cannot* execute plain _fork_ syscall;
+- *Cannot* execute any modern variation (clone(2), vfork(2), etc) directly;
+- *Cannot* execute lots of process related syscalls (setsid(2), setns(2), etc);
+
+Why?
+
+Mostly because *every* Go program is multithreaded (ever).
+
+* Implementation (Processes)
+
+How to create processes in Go?
+
+.link https://golang.org/pkg/syscall/#ForkExec syscall.ForkExec
+.link https://golang.org/pkg/os/#StartProcess os.StartProcess
+.link https://golang.org/pkg/os/exec/ os/exec
+
+- It is safe to use _ForkExec_ or _StartProcess_, but to be usable you'll re-implement _os/exec_.
+- The _os/exec_ library is safe, portable and supports additional useful features.
+
+* ForkExec example (Linux)
+
+.play ./forkexec.go /func uptime/,/OMIT/ HL1
+
+
+* ForkExec example (Linux)
+
+.play ./forkexec.go /func uptime/,/OMIT/ HL2
+
+* ForkExec example (Linux)
+
+.play ./forkexec.go /func uptime/,/OMIT/ HL3
+
+* StartProcess example (Portable)
+
+.play ./startprocess.go /func uptime/,/OMIT/ HL1
+
+* StartProcess example (Portable)
+
+.play ./startprocess.go /func uptime/,/OMIT/ HL2
+
+* StartProcess example (Portable)
+
+.play ./startprocess.go /func uptime/,/OMIT/ HL3
+
+* os/exec example (Portable)
+
+- Cmd.Stdin is an *io.Reader*
+- Cmd.Stdout and Cmd.Stderr are *io.Writer*
+
+.play ./exec.go /func uptime/,/OMIT/ HL1
+
+_First_lesson:_Go_std_library_do_the_right_thing_most_of_the_time!_
+
+* Implementation (Spawning processes)
+
+.image ./robpike-issue13473.png 500 900
+
+* Go and namespaces
+
+Namespace/container syscalls cannot be executed directly in Go because
+of multithread limitation.
+
+But Go supports invoking namespace syscalls after the _fork(2)_ and before
+the _execve(2)_ in the _ForkExec_ function using the _SysProcAttr_
+argument.
+
+- SysProcAttr.{UIdMapping,GidMapping}: Added in go1.4;
+- SysProcAttr.Unshare: Added in go1.7.3
+
+* Go and namespaces
+
+Second lesson:
+
+_If_you_want_to_handle_namespaces_without_fork-and-exec_chain,_Go_isn't_the_way_to_go._
+
+* Go and namespaces
+
+Second lesson:
+
+_If_you_want_to_handle_namespaces_without_fork-and-exec_chain,_Go_isn't_the_way_to_go._
+
+But, the good news are: This is the *best* way to get namespace right
+in a multi-threaded software.
+
+If you choose another language for the task, the software *must* be
+single-threaded or use the Go approach...
+
+* LXC
+
+.link https://github.com/lxc/lxc/blob/92281f027507b986b51de908d58b1487866874c1/src/lxc/attach.c#L843 github.com/lxc/lxc/src/lxc/attach.c
+
+  /* create intermediate subprocess, three reasons:
+   *       1. runs all pthread_atfork handlers and the
+   *          child will no longer be threaded
+   *          (we can't properly setns() in a threaded process)
+   *       2. we can't setns() in the child itself, since
+   *          we want to make sure we are properly attached to
+   *          the pidns
+   *       3. also, the initial thread has to put the attached
+   *          process into the cgroup, which we can only do if
+   *          we didn't already setns() (otherwise, user
+   *          namespaces will hate us)
+   */
+
+  pid = fork();
+
+* Lexer/Parser
+
+In Coders at Work Ken Thompson talks to Peter Seibel about yacc and lex (the tools):
+
+*Seibel*: And are there development tools that just make you happy to program?
+
+*ken*: I love yacc. I just love yacc. It just does exactly what you want done. Its complement, lex, is horrible. It does nothing you want done.
+
+*Seibel*: Do you use it anyway or do you write your lexers by hand?
+
+*ken*: I write my lexers by hand. Much easier.
+
+.link http://books.google.com/books?id=nneBa6-mWfgC&printsec=frontcover&dq=coders+at+work&ei=RNRfS5fzMIO-zATqi-WlBw&cd=1#v=onepage&q=yacc&f=false Coders at Work
+.link http://research.swtch.com/yyerror Generating Good Syntax Errors - By Russ Cox
+
+* Lexer
+
+Third lesson: A handwritten lexer could be concurrent and yet simple.
+
+Nash lexer was based on the awesome talk by Rob Pike:
+
+.link https://www.youtube.com/watch?v=HxaD_trXwRE Lexical Scanning in Go
+
+* Lexer
+
+- 549 LoC;
+- 3 data types;
+- Automatic semicolon insertion;
+- Concurrent
+
+* Lexer (Usage)
+
+.play ./lex.ex.go
+
+* Lexer (Impl.)
+
+  func Lex(name, input string) *Lexer {
+  	l := &Lexer{
+  		name:   name,
+  		input:  input,
+  		Tokens: make(chan Token),
+  	}
+
+  	go l.run() // concurrently run state machine
+
+  	return l
+  }
+
+* Lexer (Impl.)
+
+  // run lexes the input by executing state functions until the state is nil
+  func (l *Lexer) run() {
+  	l.line, l.lineStart, l.column, l.columnStart = 1, 1, 0, 0
+
+  	for state := lexStart; state != nil; {
+  		state = state(l)
+  	}
+
+  	l.emit(token.EOF)
+  	close(l.Tokens) // No more tokens will be delivered
+  }
+
+* Lexer (Impl.)
+
+  type stateFn func(*Lexer) stateFn
+
+  ...
+
+  func lexStart(l *Lexer) stateFn {
+  	r := l.next()
+
+  	switch {
+  	...
+  	case r == ';':
+  		l.emit(token.Semicolon)
+  		return lexStart
+  	case isSpace(r):
+  		return lexSpace
+  	case r == '"':
+  		l.ignore()
+  		return lexQuote
+  	case r == '#':
+  		return lexComment
+  	...
+
+* Parser
+
+- Recursive descent parser (hand-written)
+- 1223 LoC
+
+* Parser (Usage)
+
+Anyone can use to analyze nash scripts:
+
+  import (
+  	"fmt"
+
+  	"github.com/NeowayLabs/nash/parser"
+  )
+
+.play ./parser.ex.go /func parse/,/OMIT/
+
+* Parser (Usage)
+
+.play ./parser.ex.go /func main/,
+
+* Parser (Impl.)
+
+Parser walkthrough:
+
+  type (
+  	// Parser parses an nash file
+  	Parser struct {
+  		name       string // filename or name of the buffer
+  		content    string
+  		l          *scanner.Lexer
+  		tok        *scanner.Token // token saved for lookahead
+  		openblocks int
+
+  		insidePipe bool
+
+  		keywordParsers map[token.Token]parserFn
+  	}
+
+  	parserFn func(tok scanner.Token) (ast.Node, error)
+  )
+
+* parser.NewParser (Impl.)
+
+  func NewParser(name, content string) *Parser {
+  	p := &Parser{
+  		name:    name,
+  		content: content,
+  		l:       scanner.Lex(name, content),
+  	}
+
+  	p.keywordParsers = map[token.Token]parserFn{
+  		token.For:     p.parseFor,
+  		token.If:      p.parseIf,
+  		token.Fn:      p.parseFnDecl,
+  		token.Return:  p.parseReturn,
+  		token.Import:  p.parseImport,
+  		token.SetEnv:  p.parseSetenv,
+  		token.Rfork:   p.parseRfork,
+  		token.BindFn:  p.parseBindFn,
+  		token.Dump:    p.parseDump,
+  		token.Comment: p.parseComment,
+  		token.Illegal: p.parseError,
+  	}
+
+  	return p
+  }
+
+* p.Parse() (Impl.)
+
+  func (p *Parser) Parse() (tr *ast.Tree, err error) {
+  	var root *ast.BlockNode
+
+  	defer func() {
+  		if r := recover(); r != nil {
+  			if _, ok := r.(runtime.Error); ok {
+  				panic(r)
+  			}
+
+  			err = r.(error)
+  		}
+  	}()
+
+  	root, err = p.parseBlock(1, 0)
+
+  	if err != nil {
+  		return nil, err
+  	}
+
+  	tr = ast.NewTree(p.name)
+  	tr.Root = root
+
+  	return tr, nil
+  }
+
+* p.parseStatement() (Impl.)
+
+  func (p *Parser) parseStatement() (ast.Node, error) {
+  	it := p.next()
+  	next := p.peek()
+
+  	if fn, ok := p.keywordParsers[it.Type()]; ok {
+  		return fn(it)
+  	}
+
+  	// statement starting with ident:
+  	// - fn invocation
+  	// - variable assignment
+  	// - variable exec assignment
+  	// - Command
+
+  	if (it.Type() == token.Ident || it.Type() == token.Variable) && next.Type() == token.LParen {
+  		return p.parseFnInv(it, true)
+  	}
+  	...
+
+* p.parseStatement() (Cont.)
+
+  	if it.Type() == token.Ident {
+  		switch next.Type() {
+  		case token.Assign, token.AssignCmd:
+  			return p.parseAssignment(it)
+  		}
+
+  		return p.parseCommand(it)
+  	} else if it.Type() == token.Arg {
+  		return p.parseCommand(it)
+  	}
+
+  	// statement starting with '('
+  	// -multiline command (echo hello)
+  	if it.Type() == token.LParen {
+  		return p.parseCommand(it)
+  	}
+
+  	return nil, newParserError(it, p.name, "Unexpected token parsing statement '%+v'", it)
+
+* Shell engine
+
+The package _github.com/NeowayLabs/nash_ provides the user API and
+package _github.com/NeowayLabs/nash/internal/sh_ provides the internal API.
+
+The package _internal/sh_ is the shell engine.
+
+
+- Walks the AST, evaluating each node;
+
+Forth lesson: _Use_internal_package_name_wherever_possible_to_establish_a_concrete_API._
+
+In Go you can import every package which has exported symbols. The
+problem is that sometimes the symbols are exported to _internal_ use
+only. The _internal_ package name guarantees no one are importing your
+internal modules.
+
+Yes, you can broke everything and no one knows.
+
+* Shell embedding
+
+TODO show examples
