@@ -14,6 +14,8 @@ func main() {
 	)
 	fmt.Printf("%T\n", ctx)
 	fmt.Printf("%T\n", cancel)
+	fmt.Printf("Err: %s\n", ctx.Err())
 	//Call cancel to avoid leaking resources until timeout fires
 	cancel()
+	fmt.Printf("Err: %s\n", ctx.Err())
 }

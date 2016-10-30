@@ -61,14 +61,6 @@ It is not a matter of *if it will fail* but *what will happen when it fails*.
 - Choose something to start with
 
 
-* Timeouts
-
-- Integration points must have timeouts
-- Expensive and long running ops must have timeouts
-- Seems simple, but it is easy to don't do it
-- Go makes it even simpler :-)
-
-
 * Microservices
 
 .image ./img/integration-points.jpg _ 700
@@ -81,15 +73,24 @@ It is not a matter of *if it will fail* but *what will happen when it fails*.
 - Networks have really fun ways to fail
 
 
+
+* Timeouts
+
+- Integration points must have timeouts
+- Expensive and long running ops must have timeouts
+- Seems simple, but it is easy to don't do it
+- Go makes it even simpler :-)
+
+
 * context.Context
 
 - Moved to Go core in 1.7
-- Models timeouts and cancellation
+- Models timeouts/deadlines and cancellation
 
 
-* Timeout Context
+* context.Context
 
-.play examples/timeout.go
+.play examples/context.go
 
 
 * Timeout Context
@@ -103,9 +104,35 @@ It is not a matter of *if it will fail* but *what will happen when it fails*.
 .play examples/expiration.go
 
 
+* cancel
+
+- Always call it
+- Guarantee resources are freed ASAP
+
+
 * Canceling explicitly
 
 .play examples/cancellation.go
+
+
+* Context hierarchy: Child exits first
+
+.play examples/hierarchy.go
+
+
+* Context hierarchy: Parent exits first
+
+.play examples/hierarchy2.go
+
+
+* Context hierarchy: Parent cancelled
+
+.play examples/hierarchy3.go
+
+
+* Calling expensive operation
+
+.play examples/expensive.go
 
 
 * Timeout Overview
@@ -115,6 +142,13 @@ It is not a matter of *if it will fail* but *what will happen when it fails*.
 - Multiple goroutines can be waiting for a single done
 - Contexts are hierarchical
 - Cancelling parent cancels all children
+
+
+* Context best practices
+
+- Callee where context are inject can't cancel the operation
+- Propagate context as the first parameter of functions
+- Avoid using the values thing, basically a map[interface{}]interface{}
 
 
 * HTTP timeouts
