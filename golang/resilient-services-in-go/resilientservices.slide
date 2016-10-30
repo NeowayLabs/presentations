@@ -154,3 +154,10 @@ It is not a matter of *if it will fail* but *what will happen when it fails*.
 * HTTP timeouts
 
 Talk about: https://blog.cloudflare.com/the-complete-guide-to-golang-net-http-timeouts/
+
+
+* Further reading
+
+- https://blog.golang.org/context
+- https://peter.bourgon.org/blog/2016/07/11/context.html
+- https://blog.cloudflare.com/the-complete-guide-to-golang-net-http-timeouts
