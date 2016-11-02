@@ -248,9 +248,8 @@ It is not a matter of *if it will fail* but *what will happen when it fails*.
 
 .code ./examples/proper-server.go /^func main/,/^}/
 
-- Same default as HTTP clients
-- Useful for streaming, dangerous for other cases
-- Slow clients can consume all your file descriptors (open connections)
+- Almost same code
+- But with proper timeouts
 
 
 * Further reading
