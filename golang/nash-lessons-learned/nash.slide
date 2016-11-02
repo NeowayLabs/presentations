@@ -44,10 +44,6 @@ https://github.com/tiago4orion
 
 .code ./rfork_ex.sh /#!\/usr\/bin\/env nash/,/# END OMIT/ HL4
 
-* What I wanted
-
-.code ./rfork_ex.sh /fn main/,/# END OMIT/
-
 * Shells
 
 A Unix shell was tipically:
@@ -58,7 +54,7 @@ with a crappy language around it...
 
 * Shells
 
-But If it have job control, then it must handle process groups and
+But If it has job control, then it must handle process groups and
 sessions.
 
   1 session       -> N process groups
@@ -83,6 +79,8 @@ Then, _Nash_ shell is basically:
 with a sane language around it.
 
 * Nash features
+
+*100%* *Go*
 
 Functions are first-class:
 
@@ -186,7 +184,14 @@ How to create processes in Go?
 
 .play ./exec.go /func uptime/,/OMIT/ HL1
 
-_First_lesson:_Go_std_library_do_the_right_thing_most_of_the_time!_
+* Lesson 1
+
+_Use_the_portable_API_wherever_possible_
+
+- Avoid syscall package;
+- Avoid unsafe package;
+
+_Go_portable_std_library_do_the_right_thing_most_of_the_time!_
 
 * Implementation (Spawning processes)
 
@@ -204,15 +209,11 @@ argument.
 - SysProcAttr.{UIdMapping,GidMapping}: Added in go1.4;
 - SysProcAttr.Unshare: Added in go1.7.3
 
-* Go and namespaces
-
-Second lesson:
+* Lesson 2
 
 _If_you_want_to_handle_namespaces_without_fork-and-exec_chain,_Go_isn't_the_way_to_go._
 
-* Go and namespaces
-
-Second lesson:
+* Lesson 2
 
 _If_you_want_to_handle_namespaces_without_fork-and-exec_chain,_Go_isn't_the_way_to_go._
 
@@ -243,28 +244,20 @@ single-threaded or use the Go approach...
 
 * Lexer/Parser
 
-In Coders at Work Ken Thompson talks to Peter Seibel about yacc and lex (the tools):
-
-*Seibel*: And are there development tools that just make you happy to program?
-
-*ken*: I love yacc. I just love yacc. It just does exactly what you want done. Its complement, lex, is horrible. It does nothing you want done.
-
-*Seibel*: Do you use it anyway or do you write your lexers by hand?
-
-*ken*: I write my lexers by hand. Much easier.
+*Ken* *Thompson*: I write my lexers by hand. Much easier.
 
 .link http://books.google.com/books?id=nneBa6-mWfgC&printsec=frontcover&dq=coders+at+work&ei=RNRfS5fzMIO-zATqi-WlBw&cd=1#v=onepage&q=yacc&f=false Coders at Work
 .link http://research.swtch.com/yyerror Generating Good Syntax Errors - By Russ Cox
 
-* Lexer
+* Lesson 3
 
-Third lesson: A handwritten lexer could be concurrent and yet simple.
+_A_handwritten_lexer_could_be_concurrent_and_yet_simple_.
 
 Nash lexer was based on the awesome talk by Rob Pike:
 
 .link https://www.youtube.com/watch?v=HxaD_trXwRE Lexical Scanning in Go
 
-* Lexer
+* Nash lexer
 
 - 549 LoC;
 - 3 data types;
@@ -273,7 +266,7 @@ Nash lexer was based on the awesome talk by Rob Pike:
 
 * Lexer (Usage)
 
-.play ./lex.ex.go
+.play ./lex.ex.go /func scan/,/OMIT
 
 * Lexer (Impl.)
 
@@ -328,7 +321,7 @@ Nash lexer was based on the awesome talk by Rob Pike:
 
 * Parser
 
-- Recursive descent parser (hand-written)
+- Recursive descent parser (handwritten)
 - 1223 LoC
 
 * Parser (Usage)
@@ -342,10 +335,6 @@ Anyone can use to analyze nash scripts:
   )
 
 .play ./parser.ex.go /func parse/,/OMIT/
-
-* Parser (Usage)
-
-.play ./parser.ex.go /func main/,
 
 * Parser (Impl.)
 
@@ -394,94 +383,60 @@ Parser walkthrough:
   	return p
   }
 
-* p.Parse() (Impl.)
+* Lesson 4
 
-  func (p *Parser) Parse() (tr *ast.Tree, err error) {
-  	var root *ast.BlockNode
+_Keep_the_language_simple_
 
-  	defer func() {
-  		if r := recover(); r != nil {
-  			if _, ok := r.(runtime.Error); ok {
-  				panic(r)
-  			}
+*Add* *what* *matters* *on* *first* *release*
 
-  			err = r.(error)
-  		}
-  	}()
+- Add the features used 90% of the time first
+- Avoid adding complex features you can circunvent at first release
+- Keeping the code base small enables design changes with little effort
 
-  	root, err = p.parseBlock(1, 0)
+*Keep* *out* *needless* *features*
 
-  	if err != nil {
-  		return nil, err
-  	}
-
-  	tr = ast.NewTree(p.name)
-  	tr.Root = root
-
-  	return tr, nil
-  }
-
-* p.parseStatement() (Impl.)
-
-  func (p *Parser) parseStatement() (ast.Node, error) {
-  	it := p.next()
-  	next := p.peek()
-
-  	if fn, ok := p.keywordParsers[it.Type()]; ok {
-  		return fn(it)
-  	}
-
-  	// statement starting with ident:
-  	// - fn invocation
-  	// - variable assignment
-  	// - variable exec assignment
-  	// - Command
-
-  	if (it.Type() == token.Ident || it.Type() == token.Variable) && next.Type() == token.LParen {
-  		return p.parseFnInv(it, true)
-  	}
-  	...
-
-* p.parseStatement() (Cont.)
-
-  	if it.Type() == token.Ident {
-  		switch next.Type() {
-  		case token.Assign, token.AssignCmd:
-  			return p.parseAssignment(it)
-  		}
-
-  		return p.parseCommand(it)
-  	} else if it.Type() == token.Arg {
-  		return p.parseCommand(it)
-  	}
-
-  	// statement starting with '('
-  	// -multiline command (echo hello)
-  	if it.Type() == token.LParen {
-  		return p.parseCommand(it)
-  	}
-
-  	return nil, newParserError(it, p.name, "Unexpected token parsing statement '%+v'", it)
+- Tons of other shells features are needless;
+- *Generics* *(just* *kidding)*
 
 * Shell engine
 
-The package _github.com/NeowayLabs/nash_ provides the user API and
-package _github.com/NeowayLabs/nash/internal/sh_ provides the internal API.
+Walks the AST, evaluating each node;
 
-The package _internal/sh_ is the shell engine.
+     Lex -> parser -> evaluation (engine)
 
+- Embeddable shell
+- Nice API
 
-- Walks the AST, evaluating each node;
+* Shell engine (Impl.)
 
-Forth lesson: _Use_internal_package_name_wherever_possible_to_establish_a_concrete_API._
+User importable API: *github.com/NeowayLabs/nash*
+Internal API: *github.com/NeowayLabs/nash/internal/sh*
 
-In Go you can import every package which has exported symbols. The
-problem is that sometimes the symbols are exported to _internal_ use
-only. The _internal_ package name guarantees no one are importing your
-internal modules.
-
-Yes, you can broke everything and no one knows.
+The package *internal/sh* is the shell engine implementation.
 
 * Shell embedding
 
-TODO show examples
+Basic example:
+
+  sh, err := nash.New()
+  err = sh.Exec("<stdin>", "rfork un { nc -v -l -p 8080 }")
+
+* Shell embedding
+
+Consuming the output:
+
+  var buf bytes.Buffer
+
+  sh, err := nash.New()
+  sh.SetStdout(&buf)
+  sh.SetStderr(&buf)
+  err = sh.Exec("monitoring", "iostat | grep xvdb")
+
+  fmt.Printf("/dev/xvdb I/O: %s\n", string(buf.Bytes()))
+
+* Lesson 5
+
+_Use_internal_package_name_when_project_requires_long_term_stable_API_
+
+The _internal_ package name guarantees no one are importing
+your internal modules.
