@@ -15,5 +15,5 @@ func main() {
 
 	fmt.Println("Waiting for timeout")
 	<-ctx.Done()
-	fmt.Println("Done")
+	fmt.Println("Done, Reason: ", ctx.Err())
 }
