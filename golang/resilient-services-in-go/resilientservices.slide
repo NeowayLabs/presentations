@@ -90,7 +90,7 @@ It is not a matter of *if it will fail* but *what will happen when it fails*.
 
 * context.Context
 
-.play examples/context.go
+.code examples/context.go
 
 
 * Timeout Context
@@ -101,7 +101,7 @@ It is not a matter of *if it will fail* but *what will happen when it fails*.
 
 * Waiting to expire
 
-.play examples/expiration.go
+.play examples/expiration.go /^func main/,/^}/
 
 
 * cancel
@@ -112,27 +112,27 @@ It is not a matter of *if it will fail* but *what will happen when it fails*.
 
 * Canceling explicitly
 
-.play examples/cancellation.go
+.play examples/cancellation.go /^func main/,/^}/
 
 
 * Context hierarchy: Child exits first
 
-.play examples/hierarchy.go
+.play examples/hierarchy.go /^func main/,/^}/
 
 
 * Context hierarchy: Parent exits first
 
-.play examples/hierarchy2.go
+.play examples/hierarchy2.go /^func main/,/^}/
 
 
 * Context hierarchy: Parent cancelled
 
-.play examples/hierarchy3.go
+.play examples/hierarchy3.go /^func main/,/^}/
 
 
 * Calling expensive operation
 
-.play examples/expensive.go
+.play examples/expensive.go /^func main/,/^}/
 
 
 * Timeout Overview
@@ -158,6 +158,7 @@ Talk about: https://blog.cloudflare.com/the-complete-guide-to-golang-net-http-ti
 
 * Further reading
 
+- https://blog.golang.org/pipelines
 - https://blog.golang.org/context
 - https://peter.bourgon.org/blog/2016/07/11/context.html
 - https://blog.cloudflare.com/the-complete-guide-to-golang-net-http-timeouts
