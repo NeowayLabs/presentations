@@ -130,9 +130,31 @@ It is not a matter of *if it will fail* but *what will happen when it fails*.
 .play examples/hierarchy3.go /^func main/,/^}/
 
 
+* An expensive operation
+
+- Take any function that can take some time to execute
+- Avoid being locked on that function
+- Guarantee a minimum response time for the client
+
+
+* The expensive operation
+
+.code examples/expensive.go /^func expensiveOp/,/^}/
+
+
 * Calling expensive operation
 
 .play examples/expensive.go /^func main/,/^}/
+
+
+* Use case
+
+- Plugin like stuff
+- Each plugin can be as simple as a function
+- The core functionality can protect itself from bad behaved plugins
+- Plugins can still leak resources or get locked forever
+- But the core will never get locked
+- Clients have a guaranteed maximum response time
 
 
 * Timeout Overview
@@ -148,6 +170,7 @@ It is not a matter of *if it will fail* but *what will happen when it fails*.
 
 - Callee where context are inject can't cancel the operation
 - Propagate context as the first parameter of functions
+- When creating new contexts, leverage the hierarchical model
 - Avoid using the values thing, basically a map[interface{}]interface{}
 
 
