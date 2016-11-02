@@ -19,7 +19,6 @@ http://github.com/NeowayLabs/presentations
 - Context best practices
 - Making HTTP requests
 - Serving HTTP requests
-- Final thoughts
 
 
 * Resilience
@@ -232,12 +231,32 @@ It is not a matter of *if it will fail* but *what will happen when it fails*.
 
 * Server side HTTP
 
-Talk about: https://blog.cloudflare.com/the-complete-guide-to-golang-net-http-timeouts/
+.code ./examples/default-server.go /^func main/,/^}/
+
+- Same default as HTTP clients
+- Useful for streaming, dangerous for other cases
+- Slow clients can consume all your file descriptors (open connections)
+
+
+* http.Server
+
+.code ./examples/server.go
+.image ./img/server-timeout.png _ 1000
+
+
+* Proper Server side code
+
+.code ./examples/proper-server.go /^func main/,/^}/
+
+- Same default as HTTP clients
+- Useful for streaming, dangerous for other cases
+- Slow clients can consume all your file descriptors (open connections)
 
 
 * Further reading
 
 - https://blog.golang.org/pipelines
 - https://blog.golang.org/context
+- http://golang.rakyll.org/leakingctx
 - https://peter.bourgon.org/blog/2016/07/11/context.html
 - https://blog.cloudflare.com/the-complete-guide-to-golang-net-http-timeouts
