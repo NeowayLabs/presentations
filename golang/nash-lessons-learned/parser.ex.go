@@ -1,7 +1,9 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"io"
 	"os"
 
 	"github.com/NeowayLabs/nash/parser"
@@ -28,17 +30,19 @@ func parse(content string) {
 // OMIT
 
 func main() {
-	content := `
-import projX/build/all
+	buf := bufio.NewReader(os.Stdin)
 
-version <= (
-	cat version.go |
-	grep "const Version" |
-	awk "{print $5}" |
-	sed "s/\"//g"
-)
+	for {
+		content, err := buf.ReadBytes('\n')
 
-build($version)`
+		if err != nil {
+			if err == io.EOF {
+				break
+			}
 
-	parse(content)
+			fatal(err)
+		}
+
+		parse(string(content))
+	}
 }

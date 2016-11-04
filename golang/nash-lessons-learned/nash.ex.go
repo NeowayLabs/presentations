@@ -6,26 +6,21 @@ import (
 	"io"
 	"os"
 
-	"github.com/NeowayLabs/nash/scanner"
+	"github.com/NeowayLabs/nash"
 )
 
 func fatal(err error) {
-	fmt.Fprintf(os.Stderr, "error: %s\n", err)
+	fmt.Fprintf(os.Stderr, "%s", err)
 	os.Exit(1)
 }
 
-func scan(content string) {
-	l := scanner.Lex("example", content)
-
-	for tok := range l.Tokens {
-		fmt.Println(tok)
-	}
-}
-
-// OMIT
-
 func main() {
 	buf := bufio.NewReader(os.Stdin)
+	shell, err := nash.New()
+
+	if err != nil {
+		fatal(err)
+	}
 
 	for {
 		content, err := buf.ReadBytes('\n')
@@ -38,6 +33,10 @@ func main() {
 			fatal(err)
 		}
 
-		scan(string(content))
+		err = shell.Exec("<stdin>", string(content))
+
+		if err != nil {
+			fatal(err)
+		}
 	}
 }
