@@ -1,9 +1,7 @@
-.PHONY: build all
+.PHONY: all
 
-IMAGE=resilient-services
+all:
+	present -play=true
 
-all: build
-	docker run --rm --net="host" -v `pwd`:/presentations $(IMAGE)
-
-build:
-	docker build -t $(IMAGE) .
+show:
+	xdg-open http://127.0.0.1:3999
