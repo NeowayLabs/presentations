@@ -4,7 +4,7 @@ Lessons learned writing a shell
 Tags: nash, go, shell, namespaces, containers
 
 Tiago Natel de Moura
-Bug writer at Neoway Business Solution
+Neoway Business Solution
 tiago4orion@gmail.com
 https://github.com/tiago4orion
 @_i4k_
@@ -15,12 +15,13 @@ https://github.com/tiago4orion
 - Inspired by Plan9 rc
 - Modern syntax (non POSIX)
 - Portable (with some caveats)
+- Only ONE way of doing things!
 
 * Motivation
 
 - Write lots of shell scripts to test a distributed file server;
 - Testing support;
-- Linux namespace support;
+- Namespace support;
 - Easy to embed into go programs;
 - I hate bash/zsh/csh/...
 
@@ -44,7 +45,7 @@ https://github.com/tiago4orion
 
 .code ./rfork_ex.sh /#!\/usr\/bin\/env nash/,/# END OMIT/ HL4
 
-* Shells
+* Unix Shells
 
 A Unix shell was tipically:
 
@@ -68,13 +69,13 @@ All have ID's (Unix way...)
 - Process ID (PID)
 - Process thread ID (TID)
 
-_But_job_control_is_most_suited_for_interactive_use,_then_I_decided_to_avoid_this_complication_
+_But_job_control_is_rarely_used_today,_then_I_decided_to_avoid_this_complication_
 
 * Nash
 
 Then, _Nash_ shell is basically:
 
-  fork -> execve -> wait (optional)
+  rfork -> execve -> wait (optional)
 
 with a sane language around it.
 
@@ -84,24 +85,43 @@ with a sane language around it.
 
 Functions are first-class:
 
-- Have explicit arguments;
-- Return values (or other function);
-- Could be stored in variables;
-- Could be passed as arguments to other functions;
+- Have explicit arguments
+- Return values (or other function)
+- Could be stored in variables
+- Could be passed as arguments to other functions
+- Could bind to command names (aliases)
 
 Support process isolations out of the box.
 
 - Linux namespaces (USER, PID, MNT, UTS, IPC, NET)
-- Plan9 namespaces (Planned)
+- Plan9 namespaces (soon)
 
 * Nash features
 
 Safe:
 
-- No eval (no exec, backticks, etc);
-- No file wildcard (globbing);
-- No string expansions (strings are just strings);
+- No eval (no exec, backticks, etc)
+- No file wildcard (globbing)
+- No string expansions (strings are just strings)
+- No ...
+- No ...
 - Yeah, you get the idea. A shell with nothing that makes it a shell...
+
+* Nash features
+
+Modern:
+
+- Command redirection to network location
+
+.code net.sh
+
+- Do not mix commands and strings
+
+.code cmd.sh
+
+- Explicit
+
+.code if.sh
 
 * Nash features
 
@@ -122,10 +142,10 @@ Is Go suited for this task?
 
 We need:
 
-- Process spawning facilities;
-- Some way to create namespaces;
-- Lexer/Parser;
-- Signal handling;
+- Process spawning facilities
+- Some way to create namespaces
+- Lexer/Parser
+- Signal handling
 - Terminal
 - Something more?
 
@@ -145,9 +165,9 @@ Mostly because *every* Go program is multithreaded (ever).
 
 How to create processes in Go?
 
-.link https://golang.org/pkg/syscall/#ForkExec syscall.ForkExec
-.link https://golang.org/pkg/os/#StartProcess os.StartProcess
 .link https://golang.org/pkg/os/exec/ os/exec
+.link https://golang.org/pkg/os/#StartProcess os.StartProcess
+.link https://golang.org/pkg/syscall/#ForkExec syscall.ForkExec
 
 - It is safe to use _ForkExec_ or _StartProcess_, but to be usable you'll re-implement _os/exec_.
 - The _os/exec_ library is safe, portable and supports additional useful features.
@@ -155,7 +175,6 @@ How to create processes in Go?
 * ForkExec example (Linux)
 
 .play ./forkexec.go /func uptime/,/OMIT/ HL1
-
 
 * ForkExec example (Linux)
 
