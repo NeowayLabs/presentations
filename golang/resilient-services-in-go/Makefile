@@ -1,6 +1,7 @@
 .PHONY: all
 
 all:
+	go get golang.org/x/tools/cmd/present
 	present -play=true
 
 show:
