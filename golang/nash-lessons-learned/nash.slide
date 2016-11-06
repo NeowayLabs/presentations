@@ -172,30 +172,6 @@ How to create processes in Go?
 - It is safe to use _ForkExec_ or _StartProcess_, but to be usable you'll re-implement _os/exec_.
 - The _os/exec_ library is safe, portable and supports additional useful features.
 
-* ForkExec example (Linux)
-
-.play ./forkexec.go /func uptime/,/OMIT/ HL1
-
-* ForkExec example (Linux)
-
-.play ./forkexec.go /func uptime/,/OMIT/ HL2
-
-* ForkExec example (Linux)
-
-.play ./forkexec.go /func uptime/,/OMIT/ HL3
-
-* StartProcess example (Portable)
-
-.play ./startprocess.go /func uptime/,/OMIT/ HL1
-
-* StartProcess example (Portable)
-
-.play ./startprocess.go /func uptime/,/OMIT/ HL2
-
-* StartProcess example (Portable)
-
-.play ./startprocess.go /func uptime/,/OMIT/ HL3
-
 * os/exec example (Portable)
 
 - Cmd.Stdin is an *io.Reader*
@@ -211,10 +187,6 @@ _Use_the_portable_API_wherever_possible_
 - Avoid unsafe package;
 
 _Go_portable_std_library_do_the_right_thing_most_of_the_time!_
-
-* Implementation (Spawning processes)
-
-.image ./robpike-issue13473.png 500 900
 
 * Go and namespaces
 
@@ -360,7 +332,7 @@ Anyone can use to analyze nash scripts:
 Parser walkthrough:
 
   type (
-  	// Parser parses an nash file
+  	// Parser parses nash files
   	Parser struct {
   		name       string // filename or name of the buffer
   		content    string

@@ -1,5 +1,3 @@
-import alerts
-
 -/app -host :8080
 
 if $status != "0" {
