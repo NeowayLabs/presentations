@@ -1,0 +1,22 @@
+Go 1.8 Release Party
+Floripa Gophers
+Tags: floripa,gophers,golang,release,party,1.8
+
+Paulo Pizarro, Ricardo Longa, João Caibar
+Neoway Business Solution
+paulo.pizarro@neoway.com.br / ricardo.longa@neoway.com.br / joao.caibar@neoway.com.br
+
+* Notes
+
+The slides are available on [[https://github.com/NeowayLabs/presentations]]
+
+.image images/party.jpeg
+
+* Agenda
+
+- Changes to the language
+- Ports
+- Tools
+- Runtime
+- Performance
+- Standard library
