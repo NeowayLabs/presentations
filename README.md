@@ -15,6 +15,24 @@ Neoway Talk Presentations
 
 > Source [here](https://github.com/NeowayLabs/presentations/tree/master/golang/1st-floripa-gophers-under-the-hood-part-1)
 
+### Gophercon Brazil 2016 - Building Resilient Services in Go
+
+> **Author:** Tiago Katcipis
+
+> Source [here](https://github.com/NeowayLabs/presentations/tree/master/golang/resilient-services-in-go)
+
+### Gophercon Brazil 2016 - Lessons Learned Writing a Shell
+
+> **Author:** Tiago Natel de Moura
+
+> Source [here](https://github.com/NeowayLabs/presentations/tree/master/golang/nash-lessons-learned)
+
+### Gophercon Brazil 2016 - Concurrency
+
+> **Author:** Paulo Pizarro
+
+> Source [here](https://github.com/NeowayLabs/presentations/tree/master/golang/2016-gopherconbr-concurrency)
+
 # DevOps
 
 ### Networking tools for devops
