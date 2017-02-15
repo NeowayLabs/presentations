@@ -9,5 +9,5 @@ go get golang.org/x/tools/cmd/present
 ## Running Presentation
 
 ```
-present release-1.8.slide
+present presentation.slide
 ```
