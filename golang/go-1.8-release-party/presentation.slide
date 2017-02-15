@@ -1,5 +1,6 @@
 Go 1.8 Release Party
 Floripa Gophers
+16 Feb 2017
 Tags: floripa,gophers,golang,release,party,1.8
 
 Paulo Pizarro, Ricardo Longa, João Caibar
@@ -16,6 +17,7 @@ The slides are available on [[https://github.com/NeowayLabs/presentations]]
 
 - Changes to the language
 - Ports to other platforms
+- Compiler changes
 - Tools
 - Runtime
 - Performance
@@ -62,6 +64,8 @@ Both types still need to have:
 
 * Ports to other platforms
 
+The number of platforms Go supports, on balance, continues to grow.
+
 32-bit MIPS
 
 - big-endian (`linux/mips`)
@@ -71,19 +75,72 @@ Go on DragonFly BSD now requires DragonFly 4.4.4+.
 
 Go on OpenBSD now requires OpenBSD 5.9+.
 
-Plan 9 is now better!
+Plan 9 is now better
+
+- The Plan 9 port's networking support is now much more complete and matches the behavior of Unix and Windows with respect to deadlines and cancelation.
 
 * Ports to other platforms
 
-Go 1.8 supports OS X 10.8+. Likely last time we support 10.8.
+Mac
 
-ARM:
+- Go 1.8 supports OS X 10.8+. Likely last time we support 10.8.
+
+ARM
 
 - Go 1.8 is the last version to support ARMv5E and ARMv6 processors.
 
 - Go 1.9 will require ARMv6K. Will it work on my platform?
 
     go tool dist -check-armv6k
+
+* Compiler changes
+
+* Frontend: New parser
+
+Robert Griesemer and Matthew Dempsky replaced the parser.
+
+The new parser removes many of the package level variables which came along for the ride from the previous YACC based parser. Removing package level globals is a stepping stone to making the compiler more parallel.
+
+This new parser is reportedly considerably faster, but in 1.8 is hamstrung by having to convert between the new style AST and the old version the rest of the compiler expects.
+
+Expect this AST conversion to be removed in Go 1.9.
+
+* Backend: SSA - Static Single Assignment
+
+Humans can see that the first assignment is not necessary, and that the value of y being used in the third line comes from the second assignment of y.
+
+	y := 1
+	y := 2
+	x := y
+
+But if the program is in SSA form, both of these are immediate:
+
+	y1 := 1
+	y2 := 2
+	x1 := y2
+
+* Backend: SSA everywhere!
+
+_SSA_ - [[https://en.wikipedia.org/wiki/Static_single_assignment_form][Static Single Assignment]]
+
+- Generates more compact and efficient code
+- It is a better platform for optimizations
+- All backends updated to use the new SSA form. Old "plan9" style compiler backend deleted.
+- Easy to add new SSA backends (for values of easy compilier engineers work in).
+
+Big performance improvements for 32-bit ARM
+
+- 20-30% speed up!
+
+For others (where SSA was used already)
+
+- Gains are 0-10%
+
+* Compiler speed
+
+About a 12-15% improvement compared to Go 1.7
+
+.image images/benchmark.png _ 800
 
 * Tools
 
@@ -103,28 +160,19 @@ Drop the `-diff` flag to rewrite the files.
 
 "Vet is stricter in some ways and looser where it previously caused false positives."
 
-Example of extra check:
+- duplicate JSON and XML struct field tags
+- non-space-separated struct tags
+- deferred calls to HTTP `Response.Body.Close` before checking errors
+- indexed arguments in `Printf`.
+- copying an array of locks
+
+* Vet - Example of extra check:
 
 .play -edit tools/govet.go /func main/,
 
 `govet` detects the problem statically:
 
 .play tools/govet.sh /go1.8rc3 vet/
-
-* SSA everywhere!
-
-The SSA backend:
-
-- generates more compact and efficient code
-- is a better platform for optimizations
-
-For 32-bit ARM systems this means 20-30% speed up!
-
-For others (where SSA was used already) gains are 0-10%.
-
-* Compiler Toolchain
-
-.image images/benchmark.png _ 800
 
 * Default GOPATH
 
@@ -143,9 +191,47 @@ Example:
 
 .play tools/gobug.sh /go1.8rc3 bug/
 
+* Plugins
+
+Go now supports a “plugin” build mode for generating plugins written in Go, and a new plugin package for loading such plugins at run time.
+
+Plugin support is currently only available on Linux.
+
+* Plugin Example
+
+.code plugins/plugin.go
+
+Then to build plugin.so
+
+ $ go build -buildmode=plugin plugin.go
+
+* Plugin Example - Using Plugin
+.code plugins/main.go  /START OMIT/,/END OMIT/
+
+ $ go run main.go
+ main started...
+ Plugin loading
+ Hello, number 7
+
 * Runtime
 
 * Performance
 
 * Standard library
+
+* os.Executable
+
+`os.Executable` returns an absolute path to the currently running program.
+
+.play stdlib/os_executable.go /START OMIT/,/END OMIT/
+
+Executable returns the path name for the executable that started the current process. There is no guarantee that the path is still pointing to the correct executable.
+
+If a symlink was used to start the process, depending on the operating system, the result might be the symlink or the path it pointed to. If a stable result is needed, path/filepath.EvalSymlinks might help.
+
+.link http://beta.golang.org/pkg/os/#Executable os.Executable (godoc.org)
+
+* More details
+
+.link http://beta.golang.org/doc/go1.8 Go 1.8 Release Notes (DRAFT)
 
