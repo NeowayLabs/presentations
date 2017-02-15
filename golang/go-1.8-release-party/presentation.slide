@@ -132,7 +132,7 @@ Big performance improvements for 32-bit ARM
 
 - 20-30% speed up!
 
-For others (where SSA was used already)
+For 64-bit x86 systems (where SSA was used already)
 
 - Gains are 0-10%
 
@@ -214,6 +214,27 @@ Then to build plugin.so
  Hello, number 7
 
 * Runtime
+
+* Argument Liveness
+
+The garbage collector no longer considers arguments live throughout the entirety of a function.
+
+* Detection of concurrent map accesses
+
+In Go 1.6, the runtime added lightweight, best-effort detection of concurrent misuse.
+
+Improvement on Go 1.8.
+
+.play runtime/mapcrash.go /const/,/Wait\(\)/
+
+Outputs:
+
+	fatal error: concurrent map read and map write
+	fatal error: concurrent map writes
+
+* MemStats Documentation
+
+The [[http://beta.golang.org/pkg/runtime/#MemStats][runtime.MemStats]] type has been more thoroughly documented.
 
 * Performance
 
