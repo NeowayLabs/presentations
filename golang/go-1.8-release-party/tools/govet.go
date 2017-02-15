@@ -1,17 +1,17 @@
 package main
 
 import (
-	"io"
+	"fmt"
 	"log"
 	"net/http"
-	"os"
 )
 
 func main() {
-	res, err := http.Get("https://golang.org")
+	res, err := http.Get("http://golang.xxx")
 	defer res.Body.Close()
 	if err != nil {
 		log.Fatal(err)
 	}
-	io.Copy(os.Stdout, res.Body)
+
+	fmt.Printf("Resp: %s", res.Status)
 }
