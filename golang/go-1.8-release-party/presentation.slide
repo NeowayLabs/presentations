@@ -432,3 +432,11 @@ If a symlink was used to start the process, depending on the operating system, t
 .image images/more.png _ 1000
 .caption [[https://beta.golang.org/doc/go1.8][Go 1.8 release notes]]
 
+* Conclusion
+
+.image images/party-gopher.png
+
+Upgrade to Go 1.8, now! 
+
+It's literally the best version of Go, _ever_.
+
