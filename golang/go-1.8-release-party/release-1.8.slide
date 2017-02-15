@@ -15,8 +15,137 @@ The slides are available on [[https://github.com/NeowayLabs/presentations]]
 * Agenda
 
 - Changes to the language
-- Ports
+- Ports to other platforms
 - Tools
 - Runtime
 - Performance
 - Standard library
+
+* Changes to the language
+
+* Conversion rules
+
+How many times have you found yourself with two types that were *almost* equal?
+
+Let's say you define `Person`:
+
+.code stdlib/json_old.go /type Person/,/^}/
+
+And that for some reason, like JSON you also have:
+
+.code stdlib/json_old.go /var aux/,/}/
+
+* Conversion rules
+
+In order to convert `aux` to type `Person` you needed to do:
+
+.code stdlib/json_old.go /type Person/,/}/
+
+    return Person{
+        Name:     aux.Name,
+        AgeYears: aux.AgeYears,
+        SSN:      aux.SSN
+    }
+
+* Conversion rules
+
+Since Go 1.8 you can simply do:
+
+    return Person(aux)
+
+Both types still need to have:
+
+- same *sequence* of fields (the order matters)
+- corresponding fields with same type.
+
+* Ports to other platforms
+
+* Ports to other platforms
+
+32-bit MIPS
+
+- big-endian (`linux/mips`)
+- little-endian (`linux/mipsle`) - requires Floating Point Unit
+
+Go on DragonFly BSD now requires DragonFly 4.4.4+.
+
+Go on OpenBSD now requires OpenBSD 5.9+.
+
+Plan 9 is now better!
+
+* Ports to other platforms
+
+Go 1.8 supports OS X 10.8+. Likely last time we support 10.8.
+
+ARM:
+
+- Go 1.8 is the last version to support ARMv5E and ARMv6 processors.
+
+- Go 1.9 will require ARMv6K. Will it work on my platform?
+
+    go tool dist -check-armv6k
+
+* Tools
+
+* Fix
+
+Fixes the import path `"golang.org/x/net/context"` to `"context"`.
+
+.code tools/gofix.go
+
+Simply run the command below:
+
+.play tools/gofix.sh /go1.8rc3 tool/
+
+Drop the `-diff` flag to rewrite the files.
+
+* Vet
+
+"Vet is stricter in some ways and looser where it previously caused false positives."
+
+Example of extra check:
+
+.play -edit tools/govet.go /func main/,
+
+`govet` detects the problem statically:
+
+.play tools/govet.sh /go1.8rc3 vet/
+
+* SSA everywhere!
+
+The SSA backend:
+
+- generates more compact and efficient code
+- is a better platform for optimizations
+
+For 32-bit ARM systems this means 20-30% speed up!
+
+For others (where SSA was used already) gains are 0-10%.
+
+* Compiler Toolchain
+
+.image images/benchmark.png _ 800
+
+* Default GOPATH
+
+Yay!
+
+When `GOPATH` is not defined, the tool will use:
+
+- `$HOME/go` on Unix
+- `%USERPROFILE%\go` on Windows
+
+* go bug
+
+Easier way to create bugs including all relevant information.
+
+Example:
+
+.play tools/gobug.sh /go1.8rc3 bug/
+
+* Runtime
+
+* Performance
+
+* Standard library
+

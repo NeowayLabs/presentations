@@ -3,7 +3,7 @@
 ## Download package present
 
 ```
-go get code.google.com/p/go.tools/cmd/present
+go get golang.org/x/tools/cmd/present
 ```
 
 ## Running Presentation
