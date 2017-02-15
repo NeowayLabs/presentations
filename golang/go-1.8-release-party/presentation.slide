@@ -191,28 +191,6 @@ Example:
 
 .play tools/gobug.sh /go1.8rc3 bug/
 
-* Plugins
-
-Go now supports a “plugin” build mode for generating plugins written in Go, and a new plugin package for loading such plugins at run time.
-
-Plugin support is currently only available on Linux.
-
-* Plugin Example
-
-.code plugins/plugin.go
-
-Then to build plugin.so
-
- $ go build -buildmode=plugin plugin.go
-
-* Plugin Example - Using Plugin
-.code plugins/main.go  /START OMIT/,/END OMIT/
-
- $ go run main.go
- main started...
- Plugin loading
- Hello, number 7
-
 * Runtime
 
 * Argument Liveness
@@ -292,7 +270,150 @@ There have been optimizations to implementations in the `bytes`, `crypto/aes`, `
 
 .link http://beta.golang.org/doc/go1.8#library Go 1.8 Standard Library Changes
 
-* Standard library
+* Changes to the standard library
+
+* Sorting
+
+Exercise:
+
+Given a slice of `Person`
+
+    var p []Person
+
+Print the slice sorted by name, age, and SSN.
+
+.code stdlib/sort/sort_test.go /sort.Sort/,/bySSN/
+
+Easy, right?
+
+* Sorting
+
+Well, you forgot about this part.
+
+.code stdlib/sort/sort_test.go /byName/,/bySSN\) Swap/
+
+* sort.Slice
+
+Since Go 1.8 you can simply write this:
+
+.code stdlib/sort/sort_test.go /sort\.Slice/,/SSN/
+
+Also new `SliceStable` and `SliceIsSorted`.
+
+* Benchmark
+
+    N=1 go test -bench=.
+        BenchmarkSortSort-8     10000000               145 ns/op
+        BenchmarkSortSlice-8    10000000               190 ns/op
+    N=10 go test -bench=.
+        BenchmarkSortSort-8      2000000               918 ns/op
+        BenchmarkSortSlice-8     1000000              1776 ns/op
+    N=100 go test -bench=.
+        BenchmarkSortSort-8       100000             16588 ns/op
+        BenchmarkSortSlice-8       50000             39035 ns/op
+    N=1000 go test -bench=.
+        BenchmarkSortSort-8         5000            320951 ns/op
+        BenchmarkSortSlice-8        3000            446677 ns/op
+    N=10000 go test -bench=.
+        BenchmarkSortSort-8          500           3644480 ns/op
+        BenchmarkSortSlice-8         300           4962263 ns/op
+    N=100000 go test -bench=.
+        BenchmarkSortSort-8           30          43573572 ns/op
+        BenchmarkSortSlice-8          20          60861706 ns/op
+
+.caption Benchmark ran on my MacBook Pro (8 cores), simply indicative.
+
+* Benchmark
+
+.image images/bench.png _ 800
+
+* Benchmark (log/log)
+
+.image images/bench_log.png _ 800
+
+* Plugins
+
+Go now supports a “plugin” build mode for generating plugins written in Go, and a new plugin package for loading such plugins at run time.
+
+Plugin support is currently only available on Linux.
+
+* Plugin Example
+
+Define a plugin:
+
+.code stdlib/plugins/plugin.go
+
+Then to build plugin.so
+
+ $ go build -buildmode=plugin plugin.go
+
+* Plugin Example - Using Plugin
+.code stdlib/plugins/main.go  /START OMIT/,/END OMIT/
+
+ $ go run main.go
+ main started...
+ Plugin loading
+ Hello, number 7
+
+* HTTP shutdown
+
+Added `Shutdown` method to `http.Server`.
+
+Example:
+
+Call `Shutdown` when a signal is received:
+
+.code stdlib/shutdown.go /subscribe/,/}\(\)/
+
+* HTTP shutdown
+
+Check why the server stopped.
+
+.code stdlib/shutdown.go /HandleFunc/,/gracefully/
+
+
+* HTTP/2
+
+`http.Response` now satisfies the `http.Pusher` interface.
+
+    type Pusher interface {
+        Push(target string, opts *PushOptions) error
+    }
+
+A simple example:
+
+.code stdlib/http2/http2.go /func rootHandler/,/^}/
+
+* HTTP/2
+
+.play stdlib/http2/http2.go /func main/,/^}/
+
+HTTP: [[http://localhost:8080]]
+HTTP/2: [[https://localhost:8081]]
+
+* HTTP/2
+
+HTTP
+
+.image images/http.png _ 800
+
+HTTP/2
+
+.image images/http2.png _ 800
+
+* More context support
+
+Since Go 1.7:
+
+- net
+- net/http
+- os/exec
+
+Since Go 1.8:
+
+- http.Server.Shutdown
+- database/sql
+- net.Resolver
 
 * os.Executable
 
@@ -306,7 +427,8 @@ If a symlink was used to start the process, depending on the operating system, t
 
 .link http://beta.golang.org/pkg/os/#Executable os.Executable (godoc.org)
 
-* More details
+* A couple more changes too
 
-.link http://beta.golang.org/doc/go1.8 Go 1.8 Release Notes (DRAFT)
+.image images/more.png _ 1000
+.caption [[https://beta.golang.org/doc/go1.8][Go 1.8 release notes]]
 
