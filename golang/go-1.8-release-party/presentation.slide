@@ -238,6 +238,60 @@ The [[http://beta.golang.org/pkg/runtime/#MemStats][runtime.MemStats]] type has 
 
 * Performance
 
+* Garbage Collector
+
+- GC pauses should be significantly shorter than they were in Go 1.7
+- Usually under 100 microseconds and often as low as 10 microseconds
+- [[https://github.com/golang/proposal/blob/master/design/17503-eliminate-rescan.md][eliminating stop-the-world stack re-scanning]]
+
+* GC history in tweets
+
+* go 1.5
+
+.image images/gct1.png _ 900
+
+* go 1.6
+
+.image images/gct2.png _ 900
+
+* go 1.7
+
+.image images/gct4.png _ 900
+
+* go 1.8 (beta 1)
+
+.image images/gct5.png _ 700
+
+* defer is faster
+
+The overhead of deferred function calls has been reduced by about half.
+
+    name         old time/op  new time/op  delta
+    Defer-4       101ns ± 1%    66ns ± 0%  -34.73%  (p=0.000 n=20+20)
+    Defer10-4    93.2ns ± 1%  62.5ns ± 8%  -33.02%  (p=0.000 n=20+20)
+    DeferMany-4   148ns ± 3%   131ns ± 3%  -11.42%  (p=0.000 n=19+19)
+
+.image images/defer.png _ 500
+
+* cgo is also faster!
+
+The overhead of calls from Go into C has been reduced by about half.
+
+    name       old time/op  new time/op  delta
+    CgoNoop-8  93.5ns ± 0%  51.1ns ± 1%  -45.34%  (p=0.016 n=4+5)
+
+.image images/cgo.png _ 500
+
+Source: [[https://dave.cheney.net/2016/11/19/go-1-8-toolchain-improvements][dave.cheney.net]]
+
+* Miscellaneous performance improvements
+
+Lots of small updates to the standard library.
+
+There have been optimizations to implementations in the `bytes`, `crypto/aes`, `crypto/cipher`, `crypto/elliptic`, `crypto/sha256`, `crypto/sha512`, `encoding/asn1`, `encoding/csv`, `encoding/hex`, `encoding/json`, `hash/crc32`, `image/color`, `image/draw`, `math`, `math/big`, `reflect`, `regexp`, `runtime`, `strconv`, `strings`, `syscall`, `text/template`, and `unicode/utf8` packages.
+
+.link http://beta.golang.org/doc/go1.8#library Go 1.8 Standard Library Changes
+
 * Standard library
 
 * os.Executable
