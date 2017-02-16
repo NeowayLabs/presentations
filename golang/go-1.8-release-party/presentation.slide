@@ -110,7 +110,7 @@ Expect this AST conversion to be removed in Go 1.9.
 Humans can see that the first assignment is not necessary, and that the value of y being used in the third line comes from the second assignment of y.
 
 	y := 1
-	y := 2
+	y = 2
 	x := y
 
 But if the program is in SSA form, both of these are immediate:
@@ -164,7 +164,6 @@ Drop the `-diff` flag to rewrite the files.
 - non-space-separated struct tags
 - deferred calls to HTTP `Response.Body.Close` before checking errors
 - indexed arguments in `Printf`.
-- copying an array of locks
 
 * Vet - Example of extra check:
 
