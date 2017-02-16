@@ -1,0 +1,441 @@
+Go 1.8 Release Party
+Floripa Gophers
+16 Feb 2017
+Tags: floripa,gophers,golang,release,party,1.8
+
+Paulo Pizarro, Ricardo Longa, João Caibar
+Neoway Business Solutions
+paulo.pizarro@neoway.com.br / ricardo.longa@neoway.com.br / joao.silva@neoway.com.br
+
+* Notes
+
+The slides are available on [[https://github.com/NeowayLabs/presentations]]
+
+.image images/party.jpeg
+
+* Agenda
+
+- Changes to the language
+- Ports to other platforms
+- Compiler changes
+- Tools
+- Runtime
+- Performance
+- Standard library
+
+* Changes to the language
+
+* Conversion rules
+
+How many times have you found yourself with two types that were *almost* equal?
+
+Let's say you define `Person`:
+
+.code stdlib/json_old.go /type Person/,/^}/
+
+And that for some reason, like JSON you also have:
+
+.code stdlib/json_old.go /var aux/,/}/
+
+* Conversion rules
+
+In order to convert `aux` to type `Person` you needed to do:
+
+.code stdlib/json_old.go /type Person/,/}/
+
+    return Person{
+        Name:     aux.Name,
+        AgeYears: aux.AgeYears,
+        SSN:      aux.SSN
+    }
+
+* Conversion rules
+
+Since Go 1.8 you can simply do:
+
+    return Person(aux)
+
+Both types still need to have:
+
+- same *sequence* of fields (the order matters)
+- corresponding fields with same type.
+
+* Ports to other platforms
+
+* Ports to other platforms
+
+The number of platforms Go supports, on balance, continues to grow.
+
+32-bit MIPS
+
+- big-endian (`linux/mips`)
+- little-endian (`linux/mipsle`) - requires Floating Point Unit
+
+Go on DragonFly BSD now requires DragonFly 4.4.4+.
+
+Go on OpenBSD now requires OpenBSD 5.9+.
+
+Plan 9 is now better
+
+- The Plan 9 port's networking support is now much more complete and matches the behavior of Unix and Windows with respect to deadlines and cancelation.
+
+* Ports to other platforms
+
+Mac
+
+- Go 1.8 supports OS X 10.8+. Likely last time we support 10.8.
+
+ARM
+
+- Go 1.8 is the last version to support ARMv5E and ARMv6 processors.
+
+- Go 1.9 will require ARMv6K. Will it work on my platform?
+
+    go tool dist -check-armv6k
+
+* Compiler changes
+
+* Frontend: New parser
+
+Robert Griesemer and Matthew Dempsky replaced the parser.
+
+The new parser removes many of the package level variables which came along for the ride from the previous YACC based parser. Removing package level globals is a stepping stone to making the compiler more parallel.
+
+This new parser is reportedly considerably faster, but in 1.8 is hamstrung by having to convert between the new style AST and the old version the rest of the compiler expects.
+
+Expect this AST conversion to be removed in Go 1.9.
+
+* Backend: SSA - Static Single Assignment
+
+Humans can see that the first assignment is not necessary, and that the value of y being used in the third line comes from the second assignment of y.
+
+	y := 1
+	y = 2
+	x := y
+
+But if the program is in SSA form, both of these are immediate:
+
+	y1 := 1
+	y2 := 2
+	x1 := y2
+
+* Backend: SSA everywhere!
+
+_SSA_ - [[https://en.wikipedia.org/wiki/Static_single_assignment_form][Static Single Assignment]]
+
+- Generates more compact and efficient code
+- It is a better platform for optimizations
+- All backends updated to use the new SSA form. Old "plan9" style compiler backend deleted.
+- Easy to add new SSA backends (for values of easy compilier engineers work in).
+
+Big performance improvements for 32-bit ARM
+
+- 20-30% speed up!
+
+For 64-bit x86 systems (where SSA was used already)
+
+- Gains are 0-10%
+
+* Compiler speed
+
+About a 12-15% improvement compared to Go 1.7
+
+.image images/benchmark.png _ 800
+
+* Tools
+
+* Fix
+
+Fixes the import path `"golang.org/x/net/context"` to `"context"`.
+
+.code tools/gofix.go
+
+Simply run the command below:
+
+.play tools/gofix.sh /go1.8rc3 tool/
+
+Drop the `-diff` flag to rewrite the files.
+
+* Vet
+
+"Vet is stricter in some ways and looser where it previously caused false positives."
+
+- duplicate JSON and XML struct field tags
+- non-space-separated struct tags
+- deferred calls to HTTP `Response.Body.Close` before checking errors
+- indexed arguments in `Printf`.
+
+* Vet - Example of extra check:
+
+.play -edit tools/govet.go /func main/,
+
+`govet` detects the problem statically:
+
+.play tools/govet.sh /go1.8rc3 vet/
+
+* Default GOPATH
+
+Yay!
+
+When `GOPATH` is not defined, the tool will use:
+
+- `$HOME/go` on Unix
+- `%USERPROFILE%\go` on Windows
+
+* go bug
+
+Easier way to create bugs including all relevant information.
+
+Example:
+
+.play tools/gobug.sh /go1.8rc3 bug/
+
+* Runtime
+
+* Argument Liveness
+
+The garbage collector no longer considers arguments live throughout the entirety of a function.
+
+* Detection of concurrent map accesses
+
+In Go 1.6, the runtime added lightweight, best-effort detection of concurrent misuse.
+
+Improvement on Go 1.8.
+
+.play runtime/mapcrash.go /const/,/Wait\(\)/
+
+Outputs:
+
+	fatal error: concurrent map read and map write
+	fatal error: concurrent map writes
+
+* MemStats Documentation
+
+The [[http://beta.golang.org/pkg/runtime/#MemStats][runtime.MemStats]] type has been more thoroughly documented.
+
+* Performance
+
+* Garbage Collector
+
+- GC pauses should be significantly shorter than they were in Go 1.7
+- Usually under 100 microseconds and often as low as 10 microseconds
+- [[https://github.com/golang/proposal/blob/master/design/17503-eliminate-rescan.md][eliminating stop-the-world stack re-scanning]]
+
+* GC history in tweets
+
+* go 1.5
+
+.image images/gct1.png _ 900
+
+* go 1.6
+
+.image images/gct2.png _ 900
+
+* go 1.7
+
+.image images/gct4.png _ 900
+
+* go 1.8 (beta 1)
+
+.image images/gct5.png _ 700
+
+* defer is faster
+
+The overhead of deferred function calls has been reduced by about half.
+
+    name         old time/op  new time/op  delta
+    Defer-4       101ns ± 1%    66ns ± 0%  -34.73%  (p=0.000 n=20+20)
+    Defer10-4    93.2ns ± 1%  62.5ns ± 8%  -33.02%  (p=0.000 n=20+20)
+    DeferMany-4   148ns ± 3%   131ns ± 3%  -11.42%  (p=0.000 n=19+19)
+
+.image images/defer.png _ 500
+
+* cgo is also faster!
+
+The overhead of calls from Go into C has been reduced by about half.
+
+    name       old time/op  new time/op  delta
+    CgoNoop-8  93.5ns ± 0%  51.1ns ± 1%  -45.34%  (p=0.016 n=4+5)
+
+.image images/cgo.png _ 500
+
+Source: [[https://dave.cheney.net/2016/11/19/go-1-8-toolchain-improvements][dave.cheney.net]]
+
+* Miscellaneous performance improvements
+
+Lots of small updates to the standard library.
+
+There have been optimizations to implementations in the `bytes`, `crypto/aes`, `crypto/cipher`, `crypto/elliptic`, `crypto/sha256`, `crypto/sha512`, `encoding/asn1`, `encoding/csv`, `encoding/hex`, `encoding/json`, `hash/crc32`, `image/color`, `image/draw`, `math`, `math/big`, `reflect`, `regexp`, `runtime`, `strconv`, `strings`, `syscall`, `text/template`, and `unicode/utf8` packages.
+
+.link http://beta.golang.org/doc/go1.8#library Go 1.8 Standard Library Changes
+
+* Changes to the standard library
+
+* Sorting
+
+Exercise:
+
+Given a slice of `Person`
+
+    var p []Person
+
+Print the slice sorted by name, age, and SSN.
+
+.code stdlib/sort/sort_test.go /sort.Sort/,/bySSN/
+
+Easy, right?
+
+* Sorting
+
+Well, you forgot about this part.
+
+.code stdlib/sort/sort_test.go /byName/,/bySSN\) Swap/
+
+* sort.Slice
+
+Since Go 1.8 you can simply write this:
+
+.code stdlib/sort/sort_test.go /sort\.Slice/,/SSN/
+
+Also new `SliceStable` and `SliceIsSorted`.
+
+* Benchmark
+
+    N=1 go test -bench=.
+        BenchmarkSortSort-8     10000000               145 ns/op
+        BenchmarkSortSlice-8    10000000               190 ns/op
+    N=10 go test -bench=.
+        BenchmarkSortSort-8      2000000               918 ns/op
+        BenchmarkSortSlice-8     1000000              1776 ns/op
+    N=100 go test -bench=.
+        BenchmarkSortSort-8       100000             16588 ns/op
+        BenchmarkSortSlice-8       50000             39035 ns/op
+    N=1000 go test -bench=.
+        BenchmarkSortSort-8         5000            320951 ns/op
+        BenchmarkSortSlice-8        3000            446677 ns/op
+    N=10000 go test -bench=.
+        BenchmarkSortSort-8          500           3644480 ns/op
+        BenchmarkSortSlice-8         300           4962263 ns/op
+    N=100000 go test -bench=.
+        BenchmarkSortSort-8           30          43573572 ns/op
+        BenchmarkSortSlice-8          20          60861706 ns/op
+
+.caption Benchmark ran on my MacBook Pro (8 cores), simply indicative.
+
+* Benchmark
+
+.image images/bench.png _ 800
+
+* Benchmark (log/log)
+
+.image images/bench_log.png _ 800
+
+* Plugins
+
+Go now supports a “plugin” build mode for generating plugins written in Go, and a new plugin package for loading such plugins at run time.
+
+Plugin support is currently only available on Linux.
+
+* Plugin Example
+
+Define a plugin:
+
+.code stdlib/plugins/plugin.go
+
+Then to build plugin.so
+
+ $ go build -buildmode=plugin plugin.go
+
+* Plugin Example - Using Plugin
+.code stdlib/plugins/main.go  /START OMIT/,/END OMIT/
+
+ $ go run main.go
+ main started...
+ Plugin loading
+ Hello, number 7
+
+* HTTP shutdown
+
+Added `Shutdown` method to `http.Server`.
+
+Example:
+
+Call `Shutdown` when a signal is received:
+
+.code stdlib/shutdown.go /subscribe/,/}\(\)/
+
+* HTTP shutdown
+
+Check why the server stopped.
+
+.code stdlib/shutdown.go /HandleFunc/,/gracefully/
+
+
+* HTTP/2
+
+`http.Response` now satisfies the `http.Pusher` interface.
+
+    type Pusher interface {
+        Push(target string, opts *PushOptions) error
+    }
+
+A simple example:
+
+.code stdlib/http2/http2.go /func rootHandler/,/^}/
+
+* HTTP/2
+
+.play stdlib/http2/http2.go /func main/,/^}/
+
+HTTP: [[http://localhost:8080]]
+HTTP/2: [[https://localhost:8081]]
+
+* HTTP/2
+
+HTTP
+
+.image images/http.png _ 800
+
+HTTP/2
+
+.image images/http2.png _ 800
+
+* More context support
+
+Since Go 1.7:
+
+- net
+- net/http
+- os/exec
+
+Since Go 1.8:
+
+- http.Server.Shutdown
+- database/sql
+- net.Resolver
+
+* os.Executable
+
+`os.Executable` returns an absolute path to the currently running program.
+
+.play stdlib/os_executable.go /START OMIT/,/END OMIT/
+
+Executable returns the path name for the executable that started the current process. There is no guarantee that the path is still pointing to the correct executable.
+
+If a symlink was used to start the process, depending on the operating system, the result might be the symlink or the path it pointed to. If a stable result is needed, path/filepath.EvalSymlinks might help.
+
+.link http://beta.golang.org/pkg/os/#Executable os.Executable (godoc.org)
+
+* A couple more changes too
+
+.image images/more.png _ 1000
+.caption [[https://beta.golang.org/doc/go1.8][Go 1.8 release notes]]
+
+* Conclusion
+
+.image images/party-gopher.png
+
+Upgrade to Go 1.8, now! 
+
+It's literally the best version of Go, _ever_.
+
