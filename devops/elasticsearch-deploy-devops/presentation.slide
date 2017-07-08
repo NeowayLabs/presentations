@@ -1,0 +1,148 @@
+Deploy High Availability Elastic Search at Azure
+5 Meetup DevOps Day Floripa
+08 Jul 2017
+Tags: azure, elastic, elasticsearch, deploy, coreos
+
+Luciano Faustino & Paulo Pizarro
+BlackOps & Core Team Leader at Neoway
+luciano.faustino@neoway.com.br
+paulo.pizarro@neoway.com.br
+https://github.com/NeowayLabs
+@NeowayLabs
+
+* Elasticsearch @ Neoway
+
+* Search App - Resume
+
+.image images/search-resume.png
+
+* Search App - Maps Neoway
+
+.image images/maps.png
+
+* Dados - Índices no Elasticsearch
+
+- *Empresas* *Brasil*: 35 Milhões
+- *Pessoa* *Física*: 204 Milhões
+- *Processos* *Judiciais*: 223 Milhões
+- *Empresas* *USA*: 50 Milhões
+- *Imóveis* *Rurais*: 8 Milhões
+- *Empresas* *México*: 5 Milhões
+- *Obras* *Varejo*:  2 Milhões
+- *Obras* *Imobiliário* *e* *Industria*: 34 Mil
+- *Obras* *Infraestrutura*:  13 Mil
+
+* Exemplo Dados de Empresas
+
+- +1000 campos de empresas pesquisáveis 
+
+.code neoway.json
+
+* Elasticsearch cluster
+
+.image images/elastic-cluster.png
+
+* Our Deploy @ Azure
+
+* VM Sizes
+
+- Master Node: 3  x *Standard_DS2_v2*  --  `7G` `Mem,` `2` `core`
+- Client Node: 2  x *Standard_DS13_v2* -- `56G` `Mem,` `8` `core`
+- Data Node:   20 x *Standard_L8s*     -- `64G` `Mem,` `8` `core,` `1.388TB` `SSD`
+
+* Infrastructure as Code
+
+- *KLB*: [[https://github.com/NeowayLabs/klb][github.com/NeowayLabs/klb ]]
+- *Terraform*: [[https://www.terraform.io/][www.terraform.io]]
+
+.code klb-example.sh
+
+* OS Linux - CoreOS
+
+.image images/coreos.png
+
+- Distribuição Linux minimalista
+- Docker e Rkt
+- Kernel e libs atualizadas
+- Filesystem read only
+- Atualização automática
+
+* Deploy Elasticsearch
+
+- CoreOS: *cloud-init*
+
+.code cloud-config-master.yml
+
+* High Availability @ Elasticsearch
+
+* Elasticsearch - Primary & Replica Shards
+
+.image images/elastic-shards.png
+
+* Elasticsearch - Replica 2
+
+.image images/elastic-shards2.png
+
+* High Availability @ Azure
+
+* Azure Availability Set
+
+- Fault Domain - max 3
+
+.image images/fault-domain-isolation.png
+
+* Azure Availability Set
+
+- Update Domain - max 20
+
+.image images/azure-update-domain.jpg
+
+* Fault & Update Domain
+
+#.image images/ud-fd-configuration.png
+.image images/azure-availability-pattern-single-region.jpg
+
+* High Availability - Elasticsearch + Azure
+
+.image images/shards-vm-availability-set.jpg
+
+* Elasticsearch - Shard Allocation Awareness
+
+*Data* *Node* - *config*
+
+.code node-data-config.yml
+
+* Elasticsearch - Shard Allocation Awareness
+
+*Master* *Node* - *config*
+
+.code node-master-config.yml
+
+* Elasticsearch - Shard Allocation Awareness
+
+*Client* *Node* - *config*
+
+.code node-client-config.yml
+
+* Monitoring
+
+* Prometheus
+
+.link https://prometheus.io
+
+.image images/prometheus.png
+
+- Elasticsearch Exporter - [[https://github.com/justwatchcom/elasticsearch_exporter][github.com/justwatchcom/elasticsearch_exporter]]
+
+* Grafana
+
+.link https://grafana.net
+
+.image images/grafana.png
+
+* Links
+
+- https://docs.microsoft.com/en-us/azure/architecture/elasticsearch/
+- https://docs.microsoft.com/en-us/azure/architecture/elasticsearch/resilience-and-recovery
+- https://www.elastic.co/guide/en/elasticsearch/reference/current/allocation-awareness.html#allocation-awareness
+

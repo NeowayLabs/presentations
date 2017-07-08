@@ -1,0 +1,50 @@
+coreos:
+  units:
+    - name: elasticsearch.service
+      command: start
+      content: |
+        [Unit]
+        Description=Elastic Search
+        [Service]
+        EnvironmentFile=/etc/profile.d/elasticsearch
+        User=core
+        LimitFSIZE=infinity
+        LimitCPU=infinity
+        LimitMEMLOCK=infinity
+        LimitAS=infinity
+        LimitNOFILE=64000
+        LimitNPROC=32000
+        ExecStartPre=/usr/bin/docker pull ${ELASTIC_SEARCH_IMAGE}
+        ExecStart=/usr/bin/docker run --name %p \
+            --net=host \
+            --log-driver=syslog \
+            --log-opt syslog-address=udp://log.neoway.local:1514 \
+            --log-opt tag="%p" \
+            --security-opt seccomp=unconfined \
+            --cap-add=IPC_LOCK --ulimit memlock=-1:-1 --ulimit nofile=65536:65536 \
+            -e ES_HEAP_SIZE=6g \
+            -v /etc/elasticsearch/logging.yml:/usr/share/elasticsearch/config/logging.yml \
+            -v /etc/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml \
+            ${ELASTIC_SEARCH_IMAGE}
+        ExecStop=/usr/bin/docker stop %p
+    - name: elasticsearch-exporter.service
+      command: start
+      content: |
+        [Unit]
+        Description=Elasticsearch stats exporter for Prometheus
+        Documentation=https://github.com/ewr/elasticsearch_exporter
+        After=systemd-networkd.service
+        Requires=systemd-networkd.service
+        [Service]
+        # Resource limits
+        CPUShares=512
+        MemoryLimit=1G
+        Restart=always
+        RestartSec=10
+        KillMode=mixed
+        Environment=ES_EXPORTER_URL=https://s3-us-west-2.amazonaws.com/neoway-core/elasticsearch-exporter/elasticsearch_exporter
+        ExecStartPre=/usr/bin/wget -N -P /opt/bin ${ES_EXPORTER_URL}
+        ExecStartPre=/usr/bin/chmod +x /opt/bin/elasticsearch_exporter
+        ExecStart=/opt/bin/elasticsearch_exporter -es.uri http://127.0.0.1:9200
+        [Install]
+        WantedBy=multi-user.target

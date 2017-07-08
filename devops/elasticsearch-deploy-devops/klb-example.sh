@@ -1,0 +1,17 @@
+    for i in $nodes_count {
+		cfg <= asgard_lib_map_new()
+		cfg <= asgard_lib_map_add($cfg, "name", $data_vm_name+$i)
+		cfg <= asgard_lib_map_add($cfg, "resgroup", $elastic_resource_group)
+		cfg <= asgard_lib_map_add($cfg, "location", $location)
+		cfg <= asgard_lib_map_add($cfg, "image_urn", $coreos_image)
+		cfg <= asgard_lib_map_add($cfg, "size", $es_data_vm_size)
+		cfg <= asgard_lib_map_add($cfg, "availset", $data_availset_name)
+		cfg <= asgard_lib_map_add($cfg, "availset-update-domain", $es_data_update_domain)
+		cfg <= asgard_lib_map_add($cfg, "availset-fault-domain", $es_data_fault_domain)
+		cfg <= asgard_lib_map_add($cfg, "vnet", $vnet_name)
+		cfg <= asgard_lib_map_add($cfg, "subnet", $subnet_elastic_name)
+		cfg <= asgard_lib_map_add($cfg, "username", "core")
+		cfg <= asgard_lib_map_add($cfg, "accesskey", $accesskey)
+		cfg <= asgard_lib_map_add($cfg, "customdata", $es_data_cloudconfig)
+		asgard_lib_vm_create($cfg)
+	}

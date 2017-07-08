@@ -1,0 +1,6 @@
+node:
+  name: ${HOSTNAME}
+  data: false
+  master: false
+http:
+  enabled: true
