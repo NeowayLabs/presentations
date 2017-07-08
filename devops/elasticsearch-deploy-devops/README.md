@@ -1,6 +1,7 @@
 # 5 Meetup DevOps Day Floripa
 
-## Presentation
+## Deploy High Availability Elastic Search at Azure
+
 You can use one of options to visualize the slides:
 - Online
 - Docker

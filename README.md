@@ -43,6 +43,12 @@ Neoway Talk Presentations
 
 > Click [here](https://github.com/NeowayLabs/presentations/raw/master/devops/networking-tools-for-devops/pdf/Network%20Tools%20for%20DevOps.pdf) to download the PDF
 
+### Deploy High Availability Elastic Search at Azure
+
+> **Author:** Paulo Pizarro
+
+> Source [here](https://github.com/NeowayLabs/presentations/tree/master/devops/elasticsearch-deploy-devops)
+
 ### Docker Compose
 
 > **Author:** Luciano Faustino & Tiago Katcipis
@@ -80,4 +86,5 @@ Neoway Talk Presentations
 > **Author:** Luciano Faustino & Paulo Pizarro
 
 > Source [here](https://github.com/NeowayLabs/presentations/tree/master/elasticsearch/1st-meetup_elastic_florianopolis-neoway_use_case)
+
 
