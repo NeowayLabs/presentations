@@ -1,0 +1,12 @@
+FAULT=$(sed -ne '/<FaultDomains/{s#.*randomId="\([0-9]*\)".*#\1#p;q;}' /var/lib/waagent/SharedConfig.xml)
+UPDATE=$(sed -ne '/<FaultDomains/{s#.*updateId="\([0-9]*\)".*#\1#p;q;}' /var/lib/waagent/SharedConfig.xml)
+
+
+node:
+  name: ${HOSTNAME}
+  data: true
+  master: false
+  fault: ${FAULT}
+  update: ${UPDATE}
+http:
+  enabled: false

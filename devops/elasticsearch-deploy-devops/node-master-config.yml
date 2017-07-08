@@ -1,0 +1,20 @@
+cluster:
+  name: "avai"
+  routing:
+    allocation:
+      awareness:
+        force:
+          update:
+            values: 0,1,2,3,4,5,6,7,8,9
+          fault:
+            values: 0,1
+        attributes: update,fault
+node:
+  name: ${HOSTNAME}
+  data: false
+  master: true
+discovery.zen.minimum_master_nodes: 2
+discovery.zen.ping.multicast.enabled: false
+discovery.zen.ping.unicast.hosts: [\"es-master-0:9300\",\"es-master-1:9300\",\"es-master-2:9300\"]
+http:
+  enabled: false

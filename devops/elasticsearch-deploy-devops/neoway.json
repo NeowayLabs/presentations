@@ -1,0 +1,810 @@
+
+{
+	"cnpj" : "05337875000105",
+	"razaoSocial" : "NEOWAY TECNOLOGIA INTEGRADA ASSESSORIA E NEGOCIOS SA",
+	"cnaePrincipal" : {
+		"codigo" : "6204000",
+		"descricao" : "Consultoria em tecnologia da informacao",
+		"setor" : "SERVIÇOS",
+		"ramoAtividade" : "INDÚSTRIA DIGITAL"
+	},
+	"endereco" : {
+		"municipio" : "FLORIANOPOLIS",
+		"uf" : "SC",
+		"numero" : "131",
+		"precisao" : "SEM INFORMACAO",
+		"enderecoResidencial" : false,
+		"bairro" : "ITACORUBI",
+		"cep" : "88034132",
+		"logradouro" : "RUA PATRICIO FARIAS",
+		"complemento" : "SL 201",
+		"maisRecenteNoEndereco" : false,
+		"latlng" : {
+			"shape" : {
+				"type" : "Point",
+				"coordinates" : [
+					-48.510199,
+					-27.5747213
+				]
+			},
+			"point" : [
+				-48.510199,
+				-27.5747213
+			]
+		}
+	},
+	"filiais" : [
+		{
+			"cnpj" : "05337875000288",
+			"razaoSocial" : "NEOWAY TECNOLOGIA INTEGRADA ASSESSORIA E NEGOCIOS SA",
+			"municipio" : "PALHOCA",
+			"situacao" : "ATIVA",
+			"uf" : "SC",
+			"dataAbertura" : ISODate("2011-02-02T02:00:00Z")
+		},
+		{
+			"uf" : "SC",
+			"dataAbertura" : ISODate("2016-04-04T03:00:00Z"),
+			"cnpj" : "05337875000440",
+			"razaoSocial" : "NEOWAY TECNOLOGIA INTEGRADA ASSESSORIA E NEGOCIOS SA",
+			"municipio" : "PALHOCA",
+			"situacao" : "ATIVA"
+		},
+		{
+			"cnpj" : "05337875000369",
+			"razaoSocial" : "NEOWAY TECNOLOGIA INTEGRADA ASSESSORIA E NEGOCIOS SA",
+			"municipio" : "SAO PAULO",
+			"situacao" : "ATIVA",
+			"uf" : "SP",
+			"dataAbertura" : ISODate("2014-08-05T03:00:00Z")
+		}
+	],
+	"info" : {
+		"possuiSintegraInscricaoAtiva" : "true",
+		"possuiAntt" : false,
+		"possuiCndPgfn" : true,
+		"possuiCndSefaz" : false,
+		"postoCombustivel" : false,
+		"idadeEmpresa" : 13,
+		"possuiPlanoSaude" : false,
+		"chanceContatoTelefone" : true,
+		"possuiAfastamento" : true,
+		"possuiImportacao" : true,
+		"possuiExportacao" : false,
+		"possuiCFC" : false,
+		"possuiEmailRF" : true,
+		"possuiCeis" : false,
+		"possuiCepim" : false,
+		"possuiFuncionarioFalecido" : false,
+		"qsaDivergente" : false,
+		"numeroDDD" : "48",
+		"possuiCndInss" : false,
+		"possuiSocioPep" : false,
+		"percentualAfastamento" : 2,
+		"possuiEmail" : true,
+		"possuiFone" : true,
+		"possuiFoneRF" : true,
+		"numeroTelefoneRF" : "(48)32478593",
+		"emailRF" : "MAINHARDT@MAINHARDT.COM.BR",
+		"email" : [
+			"cida@contasa.com.br"
+		],
+		"possuiCndTst" : true,
+		"possuiIndicadoresFinanceiros" : false,
+		"possuiCnes" : false,
+		"possuiImovel" : false,
+		"possuiDominio" : false,
+		"possuiCndFgts" : true
+	},
+	"saudeTributaria" : {
+		"recencia" : [
+			"ATE 6 MESES"
+		],
+		"situacaoPGFN" : "REGULAR",
+		"situacaoFGTS" : "REGULAR",
+		"situacaoINSS" : "SEM INFORMACAO",
+		"situacaoTST" : "CERTIDAO NEGATIVA DE DEBITOS TRABALHISTAS",
+		"possuiSEFAZ" : false,
+		"cor" : [
+			"VERDE"
+		]
+	},
+	"beneficiarios" : [
+		{
+			"participacao" : 0,
+			"qsa" : "[\"46504060991 - JAIME LEONEL DE PAULA JUNIOR como PRESIDENTE\"]",
+			"falecido" : false,
+			"grau" : 1,
+			"nome" : "JAIME LEONEL DE PAULA JUNIOR",
+			"documento" : "46504060991"
+		},
+		{
+			"falecido" : false,
+			"grau" : 1,
+			"nome" : "RODRIGO MIRANDA BARCIA",
+			"documento" : "00791777944",
+			"participacao" : 0,
+			"qsa" : "[\"00791777944 - RODRIGO MIRANDA BARCIA como DIRETOR\"]"
+		}
+	],
+	"empresasColigadas" : [
+		{
+			"cnpj" : "10952160000194",
+			"razaoSocial" : "CAMPO BELO ENERGETICA SA",
+			"municipio" : "CURITIBA",
+			"uf" : "PR",
+			"cnae" : "Geracao de energia eletrica",
+			"dataAbertura" : ISODate("2009-07-01T03:00:00Z")
+		},
+		{
+			"cnpj" : "10603130000172",
+			"razaoSocial" : "CONSORCIO BIOMETRIA",
+			"municipio" : "FLORIANOPOLIS",
+			"uf" : "SC",
+			"cnae" : "Desenvolvimento e licenciamento de programas de computador customizaveis",
+			"dataAbertura" : ISODate("2009-01-28T02:00:00Z")
+		},
+		{
+			"uf" : "SC",
+			"cnae" : "Consultoria em tecnologia da informacao",
+			"dataAbertura" : ISODate("2012-10-11T03:00:00Z"),
+			"cnpj" : "16997247000164",
+			"razaoSocial" : "CONSORCIO NTC NEOWAY",
+			"municipio" : "FLORIANOPOLIS"
+		},
+		{
+			"razaoSocial" : "CONSORCIO SEM DESIGNACAO CONFORME INCISO I ART 279 LEI 6 404 76",
+			"municipio" : "FLORIANOPOLIS",
+			"uf" : "SC",
+			"cnae" : "Desenvolvimento de programas de computador sob encomenda",
+			"dataAbertura" : ISODate("2014-04-11T03:00:00Z"),
+			"cnpj" : "20069508000153"
+		},
+		{
+			"dataAbertura" : ISODate("2011-11-25T02:00:00Z"),
+			"cnpj" : "15336392000131",
+			"razaoSocial" : "CONSORCIO SUPORTE ERP CELESC",
+			"municipio" : "SAO PAULO",
+			"uf" : "SP",
+			"cnae" : "Atividades de coordenacao e controle da operacao da geracao e transmissao de energia eletrica"
+		},
+		{
+			"dataAbertura" : ISODate("2006-12-15T02:00:00Z"),
+			"cnpj" : "08520198000146",
+			"razaoSocial" : "CORPTECH LTDA ME",
+			"municipio" : "FLORIANOPOLIS",
+			"uf" : "SC",
+			"cnae" : "Suporte tecnico, manutencao e outros servicos em tecnologia da informacao"
+		},
+		{
+			"dataAbertura" : ISODate("2008-07-16T03:00:00Z"),
+			"cnpj" : "10176936000121",
+			"razaoSocial" : "DE PAULA EMPREENDIMENTOS E PARTICIPACOES SA",
+			"municipio" : "FLORIANOPOLIS",
+			"uf" : "SC",
+			"cnae" : "Holdings de instituicoes naofinanceiras"
+		},
+		{
+			"municipio" : "FLORIANOPOLIS",
+			"uf" : "SC",
+			"cnae" : "Geracao de energia eletrica",
+			"dataAbertura" : ISODate("2007-10-03T03:00:00Z"),
+			"cnpj" : "09107378000163",
+			"razaoSocial" : "EOLICA BOA VISTA ENERGIA SA"
+		},
+		{
+			"cnae" : "Atividades de consultoria em gestao empresarial, exceto consultoria tecnica especifica",
+			"dataAbertura" : ISODate("2013-09-11T03:00:00Z"),
+			"cnpj" : "18857220000100",
+			"razaoSocial" : "FRZNEOWAY CONSULTORIA EM GESTAO EMPRESARIAL LTDA",
+			"municipio" : "SAO PAULO",
+			"uf" : "SP"
+		},
+		{
+			"cnpj" : "03900619000140",
+			"razaoSocial" : "LEVERAGE BUSINESS TECHNOLOGY LTDA ME",
+			"municipio" : "SAO JOSE",
+			"uf" : "SC",
+			"cnae" : "Comercio varejista especializado de equipamentos e suprimentos de informatica",
+			"dataAbertura" : ISODate("2000-06-29T03:00:00Z")
+		},
+		{
+			"cnpj" : "15812162000100",
+			"razaoSocial" : "PRIMEAVIATION 2 PARTICIPACOES SA",
+			"municipio" : "BARUERI",
+			"uf" : "SP",
+			"cnae" : "Gestao e administracao da propriedade imobiliaria",
+			"dataAbertura" : ISODate("2012-05-23T03:00:00Z")
+		},
+		{
+			"cnae" : "Consultoria em tecnologia da informacao",
+			"dataAbertura" : ISODate("2011-09-22T03:00:00Z"),
+			"cnpj" : "14364853000117",
+			"razaoSocial" : "SALESWAY TECNOLOGIA E NEGOCIOS EPP LTDA",
+			"municipio" : "FLORIANOPOLIS",
+			"uf" : "SC"
+		},
+		{
+			"cnpj" : "10488040000188",
+			"razaoSocial" : "SAO SEBASTIAO EMPREENDIMENTOS SA",
+			"municipio" : "FLORIANOPOLIS",
+			"uf" : "SC",
+			"cnae" : "Geracao de energia eletrica",
+			"dataAbertura" : ISODate("2008-11-19T02:00:00Z")
+		},
+		{
+			"razaoSocial" : "SITESHOP LTDA ME",
+			"municipio" : "SAO JOSE",
+			"uf" : "SC",
+			"cnae" : "Consultoria em tecnologia da informacao",
+			"dataAbertura" : ISODate("1999-04-12T03:00:00Z"),
+			"cnpj" : "03089538000102"
+		}
+	],
+	"licencasAmbientais" : [
+		{
+			"dataAtualizacao" : ISODate("2016-01-30T02:00:00Z"),
+			"descricaoTipologia" : "CERTIDAO QUE NAO POSSUI ATIVIDADE",
+			"municipio" : "FLORIANOPOLIS",
+			"uf" : "SC",
+			"id" : "7b1b2abf24818b74fe8cf5df9617dc9e",
+			"numProcesso" : "CRT/36841/CRF",
+			"tipo" : "ATIVIDADE NAO CONSTANTE",
+			"situacao" : "FORMALIZADO ENTREGA DA DOCUMENTACAO",
+			"numeroTipologia" : "0"
+		},
+		{
+			"numProcesso" : "CRT/36841/CRF",
+			"situacao" : "FORMALIZADO ENTREGA DA DOCUMENTAA A O",
+			"descricaoTipologia" : "CERTIDA O QUE NA O POSSUI ATIVIDADE",
+			"municipio" : "FLORIANOPOLIS",
+			"uf" : "SC",
+			"id" : "63cea501a1c8fef4ab5ef69c1c438f6c",
+			"tipo" : "ATIVIDADE NA O CONSTANTE",
+			"dataAtualizacao" : ISODate("2015-12-10T02:00:00Z"),
+			"numeroTipologia" : "0"
+		},
+		{
+			"tipo" : "ATIVIDADE NA O CONSTANTE",
+			"descricaoTipologia" : "CERTIDA O QUE NA O POSSUI ATIVIDADE",
+			"situacao" : "FORMALIZADO ENTREGA DA DOCUMENTAA A O",
+			"dataAtualizacao" : ISODate("2016-02-06T02:00:00Z"),
+			"numeroTipologia" : "0",
+			"municipio" : "FLORIANOPOLIS",
+			"uf" : "SC",
+			"id" : "ad0b8c650a1788d275e40d7918bd4c8e",
+			"numProcesso" : "CRT/36841/CRF"
+		}
+	],
+	"ibge" : {
+		"faixaRendaPopulacao" : 2934.73
+	},
+	"telefones" : [
+		{
+			"nomeTitular" : "DE PAULA TECNOLOGIA E NEGOCIOS LTDA",
+			"numero" : "4833338236"
+		},
+		{
+			"numero" : "4832478593",
+			"nomeTitular" : "NEOWAY TECNOLOGIA INTEGRADA ASSESSORIA E NEGOCIOS SA"
+		},
+		{
+			"numero" : "4832220857",
+			"nomeTitular" : "NEO WAY BUSINESS SOLUTIONS"
+		},
+		{
+			"numero" : "4833332030",
+			"nomeTitular" : "NEOWAY TECNOLOGIA INTEGRADA ASS E NEGOCIOS"
+		}
+	],
+	"situacao" : {
+		"data" : ISODate("2002-10-15T03:00:00Z"),
+		"descricao" : "ATIVA"
+	},
+	"simplesNacional" : {
+		"optanteSimples" : false,
+		"optanteSimei" : false,
+		"simplesIrregular" : true
+	},
+	"cnds" : [
+		{
+			"orgaoEmissor" : "FGTS",
+			"numeroCertificacao" : "2016071303514488693032",
+			"descricaoSituacao" : "REGULAR",
+			"dataValidade" : ISODate("2016-08-11T03:00:00Z"),
+			"dataEmissao" : ISODate("2016-07-13T03:00:00Z")
+		},
+		{
+			"orgaoEmissor" : "PGFN",
+			"numeroCertificacao" : "FC5E 9101 61AB 8C91",
+			"descricaoSituacao" : "REGULAR",
+			"dataValidade" : ISODate("2016-12-26T02:00:00Z"),
+			"dataEmissao" : ISODate("2016-06-29T03:00:00Z")
+		},
+		{
+			"numeroCertificacao" : "71794720/2016",
+			"descricaoSituacao" : "CERTIDAO NEGATIVA DE DEBITOS TRABALHISTAS",
+			"dataValidade" : ISODate("2017-01-22T02:00:00Z"),
+			"dataEmissao" : ISODate("2016-07-27T03:00:00Z"),
+			"orgaoEmissor" : "TST"
+		}
+	],
+	"inpiProgramas" : [
+		{
+			"dataDeposito" : ISODate("2008-04-07T03:00:00Z"),
+			"tituloPrograma" : "GI2C",
+			"numeroProcesso" : "08786-6"
+		},
+		{
+			"tituloPrograma" : "ITW",
+			"numeroProcesso" : "09241-4",
+			"dataDeposito" : ISODate("2008-10-17T03:00:00Z")
+		},
+		{
+			"tituloPrograma" : "NKB - NEO KNOWLEDGE BASE",
+			"numeroProcesso" : "10229-3",
+			"dataDeposito" : ISODate("2009-12-04T02:00:00Z")
+		},
+		{
+			"tituloPrograma" : "NBM - NEO BUSINESS MAPS",
+			"numeroProcesso" : "10230-2",
+			"dataDeposito" : ISODate("2009-12-04T02:00:00Z")
+		},
+		{
+			"tituloPrograma" : "NEOTIMELINE",
+			"numeroProcesso" : "10794-6",
+			"dataDeposito" : ISODate("2010-07-05T03:00:00Z")
+		},
+		{
+			"tituloPrograma" : "NEOGRAPH",
+			"numeroProcesso" : "10795-1",
+			"dataDeposito" : ISODate("2010-07-05T03:00:00Z")
+		},
+		{
+			"tituloPrograma" : "NEO SIM-SISTEMA DE INTELIGENCIA DEMERCADO",
+			"numeroProcesso" : "11206-3",
+			"dataDeposito" : ISODate("2010-11-05T02:00:00Z")
+		},
+		{
+			"numeroProcesso" : "11205-1",
+			"dataDeposito" : ISODate("2010-11-05T02:00:00Z"),
+			"tituloPrograma" : "NEO MAPS"
+		},
+		{
+			"dataDeposito" : ISODate("2011-09-26T03:00:00Z"),
+			"tituloPrograma" : "NEO GED - GERENCIADOR ELETRONICO DE DOCUMENTOS",
+			"numeroProcesso" : "12477-4"
+		},
+		{
+			"tituloPrograma" : "NEO DIAGRAM",
+			"numeroProcesso" : "11204-6",
+			"dataDeposito" : ISODate("2010-11-05T02:00:00Z")
+		},
+		{
+			"numeroProcesso" : "12476-2",
+			"dataDeposito" : ISODate("2011-09-26T03:00:00Z"),
+			"tituloPrograma" : "NEO SIM - SISTEMA DE INTELIGENCIA DE MULTIMERCADO"
+		},
+		{
+			"tituloPrograma" : "NEO SQF - SISTEMA DE QUALIFICACAO DE FORNECEDORES",
+			"numeroProcesso" : "12473-3",
+			"dataDeposito" : ISODate("2011-09-26T03:00:00Z")
+		},
+		{
+			"tituloPrograma" : "NEO CORE",
+			"numeroProcesso" : "12474-5",
+			"dataDeposito" : ISODate("2011-09-26T03:00:00Z")
+		},
+		{
+			"dataDeposito" : ISODate("2011-09-26T03:00:00Z"),
+			"tituloPrograma" : "NEO DECAPTCHURE",
+			"numeroProcesso" : "12475-0"
+		},
+		{
+			"tituloPrograma" : "NEO INDEX",
+			"numeroProcesso" : "12896-3",
+			"dataDeposito" : ISODate("2012-03-06T03:00:00Z")
+		},
+		{
+			"tituloPrograma" : "NEO DECAPTCHA",
+			"numeroProcesso" : "12897-5",
+			"dataDeposito" : ISODate("2012-03-06T03:00:00Z")
+		},
+		{
+			"tituloPrograma" : "NEO AUTOTYPE",
+			"numeroProcesso" : "12898-0",
+			"dataDeposito" : ISODate("2012-03-06T03:00:00Z")
+		},
+		{
+			"tituloPrograma" : "NEO SISPROT",
+			"numeroProcesso" : "12895-1",
+			"dataDeposito" : ISODate("2012-03-06T03:00:00Z")
+		},
+		{
+			"numeroProcesso" : "14201-1",
+			"dataDeposito" : ISODate("2012-10-24T02:00:00Z"),
+			"tituloPrograma" : "NEOWAY LIVE CRM"
+		}
+	],
+	"fantasia" : "NEOWAY BUSINESS SOLUTIONS",
+	"natureza" : {
+		"id" : "2054",
+		"descricao" : "SOCIEDADE ANONIMA FECHADA"
+	},
+	"totalObras" : {
+		"quantidadeArts" : 2
+	},
+	"totalVeiculos" : {
+		"grupoEntreCincoDezAnos" : 0,
+		"grupoAcimaDezAnos" : 0,
+		"ateUmAno" : 0,
+		"entreDoisCincoAnos" : 0,
+		"entreCincoDezAnos" : 0,
+		"acimaDezAnos" : 0,
+		"grupoAteUmAno" : 0,
+		"grupoEntreDoisCincoAnos" : 0
+	},
+	"inpiMarcas" : [
+		{
+			"dataDeposito" : ISODate("2008-04-08T03:00:00Z"),
+			"marca" : "NEOWAY",
+			"numeroProcesso" : "900844019",
+			"situacao" : "REGISTRO",
+			"classe" : "NCL(9) 09"
+		},
+		{
+			"marca" : "NEOWAY",
+			"numeroProcesso" : "900844167",
+			"situacao" : "REGISTRO",
+			"classe" : "NCL(9) 42",
+			"dataDeposito" : ISODate("2008-04-08T03:00:00Z")
+		},
+		{
+			"numeroProcesso" : "901134309",
+			"situacao" : "REGISTRO",
+			"classe" : "NCL(9) 35",
+			"dataDeposito" : ISODate("2008-08-22T03:00:00Z"),
+			"marca" : "AUTENTICADOS"
+		},
+		{
+			"marca" : "DBIZ DATA SOLUTION",
+			"numeroProcesso" : "901134449",
+			"situacao" : "PED SOBREST",
+			"classe" : "NCL(9) 35",
+			"dataDeposito" : ISODate("2008-08-22T03:00:00Z")
+		},
+		{
+			"marca" : "ITW",
+			"numeroProcesso" : "901227145",
+			"situacao" : "ARQUIVADO",
+			"classe" : "NCL(9) 09",
+			"dataDeposito" : ISODate("2008-10-06T03:00:00Z")
+		}
+	],
+	"afastamentos" : [
+		{
+			"cpf" : "72590068620",
+			"nomeFuncionario" : "VALERIA REGINA DOS REIS",
+			"tipoFuncionario" : "FUNCIONARIO",
+			"ano" : 2014,
+			"quantidade" : 1
+		},
+		{
+			"tipoFuncionario" : "FUNCIONARIO",
+			"ano" : 2013,
+			"quantidade" : 1,
+			"cpf" : "30462785866",
+			"nomeFuncionario" : "TIAGO DA SILVA VALERIO"
+		},
+		{
+			"quantidade" : 1,
+			"cpf" : "72590068620",
+			"nomeFuncionario" : "VALERIA REGINA DOS REIS",
+			"tipoFuncionario" : "FUNCIONARIO",
+			"ano" : 2013
+		},
+		{
+			"cpf" : "74351567953",
+			"nomeFuncionario" : "PATRICIA DE CORDOVA QUADROS",
+			"tipoFuncionario" : "EX FUNCIONARIO",
+			"ano" : 2012,
+			"quantidade" : 1
+		},
+		{
+			"cpf" : "02855183308",
+			"nomeFuncionario" : "ELIDIOMAR DE SOUSA SANTOS",
+			"tipoFuncionario" : "EX FUNCIONARIO",
+			"ano" : 2010,
+			"quantidade" : 1
+		},
+		{
+			"ano" : 2010,
+			"quantidade" : 1,
+			"cpf" : "06885334936",
+			"nomeFuncionario" : "JULIANA TANIA FERNANDES",
+			"tipoFuncionario" : "EX FUNCIONARIO"
+		},
+		{
+			"nomeFuncionario" : "LEONARDO ARCENDINO DA SILVA",
+			"tipoFuncionario" : "EX FUNCIONARIO",
+			"ano" : 2010,
+			"quantidade" : 1,
+			"cpf" : "04771294984"
+		},
+		{
+			"tipoFuncionario" : "EX FUNCIONARIO",
+			"ano" : 2010,
+			"quantidade" : 1,
+			"cpf" : "03402971828",
+			"nomeFuncionario" : "MARIA DE FATIMA RIBEIRO BASSETTI"
+		},
+		{
+			"quantidade" : 1,
+			"cpf" : "03894902965",
+			"nomeFuncionario" : "MITCH MITCHELL PINTO BUSTOS",
+			"tipoFuncionario" : "EX FUNCIONARIO",
+			"ano" : 2010
+		},
+		{
+			"cpf" : "74351567953",
+			"nomeFuncionario" : "PATRICIA DE CORDOVA QUADROS",
+			"tipoFuncionario" : "EX FUNCIONARIO",
+			"ano" : 2010,
+			"quantidade" : 1
+		}
+	],
+	"distribuicaoFaixaEtaria" : {
+		"ate18Anos" : 0,
+		"de29a33Anos" : 22.88,
+		"de39a43Anos" : 9.15,
+		"de54a58Anos" : 0.65,
+		"acima58Anos" : 0,
+		"desconhecida" : 0,
+		"de19a23Anos" : 14.38,
+		"de24a28Anos" : 33.99,
+		"de34a38Anos" : 11.11,
+		"de44a48Anos" : 7.84,
+		"de49a53Anos" : 0
+	},
+	"cnaes" : [
+		{
+			"codigo" : "6204000",
+			"descricao" : "Consultoria em tecnologia da informacao"
+		},
+		{
+			"codigo" : "6202300",
+			"descricao" : "Desenvolvimento e licenciamento de programas de computador customizaveis"
+		},
+		{
+			"codigo" : "6201501",
+			"descricao" : "Desenvolvimento de programas de computador sob encomenda"
+		},
+		{
+			"codigo" : "7320300",
+			"descricao" : "Pesquisas de mercado e de opiniao publica"
+		},
+		{
+			"descricao" : "Guardamoveis",
+			"codigo" : "5211702"
+		},
+		{
+			"codigo" : "6311900",
+			"descricao" : "Tratamento de dados, provedores de servicos de aplicacao e servicos de hospedagem na internet"
+		},
+		{
+			"codigo" : "6463800",
+			"descricao" : "Outras sociedades de participacao, exceto holdings"
+		},
+		{
+			"descricao" : "Comercio atacadista especializado em outros produtos intermediarios nao especificados anteriormente",
+			"codigo" : "4689399"
+		},
+		{
+			"codigo" : "4751200",
+			"descricao" : "Comercio varejista especializado de equipamentos e suprimentos de informatica"
+		},
+		{
+			"codigo" : "4614100",
+			"descricao" : "Representantes comerciais e agentes do comercio de maquinas, equipamentos, embarcacoes e aeronaves"
+		},
+		{
+			"codigo" : "6810201",
+			"descricao" : "Compra e venda de imoveis proprios"
+		},
+		{
+			"codigo" : "6810202",
+			"descricao" : "Aluguel de imoveis proprios"
+		}
+	],
+	"spa" : {
+		"possuiSpa" : false,
+		"totalTancagem" : 0,
+		"totalTancagemGrupo" : 0,
+		"potencialConsumoOleoGas" : 0,
+		"potencialConsumoOleoGasGrupo" : 0
+	},
+	"distribuicaoFaixaSalarial" : {
+		"acima20SalMinimo" : 1.31,
+		"desconhecida" : 0,
+		"ate1SalMinimo" : 0,
+		"de1a3SalMinimo" : 28.1,
+		"de3a5SalMinimo" : 16.99,
+		"de5a10Salminimo" : 32.03,
+		"de10a15SalMinimo" : 17.65,
+		"de15a20SalMinimo" : 3.92
+	},
+	"pat" : [
+		{
+			"inscricao" : "0975621",
+			"servicoProprio" : "0",
+			"refeicaoTransportada" : "0",
+			"cpfResponsavel" : "56466340910",
+			"alimentacaoConvenio" : "0",
+			"nomeResponsavel" : "MARIA APARECIDA BATISTA",
+			"situacaoCadastral" : "ATIVA",
+			"beneficiadosAte5sm" : "96",
+			"beneficiadosAcima5sm" : "0",
+			"cestaAlimento" : "0",
+			"admCozinha" : "0",
+			"refeicaoConvenio" : "100",
+			"emailResponsavel" : "cida@contasa.com.br"
+		}
+	],
+	"nivelAtividade" : "ALTA",
+	"matriz" : {
+		"empresaMatriz" : true,
+		"quantidadeFilial" : 3
+	},
+	"faturamentoPresumido" : {
+		"individual" : 57041064,
+		"grupo" : 90038088,
+		"faixaIndividual" : "De R$ 30.000.000,01 a R$ 100.000.000,00",
+		"faixaGrupo" : "De R$ 30.000.000,01 a R$ 100.000.000,00"
+	},
+	"crescimentoPorAno" : [
+		{
+			"ano" : 2011,
+			"percentual" : 20.69
+		},
+		{
+			"ano" : 2012,
+			"percentual" : 111.43
+		},
+		{
+			"percentual" : 22.97,
+			"ano" : 2013
+		},
+		{
+			"ano" : 2014,
+			"percentual" : 47.25
+		},
+		{
+			"ano" : 2015,
+			"percentual" : 5.97
+		}
+	],
+	"cvm" : {
+		"cadastro" : false
+	},
+	"clienteTelefonica" : true,
+	"beneficiariosQsaUnificado" : [
+		{
+			"grau" : 1,
+			"nome" : "JAIME LEONEL DE PAULA JUNIOR",
+			"documento" : "46504060991",
+			"participacao" : 0,
+			"qsa" : "[\"46504060991 - JAIME LEONEL DE PAULA JUNIOR como DIRETOR PRESIDENTE com 0.00%\"]",
+			"falecido" : false
+		},
+		{
+			"grau" : 1,
+			"nome" : "RODRIGO MIRANDA BARCIA",
+			"documento" : "00791777944",
+			"participacao" : 0,
+			"qsa" : "[\"00791777944 - RODRIGO MIRANDA BARCIA como DIRETOR com 0.00%\"]",
+			"falecido" : false
+		}
+	],
+	"detran" : {
+		"totalVeiculosLeves" : 2,
+		"totalVeiculosGrupo" : 2,
+		"totalVeiculosPesadosGrupo" : 0,
+		"totalVeiculosLevesGrupo" : 2,
+		"totalVeiculos" : 2,
+		"totalVeiculosPesados" : 0
+	},
+	"importacao" : [
+		{
+			"ano" : 2012,
+			"valor" : "ATE US$ 1 MILHAO"
+		}
+	],
+	"empresasSimilares" : [
+		{
+			"cnpj" : "19988701000109",
+			"razaoSocial" : "EMBRATEC TECNOLOGIA HEQ LTDA",
+			"naturezaJuridica" : "2062 - SOCIEDADE EMPRESARIA LIMITADA",
+			"uf" : "RS",
+			"cnae" : "6201500 - Desenvolvimento de programas de computador sob encomenda",
+			"quantidadeFunc" : "De 101 a 500"
+		},
+		{
+			"cnpj" : "13284396000198",
+			"razaoSocial" : "VMS SOLUCOES LTDA ME",
+			"naturezaJuridica" : "2062 - SOCIEDADE EMPRESARIA LIMITADA",
+			"uf" : "PR",
+			"cnae" : "6203100 - Desenvolvimento e licenciamento de programas de computador naocustomizaveis",
+			"quantidadeFunc" : "De 6 a 10"
+		},
+		{
+			"cnpj" : "04471981000106",
+			"razaoSocial" : "WIPRO DO BRASIL TECNOLOGIA LTDA",
+			"naturezaJuridica" : "2062 - SOCIEDADE EMPRESARIA LIMITADA",
+			"uf" : "PR",
+			"cnae" : "6201500 - Desenvolvimento de programas de computador sob encomenda",
+			"quantidadeFunc" : "De 101 a 500"
+		},
+		{
+			"cnpj" : "68729649000181",
+			"razaoSocial" : "DBSERVER ASSESSORIA EM SISTEMAS DE INFORMACAO LTDA",
+			"naturezaJuridica" : "2062 - SOCIEDADE EMPRESARIA LIMITADA",
+			"uf" : "RS",
+			"cnae" : "6201500 - Desenvolvimento de programas de computador sob encomenda",
+			"quantidadeFunc" : "De 101 a 500"
+		}
+	],
+	"distribuicaoAfastamento" : {
+		"licencaMaternidade" : 0,
+		"licencaSemVencimento" : 0.63,
+		"servicoMilitar" : 0,
+		"acidenteTrabalhoTrajeto" : 0,
+		"acidenteTrabalhoTipico" : 0,
+		"doencaNaoRelativaTrabalho" : 2.5,
+		"doencaRelativaTrabalho" : 0
+	},
+	"distribuicaoGrauInstrucao" : {
+		"analfabeto" : 0,
+		"completo5" : 0,
+		"mestrado" : 0.65,
+		"doutorado" : 0,
+		"medioCompleto" : 26.8,
+		"superiorIncompleto" : 3.92,
+		"superiorCompleto" : 67.32,
+		"desconhecido" : 0,
+		"de1a5Incompl" : 0,
+		"de6a9Incompl" : 0,
+		"fundamentalCompleto" : 0,
+		"medioIncompleto" : 1.31
+	},
+	"dataAbertura" : ISODate("2002-10-15T03:00:00Z"),
+	"potencialConsumo" : {
+		"valorCapitalSocial" : 45900305.31
+	},
+	"beneficiariosJunta" : [
+		{
+			"nome" : "JAIME LEONEL DE PAULA JUNIOR",
+			"documento" : "46504060991",
+			"participacao" : 0,
+			"qsa" : "[\"46504060991 - JAIME LEONEL DE PAULA JUNIOR como DIRETOR PRESIDENTE com 0.00%\"]",
+			"falecido" : false,
+			"grau" : 1
+		},
+		{
+			"falecido" : false,
+			"grau" : 1,
+			"nome" : "RODRIGO MIRANDA BARCIA",
+			"documento" : "00791777944",
+			"participacao" : 0,
+			"qsa" : "[\"00791777944 - RODRIGO MIRANDA BARCIA como DIRETOR com 0.00%\"]"
+		}
+	],
+	"sintegra" : [
+		{
+			"inscricaoEstadual" : "255745109",
+			"cnpj" : "05337875000105",
+			"situacaoCadastral" : "ATIVO",
+			"regimeApuracao" : "NORMAL",
+			"dataSituacaoCadastral" : ISODate("2011-02-02T02:00:00Z")
+		}
+	]
+}
