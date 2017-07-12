@@ -9,7 +9,7 @@ You can use one of options to visualize the slides:
 
 ### Online
 
-- [View this presentation online](https://talks.godoc.org/github.com/NeowayLabs/presentations/devops/elastic-deploy-devops/presentation.slide)
+- [View this presentation online](http://talks.godoc.org/github.com/NeowayLabs/presentations/devops/elasticsearch-deploy-devops/presentation.slide)
 
 ### Using Docker
 
