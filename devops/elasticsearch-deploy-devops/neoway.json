@@ -1,0 +1,21 @@
+{
+	"cnpj" : "05337875000105",
+	"razaoSocial" : "NEOWAY TECNOLOGIA INTEGRADA ASSESSORIA E NEGOCIOS SA",
+	"cnaePrincipal" : {
+		"codigo" : "6204000",
+		"descricao" : "Consultoria em tecnologia da informacao",
+		"setor" : "SERVIÇOS",
+		"ramoAtividade" : "INDÚSTRIA DIGITAL"
+	},
+	"endereco" : {
+		"municipio" : "FLORIANOPOLIS",
+		"uf" : "SC",
+		"numero" : "131",
+		"precisao" : "SEM INFORMACAO",
+		"enderecoResidencial" : false,
+		"bairro" : "ITACORUBI",
+		"cep" : "88034132",
+		"logradouro" : "RUA PATRICIO FARIAS",
+		"complemento" : "SL 201"
+	}
+}
